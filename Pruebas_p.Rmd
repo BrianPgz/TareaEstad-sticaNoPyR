@@ -1,0 +1,265 @@
+---
+title: "Tarea_Est_1"
+output:
+  pdf_document: default
+  html_document:
+    keep_md: yes
+---
+Pruebas de bondad de ajuste, problema 3. 
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+ 
+```
+
+
+## Pruebas de bondad de ajuste
+## Problema 3
+La siguiente muestra aleatoria hace referencia a los rendimientos positivos de
+cierta acción a lo largo del tiempo.
+
+0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
+1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548
+
+Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.
+```{r echo=TRUE}
+library(nortest)
+```
+Ho: La muestra sigue una distribución normal VS Ha: La muestra no sigue una distribución normal
+
+Metemos los datos en un vector y ordenamos los datos.
+
+```{r echo=TRUE}
+Dirty_data=c(0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
+             1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548)
+Data=sort(Dirty_data)
+```
+
+```{r echo=FALSE}
+Data
+```
+
+
+Como queremos probar normalidad pero no sabemos los parámetros tenemos que estimarlos, primero queremos hacer una función para calcular la varianza muestral.
+
+
+```{r echo=TRUE}
+S2<-function(x){
+  mean_aux=mean(x)
+  n_aux=length(x)
+  s2=0
+  for (i in x){
+    s2=s2+(i-mean_aux)^2
+  }
+  s2=s2/(n_aux-1)
+  return(s2)
+}
+
+```
+
+Calculamos los estimadores máximos verosímiles. 
+
+```{r echo=TRUE}
+mean_est=mean(Data)
+S2_est=S2(Data)
+n=length(Data)
+
+```
+
+```{r echo=FALSE}
+mean_est
+S2_est
+n
+```
+
+Calculamos la función de distribución empírica necesaria para la prueba de lillieforce, donde "ecdf" es la función para crear la distribución empírica, "f_n" son los percentiles de la distribución empírica y "f_r" son los percentiles de la distribución pero desplazados una unidad. 
+
+
+```{r echo=TRUE}
+f_emp=ecdf(Data)
+f_n=f_emp(Data)
+f_r=f_n-(1/n) 
+```
+
+Para para prueba de lillieforce necesitamos estandarizar los datos. 
+
+```{r echo=TRUE}
+Z=(Data-mean_est)/sqrt(S2_est)
+```
+
+```{r echo=FALSE}
+Z
+```
+
+Ahora usaremos la función de distribución de una normal estandar para los valores antes calculados. 
+
+```{r echo=TRUE}
+Probas=pnorm(Z)
+```
+
+```{r echo=FALSE}
+Probas
+```
+
+
+Tenemos que calcular: $$D_{i}^{+}= | \phi(Z_{i}) - \frac{i}{n}|$$  
+$$D_{i}^{-}= | \phi(Z_{i}) - \frac{i-1}{n}|$$
+```{r echo=TRUE}
+Di_p=abs(Probas-f_n)
+Di_n=abs(Probas-f_r)
+```
+
+Visualizamos todos los cálculos. 
+
+```{r echo=TRUE}
+Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)
+```
+
+```{r echo=FALSE}
+Visual
+```
+
+Definimos $$D^{+}= max\{D_{i}^{+}\}$$ $$D^{-}= max\{D_{i}^{-}\}$$ 
+ 
+```{r echo=TRUE}
+D_p=max(Di_p)
+D_n=max(Di_n)
+```
+
+```{r echo=FALSE}
+D_p
+D_n
+```
+
+Definimos $$D= max\{ D^{+}, D^{-} \}$$
+
+```{r echo=TRUE}
+Dn=max(D_p,D_n)
+```
+
+
+```{r echo=FALSE}
+Dn
+```
+
+
+Declaramos nuestro nivel de significancia $$\alpha = 0.10$$ entonces $$1-\alpha = 0.90$$.
+
+```{r echo=F}
+conf=0.90
+alpha=1-conf
+```
+
+Comparamos con el nivel crítico $$ W_{0.10}^{15}= 0.2016 $$, para el tamaño de muestra 15 en tablas.
+
+```{r echo=TRUE}
+Est=0.2016
+Rechazamos_H0=Dn>Est
+
+```
+
+```{r echo=FALSE}
+Rechazamos_H0
+```
+
+Como $$D > W_{0.10}^{15}$$, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribución $$ N(\mu,\sigma^2) $$
+
+Hacemos la prueba en unas líneas. 
+
+```{r echo=TRUE}
+p_value=lillie.test(Data)[[2]]
+
+Rechazamos_p_value=p_value<alpha
+```
+
+```{r echo=FALSE}
+p_value
+Rechazamos_p_value
+```
+
+Confirmando la prueba anterior. 
+
+
+El gerente del banco asume que la muestra se distribuye sigue una distribución lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposición del gerente con un nivel de significancia alpha = 0.01. 
+
+Llamamos a la función de distribución de una lognormal.
+
+```{r echo=TRUE}
+ProbasB=plnorm(Data) 
+```
+
+
+```{r echo=FALSE}
+ProbasB
+```
+
+Calculamos $$ D_{i}^{+} $$ $$ D_{i}^{-} $$
+
+```{r echo=TRUE}
+Di_pB=abs(ProbasB-f_n)
+Di_nB=abs(ProbasB-f_r)
+
+```
+
+Ahora para $$D^{+}$$ $$D^{-}$$
+```{r echo=TRUE}
+D_pB=max(Di_pB)
+#Calculamos D-
+D_nB=max(Di_nB)
+```
+
+Entonces obtenemos $$D$$
+```{r echo=TRUE}
+DnB=max(D_pB,D_nB)
+```
+
+```{r echo=FALSE}
+DnB
+```
+
+Declaramos nuestro nivel de significancia $$\alpha = 0.01$$ entonces $$1-\alpha = 0.99$$. 
+
+```{r echo=FALSE}
+alphaB=0.01
+confB=1-alpha
+```
+
+Tenemos que en tablas $$W_{0.01}^{15}=0.40420$$
+
+
+```{r echo=TRUE}
+EstB=0.40420
+
+Rechazamos_H0B=DnB>EstB
+
+```
+
+```{r echo=FALSE}
+Rechazamos_H0B
+```
+
+Se cumple que $$W_{0.01}^{15} > D$$ entonces no hay evidencia para rechazar Ho, entonces 
+los datos siguen una distribución lognormal con media de 1 y varianza 0.
+
+Usamos la prueba específicando la distribución lognormal con sus parámetros.
+
+```{r echo=TRUE}
+p_valueB=ks.test(Data,plnorm,0,1)[[2]]
+
+Rechazamos_p_valueB=p_valueB<alphaB
+```
+
+```{r echo=FALSE}
+p_valueB
+Rechazamos_p_valueB
+```
+
+Cofirmamos la prueba anterior. 
+
+
+
+
+
+
