@@ -297,7 +297,7 @@ Nuestros parámetros son:
 p=0.25
 n=10
 ```
-Los datos se agruparon en nueve diferentes clasificaciones $c_{i}$.
+Los datos se agruparon en nueve diferentes clasificaciones $c_{i} \quad i\in \{0,1,...,8 \}$.
 
 ```{r echo=TRUE}
 length(oi)
@@ -312,7 +312,7 @@ Nuestras observaciones fueron:
 oi=c(64,195,287,241,140,51,25,4,1)
 ```
 
-Calculamos las probabilidades $p_{i}$ con la distribución que propusimos. 
+Calculamos las probabilidades $p_{i}$ con la distribución que propusimos, se itera desde cero ya que tenemos la clasificación 0. 
 
 ```{r echo=FALSE}
 Probas_ejercicio4=list()
@@ -328,11 +328,14 @@ print(Probas_ejercicio4)
 
 ```
 Verificamos que las probas suman 1. 
+$$\sum_{i=0}^{8} p_{i} = 1$$
 
 ```{r echo=TRUE}
 sum(Probas_ejercicio4)
 ```
 Ahora calculamos las frecuencias esperadas. 
+
+$$n * p_{i}$$
 ```{r echo=TRUE}
 ei= Probas_ejercicio4 * k 
 print(ei)
@@ -344,6 +347,40 @@ Podemos visualizar toda la información.
 Tabla_ji = data.frame("ci"=0:8, "oi"=oi,"pi"= Probas_ejercicio4,"ei"=ei)
 print(Tabla_ji)
 ```
+
+Vamos a calcular nuestra estadística de prueba. 
+$$T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}$$
+
+```{r echo=TRUE}
+EstJi=0 
+for (i in 1:9){
+  EstJi=EstJi+(((oi[i]) - (ei[i]))^2)/(ei[i])
+}
+print(EstJi)
+```
+Se comienza el ciclo desde 1 hasta 9 ya que son las entradas de los vectores, no son las clasificaciones. 
+
+Para un nivel de confianza $\alpha = 0.01 $ tenemos que $1-\alpha = 0.99$. 
+
+```{r echo=TRUE}
+alpha_ejercicio4=0.01
+conf_ejercicio4= 1- alpha_ejercicio4
+```
+
+Necesitamos los grados de libertad, que es el número de clasificaciones menos uno, ya que no estimamos parámetros. 
+
+```{r echo=FALSE}
+v= length(Probas_ejercicio4) -1
+print(v)
+```
+Calculamos el cuantil ${\chi}^2_{8,\ 0.99}$.
+```{r echo=TRUE}
+valor_critico=qchisq(conf_ejercicio4,df=v,lower.tail = TRUE)
+```
+
+
+
+
 
 
 
