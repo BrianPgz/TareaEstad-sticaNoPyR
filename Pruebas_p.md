@@ -244,7 +244,7 @@ ProbasB=plnorm(Data)
 ## [15] 0.8135061
 ```
 
-Calculamos $$ D_{i}^{+} $$ $$ D_{i}^{-} $$
+Calculamos $ D_{i}^{+}$ y $D_{i}^{-} $
 
 
 ```r
@@ -261,7 +261,7 @@ D_pB=max(Di_pB)
 D_nB=max(Di_nB)
 ```
 
-Entonces obtenemos $$D$$
+Entonces obtenemos $D$
 
 ```r
 DnB=max(D_pB,D_nB)
@@ -326,15 +326,42 @@ preferencial . Se seleccionaron aleatoriamente a 1,000 personas y observaron su
 comportamiento, generando de esta manera la siguiente tabla de frecuencia:
 
 
+```r
+intervalos <- c( "Menos de 1 semana","1<= x <2" , "2<= x <3","3<= x <4","4<= x <5","5<= x <6","6<= x <7","7<= x <8","Más de 8 semanas")
+oi <- c(64,195,287,241,140,51,25,4,1)
+
+tabla <- data.frame(oi,row.names = intervalos )
+tabla
 ```
-## data frame with 0 columns and 5 rows
+
+```
+##                    oi
+## Menos de 1 semana  64
+## 1<= x <2          195
+## 2<= x <3          287
+## 3<= x <4          241
+## 4<= x <5          140
+## 5<= x <6           51
+## 6<= x <7           25
+## 7<= x <8            4
+## Más de 8 semanas    1
+```
+
+Observamos la cantidad real de personas. 
+
+```r
+print(sum(oi))
+```
+
+```
+## [1] 1008
 ```
 
 Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago. 
 
 Enunciamos la prueba de hipótesis: 
 
-Ho: Se sigue una distribución Bin(n=10,p=0.25)  VS   Ha: No se sigue una distribución Bin(n,p)
+Ho: Se sigue una distribución Bin(n=10,p=0.25)  VS   Ha: No se sigue una distribución Bin(n=10,p=0.25)
 
 Nuestros parámetros son: 
 
@@ -343,6 +370,19 @@ Nuestros parámetros son:
 p=0.25
 n=10
 ```
+Los datos se agruparon en nueve diferentes clasificaciones $c_{i}$.
+
+
+```r
+k=length(oi)
+k
+```
+
+```
+## [1] 9
+```
+
+
 
 Nuestras observaciones fueron: 
 
@@ -350,6 +390,25 @@ Nuestras observaciones fueron:
 ```r
 oi=c(64,195,287,241,140,51,25,4,1)
 ```
+
+Calculamos las probabilidades $p_{i}$ con la distribución que propusimos. 
+
+
+```
+## [1] 0.056313515 0.187711716 0.281567574 0.250282288 0.145998001 0.058399200
+## [7] 0.016222000 0.003089905 0.000415802
+```
+Verificamos que las probas suman 1. 
+
+
+```r
+sum(Probas_ejercicio4)
+```
+
+```
+## [1] 1
+```
+
 
 
 

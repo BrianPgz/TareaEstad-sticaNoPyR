@@ -195,7 +195,7 @@ ProbasB=plnorm(Data)
 ProbasB
 ```
 
-Calculamos $$ D_{i}^{+} $$ $$ D_{i}^{-} $$
+Calculamos $ D_{i}^{+}$ y $D_{i}^{-} $
 
 ```{r echo=TRUE}
 Di_pB=abs(ProbasB-f_n)
@@ -211,7 +211,7 @@ D_pB=max(Di_pB)
 D_nB=max(Di_nB)
 ```
 
-Entonces obtenemos $$D$$
+Entonces obtenemos $D$
 ```{r echo=TRUE}
 DnB=max(D_pB,D_nB)
 ```
@@ -270,19 +270,25 @@ el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa
 preferencial . Se seleccionaron aleatoriamente a 1,000 personas y observaron su
 comportamiento, generando de esta manera la siguiente tabla de frecuencia:
 
-```{r echo=FALSE}
-intervalos <- c( "1<= x <2" , "2<= x <3","3<= x <4","4<= x <5","1<= x <2  ")
+```{r echo=TRUE}
+intervalos <- c( "Menos de 1 semana","1<= x <2" , "2<= x <3","3<= x <4","4<= x <5","5<= x <6","6<= x <7","7<= x <8","Más de 8 semanas")
+oi <- c(64,195,287,241,140,51,25,4,1)
 
-tabla <- data.frame(row.names = intervalos)
+tabla <- data.frame(oi,row.names = intervalos )
 tabla
 
+```
+
+Observamos la cantidad real de personas. 
+```{r echo=TRUE}
+print(sum(oi))
 ```
 
 Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago. 
 
 Enunciamos la prueba de hipótesis: 
 
-Ho: Se sigue una distribución Bin(n=10,p=0.25)  VS   Ha: No se sigue una distribución Bin(n,p)
+Ho: Se sigue una distribución Bin(n=10,p=0.25)  VS   Ha: No se sigue una distribución Bin(n=10,p=0.25)
 
 Nuestros parámetros son: 
 
@@ -290,12 +296,42 @@ Nuestros parámetros son:
 p=0.25
 n=10
 ```
+Los datos se agruparon en nueve diferentes clasificaciones $c_{i}$.
+
+```{r echo=TRUE}
+k=length(oi)
+k
+```
+
+
 
 Nuestras observaciones fueron: 
 
 ```{r echo=TRUE}
 oi=c(64,195,287,241,140,51,25,4,1)
 ```
+
+Calculamos las probabilidades $p_{i}$ con la distribución que propusimos. 
+
+```{r echo=FALSE}
+Probas_ejercicio4=list()
+for (i in 0:8){
+  if(i==8){
+    Probas_ejercicio4[i+1]=pbinom(i-1,n,p,lower.tail = FALSE)
+  }else{
+    Probas_ejercicio4[i+1]=dbinom(i,n,p)
+  }
+}
+Probas_ejercicio4=unlist(Probas_ejercicio4)
+print(Probas_ejercicio4)
+
+```
+Verificamos que las probas suman 1. 
+
+```{r echo=TRUE}
+sum(Probas_ejercicio4)
+```
+
 
 
 
