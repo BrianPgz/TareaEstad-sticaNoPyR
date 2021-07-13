@@ -371,7 +371,7 @@ Nuestros parámetros son:
 p=0.25
 n=10
 ```
-Los datos se agruparon en nueve diferentes clasificaciones $c_{i}$.
+Los datos se agruparon en nueve diferentes clasificaciones $c_{i} \quad i\in \{0,1,...,8 \}$.
 
 
 ```r
@@ -391,7 +391,7 @@ Nuestras observaciones fueron:
 oi=c(64,195,287,241,140,51,25,4,1)
 ```
 
-Calculamos las probabilidades $p_{i}$ con la distribución que propusimos. 
+Calculamos las probabilidades $p_{i}$ con la distribución que propusimos, se itera desde cero ya que tenemos la clasificación 0. 
 
 
 ```
@@ -399,6 +399,7 @@ Calculamos las probabilidades $p_{i}$ con la distribución que propusimos.
 ## [7] 0.016222000 0.003089905 0.000415802
 ```
 Verificamos que las probas suman 1. 
+$$\sum_{i=0}^{8} p_{i} = 1$$
 
 
 ```r
@@ -409,6 +410,8 @@ sum(Probas_ejercicio4)
 ## [1] 1
 ```
 Ahora calculamos las frecuencias esperadas. 
+
+$$n * p_{i}$$
 
 ```r
 ei= Probas_ejercicio4 * k 
@@ -440,6 +443,82 @@ print(Tabla_ji)
 ## 8  7   4 0.003089905   3.1146240
 ## 9  8   1 0.000415802   0.4191284
 ```
+
+Vamos a calcular nuestra estadística de prueba. 
+$$T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}$$
+
+
+```r
+EstJi=0 
+for (i in 1:9){
+  EstJi=EstJi+(((oi[i]) - (ei[i]))^2)/(ei[i])
+}
+print(EstJi)
+```
+
+```
+## [1] 8.670518
+```
+Se comienza el ciclo desde 1 hasta 9 ya que son las entradas de los vectores, no son las clasificaciones. 
+
+Para un nivel de confianza $\alpha = 0.01 $ tenemos que $1-\alpha = 0.99$. 
+
+
+```r
+alpha_ejercicio4=0.01
+conf_ejercicio4= 1- alpha_ejercicio4
+```
+
+Necesitamos los grados de libertad, que es el número de clasificaciones menos uno, ya que no estimamos parámetros. 
+
+
+```
+## [1] 8
+```
+Calculamos el cuantil ${\chi}^2_{8,\ 0.99}$.
+
+```r
+valor_critico=qchisq(conf_ejercicio4,df=v,lower.tail = TRUE)
+```
+Comparamos la estadística de prueba con el valor crítico. 
+
+```r
+Rechazamos_H0_p4=EstJi>valor_critico
+print(Rechazamos_H0_p4)
+```
+
+```
+## [1] FALSE
+```
+
+No hay evidencia pra decir que los datos no siguien una distribución binomial con n=10 y p=0.25, entonces aceptamos Ho. 
+
+Para comprobar los cálculos usemos la prueba que vienen en la libreria nortest. 
+
+
+```r
+p_value_p4=chisq.test(x=oi,p=Probas_ejercicio4)[[3]]
+```
+
+```
+## Warning in chisq.test(x = oi, p = Probas_ejercicio4): Chi-squared approximation
+## may be incorrect
+```
+
+```r
+Rechazamos_p_value_p4=alpha_ejercicio4>p_value_p4
+print(Rechazamos_p_value_p4)
+```
+
+```
+## [1] FALSE
+```
+No rechazamos Ho. 
+
+
+
+
+
 
 
 
