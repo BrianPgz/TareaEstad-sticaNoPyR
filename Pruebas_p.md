@@ -350,7 +350,8 @@ tabla
 Observamos la cantidad real de personas. 
 
 ```r
-print(sum(oi))
+k=sum(oi)
+print(k)
 ```
 
 ```
@@ -374,8 +375,7 @@ Los datos se agruparon en nueve diferentes clasificaciones $c_{i}$.
 
 
 ```r
-k=length(oi)
-k
+length(oi)
 ```
 
 ```
@@ -408,7 +408,38 @@ sum(Probas_ejercicio4)
 ```
 ## [1] 1
 ```
+Ahora calculamos las frecuencias esperadas. 
 
+```r
+ei= Probas_ejercicio4 * k 
+print(ei)
+```
+
+```
+## [1]  56.7640228 189.2134094 283.8201141 252.2845459 147.1659851  58.8663940
+## [7]  16.3517761   3.1146240   0.4191284
+```
+
+Podemos visualizar toda la información. 
+
+
+```r
+Tabla_ji = data.frame("ci"=0:8, "oi"=oi,"pi"= Probas_ejercicio4,"ei"=ei)
+print(Tabla_ji)
+```
+
+```
+##   ci  oi          pi          ei
+## 1  0  64 0.056313515  56.7640228
+## 2  1 195 0.187711716 189.2134094
+## 3  2 287 0.281567574 283.8201141
+## 4  3 241 0.250282288 252.2845459
+## 5  4 140 0.145998001 147.1659851
+## 6  5  51 0.058399200  58.8663940
+## 7  6  25 0.016222000  16.3517761
+## 8  7   4 0.003089905   3.1146240
+## 9  8   1 0.000415802   0.4191284
+```
 
 
 

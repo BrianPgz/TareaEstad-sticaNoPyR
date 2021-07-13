@@ -313,7 +313,8 @@ tabla</code></pre>
 ## 7&lt;= x &lt;8            4
 ## Más de 8 semanas    1</code></pre>
 <p>Observamos la cantidad real de personas.</p>
-<pre class="r"><code>print(sum(oi))</code></pre>
+<pre class="r"><code>k=sum(oi)
+print(k)</code></pre>
 <pre><code>## [1] 1008</code></pre>
 <p>Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago.</p>
 <p>Enunciamos la prueba de hipótesis:</p>
@@ -322,8 +323,7 @@ tabla</code></pre>
 <pre class="r"><code>p=0.25
 n=10</code></pre>
 <p>Los datos se agruparon en nueve diferentes clasificaciones <span class="math inline">\(c_{i}\)</span>.</p>
-<pre class="r"><code>k=length(oi)
-k</code></pre>
+<pre class="r"><code>length(oi)</code></pre>
 <pre><code>## [1] 9</code></pre>
 <p>Nuestras observaciones fueron:</p>
 <pre class="r"><code>oi=c(64,195,287,241,140,51,25,4,1)</code></pre>
@@ -333,6 +333,24 @@ k</code></pre>
 <p>Verificamos que las probas suman 1.</p>
 <pre class="r"><code>sum(Probas_ejercicio4)</code></pre>
 <pre><code>## [1] 1</code></pre>
+<p>Ahora calculamos las frecuencias esperadas.</p>
+<pre class="r"><code>ei= Probas_ejercicio4 * k 
+print(ei)</code></pre>
+<pre><code>## [1]  56.7640228 189.2134094 283.8201141 252.2845459 147.1659851  58.8663940
+## [7]  16.3517761   3.1146240   0.4191284</code></pre>
+<p>Podemos visualizar toda la información.</p>
+<pre class="r"><code>Tabla_ji = data.frame(&quot;ci&quot;=0:8, &quot;oi&quot;=oi,&quot;pi&quot;= Probas_ejercicio4,&quot;ei&quot;=ei)
+print(Tabla_ji)</code></pre>
+<pre><code>##   ci  oi          pi          ei
+## 1  0  64 0.056313515  56.7640228
+## 2  1 195 0.187711716 189.2134094
+## 3  2 287 0.281567574 283.8201141
+## 4  3 241 0.250282288 252.2845459
+## 5  4 140 0.145998001 147.1659851
+## 6  5  51 0.058399200  58.8663940
+## 7  6  25 0.016222000  16.3517761
+## 8  7   4 0.003089905   3.1146240
+## 9  8   1 0.000415802   0.4191284</code></pre>
 </div>
 
 

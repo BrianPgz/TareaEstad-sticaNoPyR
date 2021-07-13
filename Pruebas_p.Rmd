@@ -281,7 +281,8 @@ tabla
 
 Observamos la cantidad real de personas. 
 ```{r echo=TRUE}
-print(sum(oi))
+k=sum(oi)
+print(k)
 ```
 
 Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago. 
@@ -299,8 +300,8 @@ n=10
 Los datos se agruparon en nueve diferentes clasificaciones $c_{i}$.
 
 ```{r echo=TRUE}
-k=length(oi)
-k
+length(oi)
+
 ```
 
 
@@ -331,7 +332,18 @@ Verificamos que las probas suman 1.
 ```{r echo=TRUE}
 sum(Probas_ejercicio4)
 ```
+Ahora calculamos las frecuencias esperadas. 
+```{r echo=TRUE}
+ei= Probas_ejercicio4 * k 
+print(ei)
+```
 
+Podemos visualizar toda la información. 
+
+```{r echo=TRUE}
+Tabla_ji = data.frame("ci"=0:8, "oi"=oi,"pi"= Probas_ejercicio4,"ei"=ei)
+print(Tabla_ji)
+```
 
 
 
