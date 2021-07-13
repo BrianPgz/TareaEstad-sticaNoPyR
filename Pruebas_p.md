@@ -5,7 +5,6 @@ output:
     keep_md: yes
   pdf_document: default
 ---
-Pruebas de bondad de ajuste, problema 3. 
 
 
 
@@ -514,6 +513,34 @@ print(Rechazamos_p_value_p4)
 ## [1] FALSE
 ```
 No rechazamos Ho. 
+
+## Pruebas de bondad de ajuste
+## Problema 5
+
+
+En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1)
+y con ella realiza:
+
+Calcula y gráfica la función de distribución empírica de las observaciones
+generadas.
+
+Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)).
+A partir de las gráficas anteriores ¿La función de distribución empírica es
+similar a la distribucin teórica de los datos?.
+
+Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0; 1) y con ello realiza:
+
+Calcula y gráfica la función de distribución empírica de las observaciones generadas.
+
+Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)).
+A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
+
+Realiza la diferencia entre el valor de la función empírica y la función real,
+(Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y sólo mostrar los primeros 5 y los últimos 5 resultados)
+¿Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
+el resultado obtenido?.
+
+
 
 
 
