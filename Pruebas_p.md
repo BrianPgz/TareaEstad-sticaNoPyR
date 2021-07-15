@@ -537,6 +537,7 @@ A partir de las gráficas anteriores ¿La función de distribución empírica es
 
 Realiza la diferencia entre el valor de la función empírica y la función real,
 (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y sólo mostrar los primeros 5 y los últimos 5 resultados)
+
 ¿Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
 el resultado obtenido?.
 
@@ -572,6 +573,114 @@ curve(pnorm(x), add=TRUE, col="red")
 ```
 
 ![](Pruebas_p_files/figure-html/unnamed-chunk-52-1.png)<!-- -->
+
+
+Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idénticas, del lado de los negativos se aprecia más despegada en cambio para valores mayores a cero se ajustan mejor a la función de distribución de una $N(0,1)$. 
+
+Vamos con la segunda parte del ejercicio, primero volvemos a fijar la semilla. 
+
+
+```r
+set.seed(2019)
+```
+
+Generamos un millón de datos de una distribución $N(0,1)$.
+
+
+```r
+x_dataM = rnorm(10^6)
+```
+Calculamos la función de distribución empírica $F_{n}$
+
+
+```r
+x_dataM = rnorm(10^6)
+f_empiM = ecdf(x_dataM)
+```
+
+Veamos las gráficas: 
+
+
+```r
+plot(f_empiM, xlab="Observados", ylab="Función de probabilidad", 
+     main="Muestra con 10^6 valores", col="darkcyan")
+curve(pnorm(x), add=TRUE, col="red")
+```
+
+![](Pruebas_p_files/figure-html/unnamed-chunk-56-1.png)<!-- -->
+
+En este caso para una muestra de tamaño $10^6$, ambas funciones se parecen mucho, apenas se alcanzan a ver los puntos en los que difieren. 
+
+Trabajemos con la muestra tamaño 25, ahora vamos a ver como se comportan los datos en relación con la función empírica y real, primero debemos ordenar los datos.
+
+
+```r
+x_data_ord=sort(x_data)
+f_empi_norm=f_empi(x_data_ord)
+```
+
+Calculemos la función empírica con un lugar desfasado (salto de $\frac{1}{25}$).
+
+
+```r
+f_empi_des=f_empi_norm - (1/25)
+```
+
+Calculemos las probabilidades de la muestra suponiendo una distribución $N(0,1)$. 
+
+
+```r
+probras_data = pnorm(x_data_ord)
+```
+
+Primero vamos con $D^{+}$.
+
+
+
+```r
+D_data_norm = f_empi_norm - probras_data
+D_data_max = max(D_data_norm)
+print(D_data_max)
+```
+
+```
+## [1] 0.1081313
+```
+
+Ahora para $D^{-}$
+
+
+```r
+D_data_des = probras_data - f_empi_des
+D_data_des_max = max(D_data_des)
+print(D_data_des_max)
+```
+
+```
+## [1] 0.1125086
+```
+Ahora calculamos $D = max \{D^{+},D^{-}  \}$.
+
+
+```r
+D_max= max(D_data_max,D_data_des_max)
+print(D_max)
+```
+
+```
+## [1] 0.1125086
+```
+Veamos la información:
+
+
+```r
+tabla_25= data.frame()
+print(D_max)
+```
+
+```
+## [1] 0.1125086
+```
 
 
 
