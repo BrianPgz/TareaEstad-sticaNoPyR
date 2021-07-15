@@ -541,6 +541,42 @@ Realiza la diferencia entre el valor de la función empírica y la función real
 el resultado obtenido?.
 
 
+Para la primera parte del ejercicio fijemos la semilla inicial.
+
+```r
+set.seed(2019)
+```
+
+Obtengamos 25 datos de una distribución normal estándar.
+
+```r
+x_data=rnorm(25,mean=0,sd=1)
+print(x_data)
+```
+
+```
+##  [1]  0.7385227 -0.5147605 -1.6401813  0.9160368 -1.2674820  0.7382478
+##  [7] -0.7826228  0.5092959 -1.4899391 -0.3191793 -0.2379111  1.6186229
+## [13] -1.1176011  0.2340028  0.3161516  0.3707686  0.8775886 -1.7683235
+## [19] -0.3271264 -2.2632252  0.2855605  0.9684286  0.8673066  1.3781350
+## [25] -0.8082596
+```
+Calculemos la función de distribución empírica y obtengamos su gráfica.
+
+
+```r
+f_empi=ecdf(x_data)
+plot(f_empi, xlab="Observados", ylab="Función de probabilidad", 
+     main="Muestra con 25 valores", col="darkcyan")
+curve(pnorm(x), add=TRUE, col="red")
+```
+
+![](Pruebas_p_files/figure-html/unnamed-chunk-52-1.png)<!-- -->
+
+
+
+
+
 
 
 
