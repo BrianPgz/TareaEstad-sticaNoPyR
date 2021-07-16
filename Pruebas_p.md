@@ -588,13 +588,12 @@ Generamos un millón de datos de una distribución $N(0,1)$.
 
 
 ```r
-x_dataM = rnorm(10^6)
+x_dataM = rnorm(10^3)
 ```
 Calculamos la función de distribución empírica $F_{n}$
 
 
 ```r
-x_dataM = rnorm(10^6)
 f_empiM = ecdf(x_dataM)
 ```
 
@@ -659,7 +658,7 @@ print(D_data_des_max)
 ```
 ## [1] 0.1125086
 ```
-Ahora calculamos $D = max \{D^{+},D^{-}  \}$.
+Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la diferencia entre la función de distribución empírica y teórica, al final vamos a comparar con la de la simulación $10^{6}$. 
 
 
 ```r
@@ -673,9 +672,90 @@ print(D_max)
 Veamos la información:
 
 
+
+Mostremos los 5 primeros datos y últimos 5: 
+
+
 ```r
-tabla_25= data.frame()
-print(D_max)
+print(head(valores_25))
+```
+
+```
+##       x_data x_data_ord probras_data D_data_norm   D_data_des
+## 1  0.7385227  -2.263225   0.01181090  0.02818910  0.011810905
+## 2 -0.5147605  -1.768324   0.03850342  0.04149658 -0.001496583
+## 3 -1.6401813  -1.640181   0.05048373  0.06951627 -0.029516266
+## 4  0.9160368  -1.489939   0.06812013  0.09187987 -0.051879873
+## 5 -1.2674820  -1.267482   0.10249150  0.09750850 -0.057508497
+## 6  0.7382478  -1.117601   0.13186870  0.10813130 -0.068131302
+```
+
+```r
+print(tail(valores_25))
+```
+
+```
+##        x_data x_data_ord probras_data  D_data_norm   D_data_des
+## 20 -2.2632252  0.8673066    0.8071130 -0.007112981  0.047112981
+## 21  0.2855605  0.8775886    0.8099165  0.030083517  0.009916483
+## 22  0.9684286  0.9160368    0.8201762  0.059823801 -0.019823801
+## 23  0.8673066  0.9684286    0.8335848  0.086415187 -0.046415187
+## 24  1.3781350  1.3781350    0.9159192  0.044080808 -0.004080808
+## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213
+```
+
+Vamos a hacer lo mismo para los datos de la simulación $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
+
+
+```r
+x_dataM_ord = sort(x_dataM)
+f_empi_M= f_empiM(x_dataM_ord)
+```
+
+Calculamos la función desfasada ($\frac{1}{10^6}$).
+
+
+```r
+f_empi_M_des = f_empi_M - (1/(10^3))
+```
+
+Calculamos las probas bajo una distribución $N(0,1)$.
+
+
+```r
+probas_dataM = pnorm(x_dataM_ord)
+```
+
+Calculamos $D^{+}=\max \{F_{n}(x_{i}) - F(x_{i}) \}$. 
+
+
+```r
+D_dataM_norm = f_empi_M - probas_dataM
+D_dataM_norm_max = max(D_dataM_norm)
+print(D_dataM_norm_max)
+```
+
+```
+## [1] 0.05626327
+```
+
+Calculamos $D^{-}=\max \{F(x_{i}) - F_{n}(x_{i-1}) \}$. 
+
+
+```r
+D_dataM_des = probas_dataM - f_empi_M_des
+D_dataM_des_max = max(D_dataM_des)
+print(D_data_des_max)
+```
+
+```
+## [1] 0.1125086
+```
+Ahora calculamos $D$.
+
+```r
+D_maxM = max(D_dataM_norm_max, D_data_des_max)
+print(D_data_des_max)
 ```
 
 ```
@@ -685,6 +765,36 @@ print(D_max)
 
 
 
+Mostremos los 5 primeros datos y últimos 5: 
+
+
+```r
+print(head(valores_M))
+```
+
+```
+##      x_dataM x_dataM_ord probas_dataM D_dataM_norm   D_dataM_des
+## 1  0.7385227   -3.236082 0.0006059136 0.0003940864  0.0006059136
+## 2 -0.5147605   -3.186318 0.0007204796 0.0012795204 -0.0002795204
+## 3 -1.6401813   -3.096515 0.0009790485 0.0020209515 -0.0010209515
+## 4  0.9160368   -2.699617 0.0034709701 0.0005290299  0.0004709701
+## 5 -1.2674820   -2.693624 0.0035339936 0.0014660064 -0.0004660064
+## 6  0.7382478   -2.665872 0.0038394508 0.0021605492 -0.0011605492
+```
+
+```r
+print(tail(valores_M))
+```
+
+```
+##         x_dataM x_dataM_ord probas_dataM  D_dataM_norm  D_dataM_des
+## 995  -0.2995747    2.636017    0.9958057 -0.0008057174 0.0018057174
+## 996  -0.6456850    2.806820    0.9974983 -0.0014983415 0.0024983415
+## 997  -0.9405533    2.833338    0.9976968 -0.0006967652 0.0016967652
+## 998   1.0624081    3.029837    0.9987766 -0.0007765718 0.0017765718
+## 999  -0.7634958    3.262782    0.9994484 -0.0004483775 0.0014483775
+## 1000  0.9604393    3.541459    0.9998010  0.0001989603 0.0008010397
+```
 
 
 

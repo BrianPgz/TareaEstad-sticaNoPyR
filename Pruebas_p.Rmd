@@ -452,12 +452,11 @@ set.seed(2019)
 Generamos un millón de datos de una distribución $N(0,1)$.
 
 ```{r echo=TRUE}
-x_dataM = rnorm(10^6)
+x_dataM = rnorm(10^3)
 ```
 Calculamos la función de distribución empírica $F_{n}$
 
 ```{r echo=TRUE}
-x_dataM = rnorm(10^6)
 f_empiM = ecdf(x_dataM)
 ```
 
@@ -507,7 +506,7 @@ D_data_des = probras_data - f_empi_des
 D_data_des_max = max(D_data_des)
 print(D_data_des_max)
 ```
-Ahora calculamos $D = max \{D^{+},D^{-}  \}$.
+Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la diferencia entre la función de distribución empírica y teórica, al final vamos a comparar con la de la simulación $10^{6}$. 
 
 ```{r echo=TRUE}
 D_max= max(D_data_max,D_data_des_max)
@@ -515,14 +514,69 @@ print(D_max)
 ```
 Veamos la información:
 
+```{r echo=FALSE}
+valores_25=data.frame(x_data,x_data_ord,probras_data,D_data_norm,D_data_des)
+```
+
+Mostremos los 5 primeros datos y últimos 5: 
+
 ```{r echo=TRUE}
-tabla_25= data.frame()
-print(D_max)
+print(head(valores_25))
+print(tail(valores_25))
+```
+
+Vamos a hacer lo mismo para los datos de la simulación $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
+
+```{r echo=TRUE}
+x_dataM_ord = sort(x_dataM)
+f_empi_M= f_empiM(x_dataM_ord)
+```
+
+Calculamos la función desfasada ($\frac{1}{10^6}$).
+
+```{r echo=TRUE}
+f_empi_M_des = f_empi_M - (1/(10^3))
+```
+
+Calculamos las probas bajo una distribución $N(0,1)$.
+
+```{r echo=TRUE}
+probas_dataM = pnorm(x_dataM_ord)
+```
+
+Calculamos $D^{+}=\max \{F_{n}(x_{i}) - F(x_{i}) \}$. 
+
+```{r echo=TRUE}
+D_dataM_norm = f_empi_M - probas_dataM
+D_dataM_norm_max = max(D_dataM_norm)
+print(D_dataM_norm_max)
+```
+
+Calculamos $D^{-}=\max \{F(x_{i}) - F_{n}(x_{i-1}) \}$. 
+
+```{r echo=TRUE}
+D_dataM_des = probas_dataM - f_empi_M_des
+D_dataM_des_max = max(D_dataM_des)
+print(D_data_des_max)
+
+```
+Ahora calculamos $D$.
+```{r echo=TRUE}
+D_maxM = max(D_dataM_norm_max, D_data_des_max)
+print(D_data_des_max)
 ```
 
 
+```{r echo=FALSE}
+valores_M=data.frame(x_dataM,x_dataM_ord,probas_dataM,D_dataM_norm,D_dataM_des)
+```
 
+Mostremos los 5 primeros datos y últimos 5: 
 
+```{r echo=TRUE}
+print(head(valores_M))
+print(tail(valores_M))
+```
 
 
 
