@@ -512,27 +512,27 @@ Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la
 D_max= max(D_data_max,D_data_des_max)
 print(D_max)
 ```
-Veamos la informaciCión:
+Veamos la informaciCiC3n:
 
 ```{r echo=FALSE}
 valores_25=data.frame(x_data,x_data_ord,probras_data,D_data_norm,D_data_des)
 ```
 
-Mostremos los 5 primeros datos y últimos 5: 
+Mostremos los 5 primeros datos y C:ltimos 5: 
 
 ```{r echo=TRUE}
 print(head(valores_25))
 print(tail(valores_25))
 ```
 
-Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
+Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y despuC)s vamos comparar las $D$. Ordenamos la muestra. 
 
 ```{r echo=TRUE}
 x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)
 ```
 
-Calculamos la funcición desfasada ($\frac{1}{10^6}$).
+Calculamos la funciciC3n desfasada ($\frac{1}{10^6}$).
 
 ```{r echo=TRUE}
 f_empi_M_des = f_empi_M - (1/(10^3))
@@ -571,7 +571,7 @@ print(D_data_des_max)
 valores_M=data.frame(x_dataM,x_dataM_ord,probas_dataM,D_dataM_norm,D_dataM_des)
 ```
 
-Mostremos los 5 primeros datos y últimos 5: 
+Mostremos los 5 primeros datos y C:ltimos 5: 
 
 ```{r echo=TRUE}
 print(head(valores_M))
@@ -593,11 +593,23 @@ print(tail(valores_M))
 
 
 
-## Pruebas de correlación de rango 
+## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
 ## Problema 1
 
+1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los
+afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o
+2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el
+numero de Hispanos y el procentaje de la población del estado para los nueve
+estados.
 
-## Pruebas de correlación de rango 
+ 
+
+
+
+
+
+
+## Pruebas de correlaciC3n de rango 
 ## Problema 2
 
 
