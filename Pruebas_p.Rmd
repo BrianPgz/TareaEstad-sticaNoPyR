@@ -600,9 +600,29 @@ print(tail(valores_M))
 afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o
 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el
 numero de Hispanos y el procentaje de la población del estado para los nueve
-estados.
+estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
 
- 
+Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma población.En este caso los datos vienen por estado en ese orden. 
+
+```{r echo=TRUE}
+library(dplyr)
+porcentaje=c(23,24,12,12,7,18,8,35,11)
+hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)
+```
+
+Vamos a meter los vectores en un data frame. 
+
+```{r echo=TRUE}
+paises<-data.frame(hispanos,porcentaje)
+paises
+```
+
+Vamos a calcular los rangos considerando a $X$ e $y$ como una sola muestra aleatoria. 
+
+```{r echo=TRUE}
+paises$R_x = rank(paises$hispanos)
+paises$R_y=rank(paises$porcentaje)
+```
 
 
 
