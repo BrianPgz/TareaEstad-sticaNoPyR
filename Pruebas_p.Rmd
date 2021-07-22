@@ -512,33 +512,33 @@ Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la
 D_max= max(D_data_max,D_data_des_max)
 print(D_max)
 ```
-Veamos la informaciC3n:
+Veamos la informaciCión:
 
 ```{r echo=FALSE}
 valores_25=data.frame(x_data,x_data_ord,probras_data,D_data_norm,D_data_des)
 ```
 
-Mostremos los 5 primeros datos y C:ltimos 5: 
+Mostremos los 5 primeros datos y últimos 5: 
 
 ```{r echo=TRUE}
 print(head(valores_25))
 print(tail(valores_25))
 ```
 
-Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y despuC)s vamos comparar las $D$. Ordenamos la muestra. 
+Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
 
 ```{r echo=TRUE}
 x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)
 ```
 
-Calculamos la funciC3n desfasada ($\frac{1}{10^6}$).
+Calculamos la funcición desfasada ($\frac{1}{10^6}$).
 
 ```{r echo=TRUE}
 f_empi_M_des = f_empi_M - (1/(10^3))
 ```
 
-Calculamos las probas bajo una distribuciC3n $N(0,1)$.
+Calculamos las probas bajo una distribuciones $N(0,1)$.
 
 ```{r echo=TRUE}
 probas_dataM = pnorm(x_dataM_ord)
@@ -571,7 +571,7 @@ print(D_data_des_max)
 valores_M=data.frame(x_dataM,x_dataM_ord,probas_dataM,D_dataM_norm,D_dataM_des)
 ```
 
-Mostremos los 5 primeros datos y ??ltimos 5: 
+Mostremos los 5 primeros datos y últimos 5: 
 
 ```{r echo=TRUE}
 print(head(valores_M))
@@ -597,7 +597,7 @@ print(tail(valores_M))
 ## Problema 1
 
 
-## Pruebas de correlac??n de rango 
+## Pruebas de correlación de rango 
 ## Problema 2
 
 

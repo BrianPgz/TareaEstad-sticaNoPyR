@@ -173,18 +173,18 @@ pre code {
 </div>
 <div id="problema-3" class="section level2">
 <h2>Problema 3</h2>
-<p>La siguiente muestra aleatoria hace referencia a los rendimientos positivos de cierta acción a lo largo del tiempo.</p>
+<p>La siguiente muestra aleatoria hace referencia a los rendimientos positivos de cierta acciC3n a lo largo del tiempo.</p>
 <p>0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906, 1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548</p>
 <p>Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.</p>
 <pre class="r"><code>library(nortest)</code></pre>
-<p>Ho: La muestra sigue una distribución normal VS Ha: La muestra no sigue una distribución normal</p>
+<p>Ho: La muestra sigue una distribuciC3n normal VS Ha: La muestra no sigue una distribuciC3n normal</p>
 <p>Metemos los datos en un vector y ordenamos los datos.</p>
 <pre class="r"><code>Dirty_data=c(0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
              1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548)
 Data=sort(Dirty_data)</code></pre>
 <pre><code>##  [1] 0.25130 0.25660 0.31280 0.34590 0.35005 0.63790 0.65480 1.27260 1.52990
 ## [10] 1.80300 2.05050 2.19060 2.32140 2.36740 2.43730</code></pre>
-<p>Como queremos probar normalidad pero no sabemos los parámetros tenemos que estimarlos, primero queremos hacer una función para calcular la varianza muestral.</p>
+<p>Como queremos probar normalidad pero no sabemos los parC!metros tenemos que estimarlos, primero queremos hacer una funciC3n para calcular la varianza muestral.</p>
 <pre class="r"><code>S2&lt;-function(x){
   mean_aux=mean(x)
   n_aux=length(x)
@@ -195,14 +195,14 @@ Data=sort(Dirty_data)</code></pre>
   s2=s2/(n_aux-1)
   return(s2)
 }</code></pre>
-<p>Calculamos los estimadores máximos verosímiles.</p>
+<p>Calculamos los estimadores mC!ximos verosC-miles.</p>
 <pre class="r"><code>mean_est=mean(Data)
 S2_est=S2(Data)
 n=length(Data)</code></pre>
 <pre><code>## [1] 1.252137</code></pre>
 <pre><code>## [1] 0.7810794</code></pre>
 <pre><code>## [1] 15</code></pre>
-<p>Calculamos la función de distribución empírica necesaria para la prueba de lillieforce, donde “ecdf” es la función para crear la distribución empírica, “f_n” son los percentiles de la distribución empírica y “f_r” son los percentiles de la distribución pero desplazados una unidad.</p>
+<p>Calculamos la funciC3n de distribuciC3n empC-rica necesaria para la prueba de lillieforce, donde “ecdf” es la funciC3n para crear la distribuciC3n empC-rica, “f_n” son los percentiles de la distribuciC3n empC-rica y “f_r” son los percentiles de la distribuciC3n pero desplazados una unidad.</p>
 <pre class="r"><code>f_emp=ecdf(Data)
 f_n=f_emp(Data)
 f_r=f_n-(1/n) </code></pre>
@@ -211,7 +211,7 @@ f_r=f_n-(1/n) </code></pre>
 <pre><code>##  [1] -1.13244110 -1.12644418 -1.06285419 -1.02540173 -1.02070603 -0.69500536
 ##  [7] -0.67588310  0.02315415  0.31428766  0.62329879  0.90334365  1.06186602
 ## [13]  1.20986549  1.26191423  1.34100569</code></pre>
-<p>Ahora usaremos la función de distribución de una normal estandar para los valores antes calculados.</p>
+<p>Ahora usaremos la funciC3n de distribuciC3n de una normal estandar para los valores antes calculados.</p>
 <pre class="r"><code>Probas=pnorm(Z)</code></pre>
 <pre><code>##  [1] 0.1287245 0.1299888 0.1439240 0.1525868 0.1536969 0.2435260 0.2495574
 ##  [8] 0.5092363 0.6233487 0.7334559 0.8168282 0.8558517 0.8868347 0.8965102
@@ -220,7 +220,7 @@ f_r=f_n-(1/n) </code></pre>
 <span class="math display">\[D_{i}^{-}= | \phi(Z_{i}) - \frac{i-1}{n}|\]</span></p>
 <pre class="r"><code>Di_p=abs(Probas-f_n)
 Di_n=abs(Probas-f_r)</code></pre>
-<p>Visualizamos todos los cálculos.</p>
+<p>Visualizamos todos los cC!lculos.</p>
 <pre class="r"><code>Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)</code></pre>
 <pre><code>##    Dirty_data    Data           Z    Probas        Di_p       Di_n
 ## 1     0.25130 0.25130 -1.13244110 0.1287245 0.062057851 0.12872452
@@ -247,20 +247,20 @@ D_n=max(Di_n)</code></pre>
 <pre class="r"><code>Dn=max(D_p,D_n)</code></pre>
 <pre><code>## [1] 0.2171092</code></pre>
 <p>Declaramos nuestro nivel de significancia <span class="math display">\[\alpha = 0.10\]</span> entonces <span class="math display">\[1-\alpha = 0.90\]</span>.</p>
-<p>Comparamos con el nivel crítico <span class="math display">\[ W_{0.10}^{15}= 0.2016 \]</span>, para el tamaño de muestra 15 en tablas.</p>
+<p>Comparamos con el nivel crC-tico <span class="math display">\[ W_{0.10}^{15}= 0.2016 \]</span>, para el tamaC1o de muestra 15 en tablas.</p>
 <pre class="r"><code>Est=0.2016
 Rechazamos_H0=Dn&gt;Est</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>Como <span class="math display">\[D &gt; W_{0.10}^{15}\]</span>, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribución <span class="math display">\[ N(\mu,\sigma^2) \]</span></p>
-<p>Hacemos la prueba en unas líneas.</p>
+<p>Como <span class="math display">\[D &gt; W_{0.10}^{15}\]</span>, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribuciC3n <span class="math display">\[ N(\mu,\sigma^2) \]</span></p>
+<p>Hacemos la prueba en unas lC-neas.</p>
 <pre class="r"><code>p_value=lillie.test(Data)[[2]]
 
 Rechazamos_p_value=p_value&lt;alpha</code></pre>
 <pre><code>## [1] 0.05540837</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>Confirmando la prueba anterior.</p>
-<p>El gerente del banco asume que la muestra se distribuye sigue una distribución lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposición del gerente con un nivel de significancia alpha = 0.01.</p>
-<p>Llamamos a la función de distribución de una lognormal.</p>
+<p>El gerente del banco asume que la muestra se distribuye sigue una distribuciC3n lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposiciC3n del gerente con un nivel de significancia alpha = 0.01.</p>
+<p>Llamamos a la funciC3n de distribuciC3n de una lognormal.</p>
 <pre class="r"><code>ProbasB=plnorm(Data) </code></pre>
 <pre><code>##  [1] 0.0836229 0.0868775 0.1225789 0.1442074 0.1469328 0.3265089 0.3359924
 ##  [8] 0.5952465 0.6646554 0.7222209 0.7636471 0.7835314 0.8001537 0.8055991
@@ -281,8 +281,8 @@ D_nB=max(Di_nB)</code></pre>
 
 Rechazamos_H0B=DnB&gt;EstB</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>Se cumple que <span class="math display">\[W_{0.01}^{15} &gt; D\]</span> entonces no hay evidencia para rechazar Ho, entonces los datos siguen una distribución lognormal con media de 1 y varianza 0.</p>
-<p>Usamos la prueba específicando la distribución lognormal con sus parámetros.</p>
+<p>Se cumple que <span class="math display">\[W_{0.01}^{15} &gt; D\]</span> entonces no hay evidencia para rechazar Ho, entonces los datos siguen una distribuciC3n lognormal con media de 1 y varianza 0.</p>
+<p>Usamos la prueba especC-ficando la distribuciC3n lognormal con sus parC!metros.</p>
 <pre class="r"><code>p_valueB=ks.test(Data,plnorm,0,1)[[2]]
 
 Rechazamos_p_valueB=p_valueB&lt;alphaB</code></pre>
@@ -295,8 +295,8 @@ Rechazamos_p_valueB=p_valueB&lt;alphaB</code></pre>
 </div>
 <div id="problema-4" class="section level2">
 <h2>Problema 4</h2>
-<p>Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal manera que los acreditados pueden pagar en cualquier momento desde que piden el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa preferencial . Se seleccionaron aleatoriamente a 1,000 personas y observaron su comportamiento, generando de esta manera la siguiente tabla de frecuencia:</p>
-<pre class="r"><code>intervalos &lt;- c( &quot;Menos de 1 semana&quot;,&quot;1&lt;= x &lt;2&quot; , &quot;2&lt;= x &lt;3&quot;,&quot;3&lt;= x &lt;4&quot;,&quot;4&lt;= x &lt;5&quot;,&quot;5&lt;= x &lt;6&quot;,&quot;6&lt;= x &lt;7&quot;,&quot;7&lt;= x &lt;8&quot;,&quot;Más de 8 semanas&quot;)
+<p>Un cierto banco otorga crC)dito a las personas con una tasa preferencial, de tal manera que los acreditados pueden pagar en cualquier momento desde que piden el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa preferencial . Se seleccionaron aleatoriamente a 1,000 personas y observaron su comportamiento, generando de esta manera la siguiente tabla de frecuencia:</p>
+<pre class="r"><code>intervalos &lt;- c( &quot;Menos de 1 semana&quot;,&quot;1&lt;= x &lt;2&quot; , &quot;2&lt;= x &lt;3&quot;,&quot;3&lt;= x &lt;4&quot;,&quot;4&lt;= x &lt;5&quot;,&quot;5&lt;= x &lt;6&quot;,&quot;6&lt;= x &lt;7&quot;,&quot;7&lt;= x &lt;8&quot;,&quot;MC!s de 8 semanas&quot;)
 oi &lt;- c(64,195,287,241,140,51,25,4,1)
 
 tabla &lt;- data.frame(oi,row.names = intervalos )
@@ -310,15 +310,15 @@ tabla</code></pre>
 ## 5&lt;= x &lt;6           51
 ## 6&lt;= x &lt;7           25
 ## 7&lt;= x &lt;8            4
-## Más de 8 semanas    1</code></pre>
+## MC!s de 8 semanas   1</code></pre>
 <p>Observamos la cantidad real de personas.</p>
 <pre class="r"><code>k=sum(oi)
 print(k)</code></pre>
 <pre><code>## [1] 1008</code></pre>
 <p>Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago.</p>
-<p>Enunciamos la prueba de hipótesis:</p>
-<p>Ho: Se sigue una distribución Bin(n=10,p=0.25) VS Ha: No se sigue una distribución Bin(n=10,p=0.25)</p>
-<p>Nuestros parámetros son:</p>
+<p>Enunciamos la prueba de hipC3tesis:</p>
+<p>Ho: Se sigue una distribuciC3n Bin(n=10,p=0.25) VS Ha: No se sigue una distribuciC3n Bin(n=10,p=0.25)</p>
+<p>Nuestros parC!metros son:</p>
 <pre class="r"><code>p=0.25
 n=10</code></pre>
 <p>Los datos se agruparon en nueve diferentes clasificaciones <span class="math inline">\(c_{i} \quad i\in \{0,1,...,8 \}\)</span>.</p>
@@ -326,7 +326,7 @@ n=10</code></pre>
 <pre><code>## [1] 9</code></pre>
 <p>Nuestras observaciones fueron:</p>
 <pre class="r"><code>oi=c(64,195,287,241,140,51,25,4,1)</code></pre>
-<p>Calculamos las probabilidades <span class="math inline">\(p_{i}\)</span> con la distribución que propusimos, se itera desde cero ya que tenemos la clasificación 0.</p>
+<p>Calculamos las probabilidades <span class="math inline">\(p_{i}\)</span> con la distribuciC3n que propusimos, se itera desde cero ya que tenemos la clasificaciC3n 0.</p>
 <pre><code>## [1] 0.056313515 0.187711716 0.281567574 0.250282288 0.145998001 0.058399200
 ## [7] 0.016222000 0.003089905 0.000415802</code></pre>
 <p>Verificamos que las probas suman 1. <span class="math display">\[\sum_{i=0}^{8} p_{i} = 1\]</span></p>
@@ -338,7 +338,7 @@ n=10</code></pre>
 print(ei)</code></pre>
 <pre><code>## [1]  56.7640228 189.2134094 283.8201141 252.2845459 147.1659851  58.8663940
 ## [7]  16.3517761   3.1146240   0.4191284</code></pre>
-<p>Podemos visualizar toda la información.</p>
+<p>Podemos visualizar toda la informaciC3n.</p>
 <pre class="r"><code>Tabla_ji = data.frame(&quot;ci&quot;=0:8, &quot;oi&quot;=oi,&quot;pi&quot;= Probas_ejercicio4,&quot;ei&quot;=ei)
 print(Tabla_ji)</code></pre>
 <pre><code>##   ci  oi          pi          ei
@@ -351,7 +351,7 @@ print(Tabla_ji)</code></pre>
 ## 7  6  25 0.016222000  16.3517761
 ## 8  7   4 0.003089905   3.1146240
 ## 9  8   1 0.000415802   0.4191284</code></pre>
-<p>Vamos a calcular nuestra estadística de prueba. <span class="math display">\[T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}\]</span></p>
+<p>Vamos a calcular nuestra estadC-stica de prueba. <span class="math display">\[T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}\]</span></p>
 <pre class="r"><code>EstJi=0 
 for (i in 1:9){
   EstJi=EstJi+(((oi[i]) - (ei[i]))^2)/(ei[i])
@@ -362,16 +362,16 @@ print(EstJi)</code></pre>
 <p>Para un nivel de confianza $= 0.01 $ tenemos que <span class="math inline">\(1-\alpha = 0.99\)</span>.</p>
 <pre class="r"><code>alpha_ejercicio4=0.01
 conf_ejercicio4= 1- alpha_ejercicio4</code></pre>
-<p>Necesitamos los grados de libertad, que es el número de clasificaciones menos uno, ya que no estimamos parámetros.</p>
+<p>Necesitamos los grados de libertad, que es el nC:mero de clasificaciones menos uno, ya que no estimamos parC!metros.</p>
 <pre><code>## [1] 8</code></pre>
 <p>Calculamos el cuantil <span class="math inline">\({\chi}^2_{8,\ 0.99}\)</span>.</p>
 <pre class="r"><code>valor_critico=qchisq(conf_ejercicio4,df=v,lower.tail = TRUE)</code></pre>
-<p>Comparamos la estadística de prueba con el valor crítico.</p>
+<p>Comparamos la estadC-stica de prueba con el valor crC-tico.</p>
 <pre class="r"><code>Rechazamos_H0_p4=EstJi&gt;valor_critico
 print(Rechazamos_H0_p4)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>No hay evidencia pra decir que los datos no siguien una distribución binomial con n=10 y p=0.25, entonces aceptamos Ho.</p>
-<p>Para comprobar los cálculos usemos la prueba que vienen en la libreria nortest.</p>
+<p>No hay evidencia pra decir que los datos no siguien una distribuciC3n binomial con n=10 y p=0.25, entonces aceptamos Ho.</p>
+<p>Para comprobar los cC!lculos usemos la prueba que vienen en la libreria nortest.</p>
 <pre class="r"><code>p_value_p4=chisq.test(x=oi,p=Probas_ejercicio4)[[3]]</code></pre>
 <pre><code>## Warning in chisq.test(x = oi, p = Probas_ejercicio4): Chi-squared approximation
 ## may be incorrect</code></pre>
@@ -386,16 +386,16 @@ print(Rechazamos_p_value_p4)</code></pre>
 <div id="problema-5" class="section level2">
 <h2>Problema 5</h2>
 <p>En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1) y con ella realiza:</p>
-<p>Calcula y gráfica la función de distribución empírica de las observaciones generadas.</p>
-<p>Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)). A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribucin teórica de los datos?.</p>
-<p>Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0; 1) y con ello realiza:</p>
-<p>Calcula y gráfica la función de distribución empírica de las observaciones generadas.</p>
-<p>Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)). A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.</p>
-<p>Realiza la diferencia entre el valor de la función empírica y la función real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y sólo mostrar los primeros 5 y los últimos 5 resultados)</p>
-<p>¿Al ser una muestra mucho mayor que al anterior a que teorema te recuerda el resultado obtenido?.</p>
+<p>Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones generadas.</p>
+<p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es similar a la distribucin teC3rica de los datos?.</p>
+<p>Vuelve a fijar la semilla 2019, y genera un millC3n de observaciones distribuidas como una N(0; 1) y con ello realiza:</p>
+<p>Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones generadas.</p>
+<p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es similar a la distribuciC3n teC3rica de los datos?.</p>
+<p>Realiza la diferencia entre el valor de la funciC3n empC-rica y la funciC3n real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribuciC3n conocida y sC3lo mostrar los primeros 5 y los C:ltimos 5 resultados)</p>
+<p>B?Al ser una muestra mucho mayor que al anterior a que teorema te recuerda el resultado obtenido?.</p>
 <p>Para la primera parte del ejercicio fijemos la semilla inicial.</p>
 <pre class="r"><code>set.seed(2019)</code></pre>
-<p>Obtengamos 25 datos de una distribución normal estándar.</p>
+<p>Obtengamos 25 datos de una distribuciC3n normal estC!ndar.</p>
 <pre class="r"><code>x_data=rnorm(25,mean=0,sd=1)
 print(x_data)</code></pre>
 <pre><code>##  [1]  0.7385227 -0.5147605 -1.6401813  0.9160368 -1.2674820  0.7382478
@@ -403,31 +403,31 @@ print(x_data)</code></pre>
 ## [13] -1.1176011  0.2340028  0.3161516  0.3707686  0.8775886 -1.7683235
 ## [19] -0.3271264 -2.2632252  0.2855605  0.9684286  0.8673066  1.3781350
 ## [25] -0.8082596</code></pre>
-<p>Calculemos la función de distribución empírica y obtengamos su gráfica.</p>
+<p>Calculemos la funciC3n de distribuciC3n empC-rica y obtengamos su grC!fica.</p>
 <pre class="r"><code>f_empi=ecdf(x_data)
-plot(f_empi, xlab=&quot;Observados&quot;, ylab=&quot;Función de probabilidad&quot;, 
+plot(f_empi, xlab=&quot;Observados&quot;, ylab=&quot;FunciC3n de probabilidad&quot;, 
      main=&quot;Muestra con 25 valores&quot;, col=&quot;darkcyan&quot;)
 curve(pnorm(x), add=TRUE, col=&quot;red&quot;)</code></pre>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAMAAABNUi8GAAAAzFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrYAi4s6AAA6ADo6AGY6OgA6Ojo6OmY6ZmY6ZpA6ZrY6kLY6kNtmAABmADpmOgBmOjpmZmZmkJBmkLZmkNtmtrZmtttmtv+QOgCQZgCQZjqQkDqQkGaQkLaQtpCQttuQtv+Q29uQ2/+zs7O2ZgC2Zjq2ZpC2kDq2kGa225C227a229u22/+2/7a2///bkDrbkGbbtmbbtpDb27bb29vb////AAD/tmb/25D/27b//7b//9v////Wze/oAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAVbElEQVR4nO2dC3vjtpVA6cl4bTXZbloryb4y3jTbtK66r05Hm3QtaWT+//+0BPgQJZEUCQLgBXDO93WsWBRBlccXwAUIZDmAYLKlLwBgCAQF0SAoiAZBQTQICqJBUBANgoJoEBREg6AgGgQF0SAoiAZBQTQICqJBUBANgoJoEBREg6AgGgQF0SAoiAZBQTQICqJBUBANgoJoEBREg6AgGgQF0SAoiAZBQTQICqJBUBANgoJoEBREk6qgmyzL7l/rVw+jPvP2H58slPz5u6LAX39UL7eZZrD0t+fqOhMlZUHvXooXx/VYQT9/+86CoPuVllKXvUHQm6QsaPZUvDisxgq6ySwIWvj27kUVWlhX/G08jfkAgiZIIejf6zu/rWJYqV/lzNufixj3G+3F/35VvPz6Y6X0u0/b7O7332bvPua/fKuq6pfTKX8ujvzie/3yl6Ia/+Kf1eeLw/9YnOx9fdzxu9VDXpVWaPrh7JL0H8A+U79tzl4LenbK8gq6rjI6Ehb0H1ZFPfv2/O53V4Lqar+w6lPTTCzeawTNdPN1n52q6vqMdVSuPtT4f3ZcdXBxxr36I6mao3ltZvFW8bnT2StBr055/9p5ldGRsKDfPxc2HVb3/3kl6EbFpyK+Pan/fnjNf86q35Yu3H/M/6/w5u9ey2NKCqV++/p5XUXGQqSt/lDx7/uP1esT5RGbc3eLUz5UV9A6eynoxSnVFfRcZWwkLOiHjQ6ET9tLQat6flv8prj/7//SfKQStK6X//ZfX52ar9W7X/+lqav1j/Lw4jTtZq6KfR/ytx9Whbu/rJo25rb8QCVsdfZS0OtT9l1lbKQs6L64t5vsw5Wgh1VTLxd6ZHXbrxa0FOjth7MueKsvU7/UR5aHqxB3KruIs62OT2OkbpNWHz6dXf+i45R9Vxkb6Qp691Lc4n9d373sW4LqGrNqAOrK9/O35as/XAiqnHj/739btwStFaxt1G3KDkGVWa2O+f6sji8bDa2zazc7Ttl3lbGRsqA68Ojuzrmg573rzz9+VfZOzgQtRTqup0fQCz9bgqrq+nf6v1pnH4qgXVcZGykLWg0ilYKWt32fVX2Os4Pf/q3sxrcE3ddty6fmhOrd/a9/umyDXgh6bOr3w3erp+aDGl1rqzdbZ+9qg9YjDF1XGRtJC7rXaaGyB6N7yJ+fq/763feqpaij629fVQ2q+9BKjFP8un9Vh9eSFEf+RkW6wqzzLveFoJsmzhUH3/2U/9zuP6m/mA/nZ+/qxZcht/sqYyNdQct80N1LJWjT5zjlQZUHfz6lgvZ1or5ug56PU7bGLc+SlueCNsWUxdeHVeyrXGbr7F150FLQ7quMjaQFVeOOn+oc0KHoaHz9P2Xu5vMPhTvlwIwaHyqT6Wrg5v3Hdi/+/U/bVq2qR5L+Rb/Uwz765aWgdeJef07NG6mGgkqa405nPxtJap2y7ypjI1VBIRAQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKorEsaAYwCjeC1iv/9q6FTkCGUbgRdFtvGbDv29MMQWEUTgR9e2603PYs14+gMAongh7XzcY8+55KHkFhFERQEI2rNmgVQmmDwjwc9eKrrXn6N4xCUBiFI0F9nw6E8/j4aPZBBAUPPD6aGupa0C29eCj9NDPUcwRtBrD+pCh+wc8Ufj4+6p+PJj9HqzX2wEVOB6IJJ4K6Oh3IRm4b1NPpQDj04iFOHI3Fn6bz0YuHObiJoG/PvRNBTU4H6eJswvKDzdNBsrhqg+6zD4PvIyhcsNvtOn5LJwmsYdpV32m630NQsIVJsnNAzRIEBUtMHS666aYGQcESj8O0Dx3npgZBwRLjIugENzUICra45edUNzUICtYY8NPETQ2CgnsM5VQgKLjFOHaWICi4Y6acCgQFR8yXU4Gg0I/xNGNLduYICgMYP6hhy84cQaEfw0fdrAVPDYJCHzfGLrvHM63amSMo9DM9gtoNnhoEhV4m+mnfzhxBYYgJfjoInhoEBQs4sjNHUJiPq+CpQVCYh0s7cwSFWTgNnhoEhU7G9I+c25kjKHQzIsPkQ08EhU5u5+j96Img0Enns5gtfOmJoNCJFD0RFLoZ8NOnnggKPfT46T6vdAGCwnh825kjKIxnAT0RFEazhJ4ICiNZJHzmCArXdPSPltITQeGKjgzTYnoiKFxynaNfLnzmCAqXXI5yLqongsIlFxF0WT2dCbrJsoe35yzr3YwGQcUiKHzmrgTd3r8Wjj6oTRGfLJwOvNL4ubyejgR9ey603N+95KWqc08HyyBAT0eCHtdFzb7X23Xu2Uw2VET4SQSFbiRU7wrHbVCt6uzTgXeE6EkvHjoR4yd5ULjk8VFK9a5AUDin0NN44W8HTBT0uM4aevrn52zpxYfF48544W8nGETQfaY6PmUnfXJxDQYfBg/szNb9dsZ0Qd+eH/TPvgSS5XLBJ7ud4cL0zpguqM7C5/0peMvlgkdU50iWn0YRtExtboYiqE4xDbVTEVQgZeddlJ9mbVAVQrdDbdBt9lQfS6I+FCQll06YpJl0V344fjZaMtQZCDL1dDlZpITJImEgVE+Xk0VKiKAhIDV85kaC1sn6gV78th6Dpw0aAI87Sb2iCwwELbrv24f8sOqbB6KoJe5tqSKoGHTuc+mL6MUkD/qU7wvxSNTHgbShowvMEvWHLz/p/3koF9xSDx2dbwkrB7NE/fGbFwSNgaJ3JFDKNgZtUDVBafNEFR8BuvMu2k+jNNPmQXWCZg3FI6gEquSSZD+ZsJwwcpOfLRA0VQQn59u4nlE/u1xwQxh6ep9RP71ccEIofjKjPk3O/Iysk8SM+vC59FOwoY5m1NsrF+xz7adcQ93MqLdYLljnvP0Zn6C3Z9TbLBdsc9E/ilBQr+WCZa7676L9RNDE6ErPS/YTQdMimPRnw+SRpKdmMIk0U3CE5ycRNCUC9BNB0yGQ2SEXIGgqiFr1czzMZkqEnehkUj9E0DQQ/uxmPwiaBF3Pbgp9jPMCBE0B8c9u9kMeNAEErks7GiJo/Ehcl3Y0CBo9QaY/G5huFzlhpudPMGE5bgLXk0c+Iid4P3loLmrC95PHjuNF1J6wxrBwQ6w8il44eTRMFokUaZvCmkIeNFI6Rt+XviQjHAm6KcLrYZVlve0ABHWLuE1hTXGzDY3281cvZ1t6GZYLJuzCHXy/wMk2NGojELUOc85GXstQL+299HVYwMk2NCpuVvl8tkJcgBjSSzVutqFR0XNLBF2ImPx0tA3Ncf3ukw6hvdlSBHVGVH4624ZmX3akHmaXCxOJy0+2oYmNXSy9owoS9XERT36pwrWgW3rxPtmJX+9zKp5n1J9G8k0+DTdono6LR1Jm1EfEaevNOORUMKM+Hk5bb8bjp6sZ9W/PN8brEdQ6TX4pJj8dzajfZmWUrSY3zykXRhJZ/rPGyYz6uhWQM9TpjUj9dDOjvjXJjskifojVTzd5UCKob6L101GifptVIZQ2qBdafkbVQ8rNBFXPcvQ/zKGpmwK9HSkEtci5n3EZatxJaoKk43LhJpd+RmWoeaKehRuE0G5/IihL30gjpL21DSCCBk7X3sXLXIkbaIOGTdfexUtchzMc9eLtlQtDxJv/rGFGfcjE7+eMNqincqGfBPyc0Yv3VC70koKfRp2kec9zTiwX+rj0M7buUYlJBGV9UAl0+BmjoXSSAqXTzwgNRdAw6cp/RukoG3kFyXX/KEo7c7NOks7R89jxgnT13+P00ygPWqaZeOx4MbrzS1H6adKL/6YMncxmWook8p815hGU2UwLkZSfM5a+YTbTMqTl55xE/axcPYIakpif5EEDIzU/EVQivf3xKLaHnQaCyqM3o5menggqkN4xoRT9RFB5XO8CW9KxPewFS1+5CxBUHD22JRk/jSeL3L9u5j34gaD94GcLs8ki2/tXvWGsh3JTBD9PmD00p4Y5+zaYsVwuKJL10/ChOSUok0X8ka6fMyIo0+28kbCf5m1QJot4I2U/zR/5YOkb6zB+1AF5UDEwftQFgkqB/HwnTrahsVluMnQPWqbup5uNvGoOq96OFIJe0hlBk/fTKM10cyvEEXEWQa/Azy7crFFfbY9EBJ0EfnZgvj7oYKL+uFbvIugs8DOf81TnjTbopngfQeeAnwp3azNtsycEnQF+ahzmQQ+rLxDUGPwscZmof3vuH69H0CvO+kj4WcFIkhTOskz4WeNa0L5pzQh6wVmeHj8bPEfQUwLfyukioi0ofp6gihdCS1D8bGEgaNH3YbKIffCzEwNBNyPMvCkxgl6Bn12YjMXfft54m1XH7LOegxG0B/w8x3yyyACt7Tz75jwhaCcJLl93A/PpdgO0HO6b84SgXaDnFcaTRYYggpqBn9fMWAJ8oK/UPJNMG7ST7uc38bMDR3nQ2uLeOU9JC9r9/CZ+dkGi3j/dz2/iZycmgh5WLNwwh97laZe+MIlMFPTwh7pdydI3xnRFUOJnD1MFXT3VXXR2mjMGP8cztYo/fPnXEU91Wiw3Si78JD3fj/lTnURQW6DnAMYri9AGtQV+DkEvfmnwcxDyoAuDn8MgqBPGJjXpHt0CQV0wdt839LzJ5PVBn8ZMFrFYboiM3ZkQP29DBHVA906aVyvU4ucIENQB4yIofo7BRFC18GLvRE/b5QYJflrD5KlOPYR0XN988sNKuWGCn7Zws8KyxXIjBT9HMmMsHkHNwc+xGFTx5Sj8YcV23KaQnh8PY/H+Qc8JkGbyDn5OAUHtM9yFx89JsLqddYaToPg5DUer29krNziGh5HwcyJuVrezWG5wDAqKn1NxsrqdzXKDY0hQ/JyMk9XtbJYbHvhpEyer29ksN0B6/CQ9b4Kb1e0slhsN6GkEeVBP4KcZCOoH/DSEKt4HND+NMY6g86aDhiuoySqJ6GmOeRW/SXJG/dgHitvg5wzMBU1yRv3YB4rb4OcczAVNckb9iAeKLwSm+TkPY0GHH5rbFp0onc6PbDvuyREUPWdi3osfWh50e/dSGRyZoFPboPg5Fyd50PK5urfnwuHYBJ3Ui6d6n48TQesJT5v71+gEnQB6WmDy4mFjJoo0WyFuHtIVlPBpBRNBW1tx9lBrWbRXUxUUPe3gRtBmBfu35zQFJXzawpGg9spdGJORTfS0CIIOYjKySe1uE9eCht1JMhnZxE+reI6gWYPpGbxyaxyzA6p3u0wW9KRYAmPx0yMoelqGGfWD4OfSOBL05vI4gQg6rRdP9W4fN4Ju6xXse5eyD0XQCaCnCxxOFtH07Ykcn6Do6QSnk0Xy/nn3sQlK+HQEEdQG6OkMV23QKoSG0gY1GtFsQE93OOrF35x2L0tQoxHNBvx0CHnQ3HBEs4bq3SkImt94VvPGZ9HTLQiaz4qg+OkYBFWY+kn17hwE1TAvWSoIagp6egFBzUBPTyCoCejpDQSdDnp6BEGngp5eSVNQ84FN9PRMkoKap+XR0zcpCmo6cISeC5CwoJOG3NFzIRIWdNJn0HMhUhR0ehsUPRcjSUEn9uLRc0HSFHQK6LkoCDoMei4Mgg6BnouDoL3s0FMAiQg6PS+PnTJIQ9DJi9ShpxSSEHRiZh47BZGSoKNGNgmeskhJ0BFHYqc0khB0XBt0R/AUSBqC3uzFI6dUEhF0EOQUTOqCEjqFk7KgyBkA6QqKnEEQmKDzVkJuIHYGQ1iCzlsJWbNDzqAIStBZKyHjZpCEKKgBuBkqjgR1sxWiUQTFzaBxtQ2Nm60Qp/m5w83wCWwjr7F+omYsOBF00a0QcTMqAougvewaLJ8YlsVVG9TjVohoGTOOevHut0IkZKZBMHnQ3QV2LwekIldQhITcvaDbKb14jIRLPEfQrOZPisfHR6OfxYn4mcrP0WqNPXCR00GsyG2DAuSBTRaB9AhrsggkRyxDnRAp8U0WgagggoJoIpgsAjET7GQRSAPyoCAaBAXRLCYowCgWEtQN/i/Se4kJfEWzEhFURokJfEUEDbnEBL4igoZcYgJfEUFDLjGBr4igIZeYwFdE0JBLTOArImjIJSbwFRE05BIT+IoRCwrpgqAgGgQF0SAoiAZBQTQICqJBUBANgoJoEBREg6AgGgQF0SAoiAZBQTQhCKpXJe1Za8cZhy/71kC1zz7L7l68lVbi8/vlM+5hAIK+PRd3b5s9eC30uO5dpNc6++L77T0b6vP75XPuYQCCHlZqybK+fUXcsB9YRdo25aKBG69/gD6/n8L8HgYgaInXELPPnvpWQLXPAn+AXr9fq1iDexiMoBvP/4d6FPRXL17LK1lCUJN7GIqgvSuSOivQ2w0s44rvRugCghrdw0AE3XvuIyGogxKN7mEYgnqPn1Tx9gs0u4eyBd2WybOtPz+3dbou6k5S7l9Q03soW9CSZml8n/i7gUukmbwLanwPAxD0sPJev+deb+ASiXrPgprfwwAE3ZZL8kbcidguMNTpV1DzexiAoJAyCAqiQVAQDYKCaBAURIOgIBoEBdEgKIgGQUE0CAqiQVAQDYKCaBAURIOgIBoEBdEgKIgGQUE0CAqiQVAQDYKCaBAURIOgIBoEBdEgKIgGQUE0CAqiQVAQDYKac1hlmV60rVxAcSLelwsLEwQ1Rq8oeFg9IKhLENSUcmHk/Lh+QlCHIKgp9Yqz2/vXw+qfVuXCzE2tX63UfPzmx+oXysdN9Vqvt/ijEnSfXXwOLkBQQ1Tk1BTmHVaFbGqNVh1K94Vp2+oXx/X969uzUnlz/6qUVm/o7Vj2arFMdehx/XD6HFyCoIYc15VOhVzl+sHbd5/qVWFLe4v/0i/U8vPFi+M3L2VztWwRbO5eysW/C8OX2LQoEBDUkHNBq0q83gGzbF8Wv9ZHqX+qFudeVeSljjryfqgPw9AeENSQsype95fUv3pT3w+6aakoBVXN1aKGVy3Pd/9dOLk9F1QdU30OrkBQU846SXU3SL9RVNl1D70UdP/ur+uqZlf/XEfQ+nO+v0MAIKgplVdlmkm3QYsgWf7mQ1P/ly+O639U3SLlpeoJVRsjtdqgrWPhHAQ1pp2or3rk2jX1T9lZV41SLd0mq9L5x7XemEwf3urFN5+DSxDUnNZQp8qD6sq83mtF5UF1510Luq9zo3cvuiK/yoPu/e+zEwgICqJBUBANgoJoEBREg6AgGgQF0SAoiAZBQTQICqJBUBANgoJoEBREg6AgGgQF0SAoiAZBQTQICqJBUBANgoJoEBREg6AgGgQF0SAoiAZBQTT/DzL/+uuBL1KpAAAAAElFTkSuQmCC" /><!-- --></p>
-<p>Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idénticas, del lado de los negativos se aprecia más despegada en cambio para valores mayores a cero se ajustan mejor a la función de distribución de una <span class="math inline">\(N(0,1)\)</span>.</p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idC)nticas, del lado de los negativos se aprecia mC!s despegada en cambio para valores mayores a cero se ajustan mejor a la funciC3n de distribuciC3n de una <span class="math inline">\(N(0,1)\)</span>.</p>
 <p>Vamos con la segunda parte del ejercicio, primero volvemos a fijar la semilla.</p>
 <pre class="r"><code>set.seed(2019)</code></pre>
-<p>Generamos un millón de datos de una distribución <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>Generamos un millC3n de datos de una distribuciC3n <span class="math inline">\(N(0,1)\)</span>.</p>
 <pre class="r"><code>x_dataM = rnorm(10^3)</code></pre>
-<p>Calculamos la función de distribución empírica <span class="math inline">\(F_{n}\)</span></p>
+<p>Calculamos la funciC3n de distribuciC3n empC-rica <span class="math inline">\(F_{n}\)</span></p>
 <pre class="r"><code>f_empiM = ecdf(x_dataM)</code></pre>
-<p>Veamos las gráficas:</p>
-<pre class="r"><code>plot(f_empiM, xlab=&quot;Observados&quot;, ylab=&quot;Función de probabilidad&quot;, 
+<p>Veamos las grC!ficas:</p>
+<pre class="r"><code>plot(f_empiM, xlab=&quot;Observados&quot;, ylab=&quot;FunciC3n de probabilidad&quot;, 
      main=&quot;Muestra con 10^6 valores&quot;, col=&quot;darkcyan&quot;)
 curve(pnorm(x), add=TRUE, col=&quot;red&quot;)</code></pre>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>En este caso para una muestra de tamaño <span class="math inline">\(10^6\)</span>, ambas funciones se parecen mucho, apenas se alcanzan a ver los puntos en los que difieren.</p>
-<p>Trabajemos con la muestra tamaño 25, ahora vamos a ver como se comportan los datos en relación con la función empírica y real, primero debemos ordenar los datos.</p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>En este caso para una muestra de tamaC1o <span class="math inline">\(10^6\)</span>, ambas funciones se parecen mucho, apenas se alcanzan a ver los puntos en los que difieren.</p>
+<p>Trabajemos con la muestra tamaC1o 25, ahora vamos a ver como se comportan los datos en relaciC3n con la funciC3n empC-rica y real, primero debemos ordenar los datos.</p>
 <pre class="r"><code>x_data_ord=sort(x_data)
 f_empi_norm=f_empi(x_data_ord)</code></pre>
-<p>Calculemos la función empírica con un lugar desfasado (salto de <span class="math inline">\(\frac{1}{25}\)</span>).</p>
+<p>Calculemos la funciC3n empC-rica con un lugar desfasado (salto de <span class="math inline">\(\frac{1}{25}\)</span>).</p>
 <pre class="r"><code>f_empi_des=f_empi_norm - (1/25)</code></pre>
-<p>Calculemos las probabilidades de la muestra suponiendo una distribución <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>Calculemos las probabilidades de la muestra suponiendo una distribuciC3n <span class="math inline">\(N(0,1)\)</span>.</p>
 <pre class="r"><code>probras_data = pnorm(x_data_ord)</code></pre>
 <p>Primero vamos con <span class="math inline">\(D^{+}\)</span>.</p>
 <pre class="r"><code>D_data_norm = f_empi_norm - probras_data
@@ -439,11 +439,11 @@ print(D_data_max)</code></pre>
 D_data_des_max = max(D_data_des)
 print(D_data_des_max)</code></pre>
 <pre><code>## [1] 0.1125086</code></pre>
-<p>Ahora calculamos <span class="math inline">\(D = max \{D^{+},D^{-} \}= \sup |F_{n}(x) - F(x) |\)</span>, que es la diferencia entre la función de distribución empírica y teórica, al final vamos a comparar con la de la simulación <span class="math inline">\(10^{6}\)</span>.</p>
+<p>Ahora calculamos <span class="math inline">\(D = max \{D^{+},D^{-} \}= \sup |F_{n}(x) - F(x) |\)</span>, que es la diferencia entre la funciC3n de distribuciC3n empC-rica y teC3rica, al final vamos a comparar con la de la simulaciC3n <span class="math inline">\(10^{6}\)</span>.</p>
 <pre class="r"><code>D_max= max(D_data_max,D_data_des_max)
 print(D_max)</code></pre>
 <pre><code>## [1] 0.1125086</code></pre>
-<p>Veamos la información:</p>
+<p>Veamos la informaciCión:</p>
 <p>Mostremos los 5 primeros datos y últimos 5:</p>
 <pre class="r"><code>print(head(valores_25))</code></pre>
 <pre><code>##       x_data x_data_ord probras_data D_data_norm   D_data_des
@@ -461,12 +461,12 @@ print(D_max)</code></pre>
 ## 23  0.8673066  0.9684286    0.8335848  0.086415187 -0.046415187
 ## 24  1.3781350  1.3781350    0.9159192  0.044080808 -0.004080808
 ## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213</code></pre>
-<p>Vamos a hacer lo mismo para los datos de la simulación <span class="math inline">\(10^{6}\)</span>, y después vamos comparar las <span class="math inline">\(D\)</span>. Ordenamos la muestra.</p>
+<p>Vamos a hacer lo mismo para los datos de la simulaciC3n <span class="math inline">\(10^{6}\)</span>, y después vamos comparar las <span class="math inline">\(D\)</span>. Ordenamos la muestra.</p>
 <pre class="r"><code>x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)</code></pre>
-<p>Calculamos la función desfasada (<span class="math inline">\(\frac{1}{10^6}\)</span>).</p>
+<p>Calculamos la funcición desfasada (<span class="math inline">\(\frac{1}{10^6}\)</span>).</p>
 <pre class="r"><code>f_empi_M_des = f_empi_M - (1/(10^3))</code></pre>
-<p>Calculamos las probas bajo una distribución <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>Calculamos las probas bajo una distribuciones <span class="math inline">\(N(0,1)\)</span>.</p>
 <pre class="r"><code>probas_dataM = pnorm(x_dataM_ord)</code></pre>
 <p>Calculamos <span class="math inline">\(D^{+}=\max \{F_{n}(x_{i}) - F(x_{i}) \}\)</span>.</p>
 <pre class="r"><code>D_dataM_norm = f_empi_M - probas_dataM
@@ -499,6 +499,24 @@ print(D_data_des_max)</code></pre>
 ## 998   1.0624081    3.029837    0.9987766 -0.0007765718 0.0017765718
 ## 999  -0.7634958    3.262782    0.9994484 -0.0004483775 0.0014483775
 ## 1000  0.9604393    3.541459    0.9998010  0.0001989603 0.0008010397</code></pre>
+</div>
+<div id="tablas-de-contingencia" class="section level2">
+<h2>Tablas de contingencia</h2>
+</div>
+<div id="problema-1" class="section level2">
+<h2>Problema 1</h2>
+</div>
+<div id="pruebas-de-correlación-de-rango" class="section level2">
+<h2>Pruebas de correlación de rango</h2>
+</div>
+<div id="problema-1-1" class="section level2">
+<h2>Problema 1</h2>
+</div>
+<div id="pruebas-de-correlación-de-rango-1" class="section level2">
+<h2>Pruebas de correlación de rango</h2>
+</div>
+<div id="problema-2" class="section level2">
+<h2>Problema 2</h2>
 </div>
 
 

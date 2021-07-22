@@ -14,7 +14,7 @@ output:
 ## Pruebas de bondad de ajuste
 ## Problema 3
 La siguiente muestra aleatoria hace referencia a los rendimientos positivos de
-cierta acción a lo largo del tiempo.
+cierta acciC3n a lo largo del tiempo.
 
 0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
 1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548
@@ -24,7 +24,7 @@ Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.
 ```r
 library(nortest)
 ```
-Ho: La muestra sigue una distribución normal VS Ha: La muestra no sigue una distribución normal
+Ho: La muestra sigue una distribuciC3n normal VS Ha: La muestra no sigue una distribuciC3n normal
 
 Metemos los datos en un vector y ordenamos los datos.
 
@@ -42,7 +42,7 @@ Data=sort(Dirty_data)
 ```
 
 
-Como queremos probar normalidad pero no sabemos los parámetros tenemos que estimarlos, primero queremos hacer una función para calcular la varianza muestral.
+Como queremos probar normalidad pero no sabemos los parC!metros tenemos que estimarlos, primero queremos hacer una funciC3n para calcular la varianza muestral.
 
 
 
@@ -59,7 +59,7 @@ S2<-function(x){
 }
 ```
 
-Calculamos los estimadores máximos verosímiles. 
+Calculamos los estimadores mC!ximos verosC-miles. 
 
 
 ```r
@@ -81,7 +81,7 @@ n=length(Data)
 ## [1] 15
 ```
 
-Calculamos la función de distribución empírica necesaria para la prueba de lillieforce, donde "ecdf" es la función para crear la distribución empírica, "f_n" son los percentiles de la distribución empírica y "f_r" son los percentiles de la distribución pero desplazados una unidad. 
+Calculamos la funciC3n de distribuciC3n empC-rica necesaria para la prueba de lillieforce, donde "ecdf" es la funciC3n para crear la distribuciC3n empC-rica, "f_n" son los percentiles de la distribuciC3n empC-rica y "f_r" son los percentiles de la distribuciC3n pero desplazados una unidad. 
 
 
 
@@ -105,7 +105,7 @@ Z=(Data-mean_est)/sqrt(S2_est)
 ## [13]  1.20986549  1.26191423  1.34100569
 ```
 
-Ahora usaremos la función de distribución de una normal estandar para los valores antes calculados. 
+Ahora usaremos la funciC3n de distribuciC3n de una normal estandar para los valores antes calculados. 
 
 
 ```r
@@ -128,7 +128,7 @@ Di_p=abs(Probas-f_n)
 Di_n=abs(Probas-f_r)
 ```
 
-Visualizamos todos los cálculos. 
+Visualizamos todos los cC!lculos. 
 
 
 ```r
@@ -190,7 +190,7 @@ Declaramos nuestro nivel de significancia $$\alpha = 0.10$$ entonces $$1-\alpha 
 
 
 
-Comparamos con el nivel crítico $$ W_{0.10}^{15}= 0.2016 $$, para el tamaño de muestra 15 en tablas.
+Comparamos con el nivel crC-tico $$ W_{0.10}^{15}= 0.2016 $$, para el tamaC1o de muestra 15 en tablas.
 
 
 ```r
@@ -203,9 +203,9 @@ Rechazamos_H0=Dn>Est
 ## [1] TRUE
 ```
 
-Como $$D > W_{0.10}^{15}$$, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribución $$ N(\mu,\sigma^2) $$
+Como $$D > W_{0.10}^{15}$$, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribuciC3n $$ N(\mu,\sigma^2) $$
 
-Hacemos la prueba en unas líneas. 
+Hacemos la prueba en unas lC-neas. 
 
 
 ```r
@@ -226,9 +226,9 @@ Rechazamos_p_value=p_value<alpha
 Confirmando la prueba anterior. 
 
 
-El gerente del banco asume que la muestra se distribuye sigue una distribución lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposición del gerente con un nivel de significancia alpha = 0.01. 
+El gerente del banco asume que la muestra se distribuye sigue una distribuciC3n lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposiciC3n del gerente con un nivel de significancia alpha = 0.01. 
 
-Llamamos a la función de distribución de una lognormal.
+Llamamos a la funciC3n de distribuciC3n de una lognormal.
 
 
 ```r
@@ -291,9 +291,9 @@ Rechazamos_H0B=DnB>EstB
 ```
 
 Se cumple que $$W_{0.01}^{15} > D$$ entonces no hay evidencia para rechazar Ho, entonces 
-los datos siguen una distribución lognormal con media de 1 y varianza 0.
+los datos siguen una distribuciC3n lognormal con media de 1 y varianza 0.
 
-Usamos la prueba específicando la distribución lognormal con sus parámetros.
+Usamos la prueba especC-ficando la distribuciC3n lognormal con sus parC!metros.
 
 
 ```r
@@ -318,7 +318,7 @@ Confirmamos la prueba anterior.
 ## Problema 4
 
 
-Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal
+Un cierto banco otorga crC)dito a las personas con una tasa preferencial, de tal
 manera que los acreditados pueden pagar en cualquier momento desde que piden
 el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa
 preferencial . Se seleccionaron aleatoriamente a 1,000 personas y observaron su
@@ -326,7 +326,7 @@ comportamiento, generando de esta manera la siguiente tabla de frecuencia:
 
 
 ```r
-intervalos <- c( "Menos de 1 semana","1<= x <2" , "2<= x <3","3<= x <4","4<= x <5","5<= x <6","6<= x <7","7<= x <8","Más de 8 semanas")
+intervalos <- c( "Menos de 1 semana","1<= x <2" , "2<= x <3","3<= x <4","4<= x <5","5<= x <6","6<= x <7","7<= x <8","MC!s de 8 semanas")
 oi <- c(64,195,287,241,140,51,25,4,1)
 
 tabla <- data.frame(oi,row.names = intervalos )
@@ -343,7 +343,7 @@ tabla
 ## 5<= x <6           51
 ## 6<= x <7           25
 ## 7<= x <8            4
-## Más de 8 semanas    1
+## MC!s de 8 semanas   1
 ```
 
 Observamos la cantidad real de personas. 
@@ -359,11 +359,11 @@ print(k)
 
 Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago. 
 
-Enunciamos la prueba de hipótesis: 
+Enunciamos la prueba de hipC3tesis: 
 
-Ho: Se sigue una distribución Bin(n=10,p=0.25)  VS   Ha: No se sigue una distribución Bin(n=10,p=0.25)
+Ho: Se sigue una distribuciC3n Bin(n=10,p=0.25)  VS   Ha: No se sigue una distribuciC3n Bin(n=10,p=0.25)
 
-Nuestros parámetros son: 
+Nuestros parC!metros son: 
 
 
 ```r
@@ -390,7 +390,7 @@ Nuestras observaciones fueron:
 oi=c(64,195,287,241,140,51,25,4,1)
 ```
 
-Calculamos las probabilidades $p_{i}$ con la distribución que propusimos, se itera desde cero ya que tenemos la clasificación 0. 
+Calculamos las probabilidades $p_{i}$ con la distribuciC3n que propusimos, se itera desde cero ya que tenemos la clasificaciC3n 0. 
 
 
 ```
@@ -422,7 +422,7 @@ print(ei)
 ## [7]  16.3517761   3.1146240   0.4191284
 ```
 
-Podemos visualizar toda la información. 
+Podemos visualizar toda la informaciC3n. 
 
 
 ```r
@@ -443,7 +443,7 @@ print(Tabla_ji)
 ## 9  8   1 0.000415802   0.4191284
 ```
 
-Vamos a calcular nuestra estadística de prueba. 
+Vamos a calcular nuestra estadC-stica de prueba. 
 $$T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}$$
 
 
@@ -468,7 +468,7 @@ alpha_ejercicio4=0.01
 conf_ejercicio4= 1- alpha_ejercicio4
 ```
 
-Necesitamos los grados de libertad, que es el número de clasificaciones menos uno, ya que no estimamos parámetros. 
+Necesitamos los grados de libertad, que es el nC:mero de clasificaciones menos uno, ya que no estimamos parC!metros. 
 
 
 ```
@@ -479,7 +479,7 @@ Calculamos el cuantil ${\chi}^2_{8,\ 0.99}$.
 ```r
 valor_critico=qchisq(conf_ejercicio4,df=v,lower.tail = TRUE)
 ```
-Comparamos la estadística de prueba con el valor crítico. 
+Comparamos la estadC-stica de prueba con el valor crC-tico. 
 
 ```r
 Rechazamos_H0_p4=EstJi>valor_critico
@@ -490,9 +490,9 @@ print(Rechazamos_H0_p4)
 ## [1] FALSE
 ```
 
-No hay evidencia pra decir que los datos no siguien una distribución binomial con n=10 y p=0.25, entonces aceptamos Ho. 
+No hay evidencia pra decir que los datos no siguien una distribuciC3n binomial con n=10 y p=0.25, entonces aceptamos Ho. 
 
-Para comprobar los cálculos usemos la prueba que vienen en la libreria nortest. 
+Para comprobar los cC!lculos usemos la prueba que vienen en la libreria nortest. 
 
 
 ```r
@@ -521,24 +521,24 @@ No rechazamos Ho.
 En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1)
 y con ella realiza:
 
-Calcula y gráfica la función de distribución empírica de las observaciones
+Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones
 generadas.
 
-Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)).
-A partir de las gráficas anteriores ¿La función de distribución empírica es
-similar a la distribucin teórica de los datos?.
+Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
+A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es
+similar a la distribucin teC3rica de los datos?.
 
-Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0; 1) y con ello realiza:
+Vuelve a fijar la semilla 2019, y genera un millC3n de observaciones distribuidas como una N(0; 1) y con ello realiza:
 
-Calcula y gráfica la función de distribución empírica de las observaciones generadas.
+Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones generadas.
 
-Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)).
-A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
+Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
+A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es similar a la distribuciC3n teC3rica de los datos?.
 
-Realiza la diferencia entre el valor de la función empírica y la función real,
-(Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y sólo mostrar los primeros 5 y los últimos 5 resultados)
+Realiza la diferencia entre el valor de la funciC3n empC-rica y la funciC3n real,
+(Hint: no olvides que debes ordenar de menor a mayor los valores de la distribuciC3n conocida y sC3lo mostrar los primeros 5 y los C:ltimos 5 resultados)
 
-¿Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
+B?Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
 el resultado obtenido?.
 
 
@@ -548,7 +548,7 @@ Para la primera parte del ejercicio fijemos la semilla inicial.
 set.seed(2019)
 ```
 
-Obtengamos 25 datos de una distribución normal estándar.
+Obtengamos 25 datos de una distribuciC3n normal estC!ndar.
 
 ```r
 x_data=rnorm(25,mean=0,sd=1)
@@ -562,12 +562,12 @@ print(x_data)
 ## [19] -0.3271264 -2.2632252  0.2855605  0.9684286  0.8673066  1.3781350
 ## [25] -0.8082596
 ```
-Calculemos la función de distribución empírica y obtengamos su gráfica.
+Calculemos la funciC3n de distribuciC3n empC-rica y obtengamos su grC!fica.
 
 
 ```r
 f_empi=ecdf(x_data)
-plot(f_empi, xlab="Observados", ylab="Función de probabilidad", 
+plot(f_empi, xlab="Observados", ylab="FunciC3n de probabilidad", 
      main="Muestra con 25 valores", col="darkcyan")
 curve(pnorm(x), add=TRUE, col="red")
 ```
@@ -575,7 +575,7 @@ curve(pnorm(x), add=TRUE, col="red")
 ![](Pruebas_p_files/figure-html/unnamed-chunk-52-1.png)<!-- -->
 
 
-Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idénticas, del lado de los negativos se aprecia más despegada en cambio para valores mayores a cero se ajustan mejor a la función de distribución de una $N(0,1)$. 
+Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idC)nticas, del lado de los negativos se aprecia mC!s despegada en cambio para valores mayores a cero se ajustan mejor a la funciC3n de distribuciC3n de una $N(0,1)$. 
 
 Vamos con la segunda parte del ejercicio, primero volvemos a fijar la semilla. 
 
@@ -584,33 +584,33 @@ Vamos con la segunda parte del ejercicio, primero volvemos a fijar la semilla.
 set.seed(2019)
 ```
 
-Generamos un millón de datos de una distribución $N(0,1)$.
+Generamos un millC3n de datos de una distribuciC3n $N(0,1)$.
 
 
 ```r
 x_dataM = rnorm(10^3)
 ```
-Calculamos la función de distribución empírica $F_{n}$
+Calculamos la funciC3n de distribuciC3n empC-rica $F_{n}$
 
 
 ```r
 f_empiM = ecdf(x_dataM)
 ```
 
-Veamos las gráficas: 
+Veamos las grC!ficas: 
 
 
 ```r
-plot(f_empiM, xlab="Observados", ylab="Función de probabilidad", 
+plot(f_empiM, xlab="Observados", ylab="FunciC3n de probabilidad", 
      main="Muestra con 10^6 valores", col="darkcyan")
 curve(pnorm(x), add=TRUE, col="red")
 ```
 
 ![](Pruebas_p_files/figure-html/unnamed-chunk-56-1.png)<!-- -->
 
-En este caso para una muestra de tamaño $10^6$, ambas funciones se parecen mucho, apenas se alcanzan a ver los puntos en los que difieren. 
+En este caso para una muestra de tamaC1o $10^6$, ambas funciones se parecen mucho, apenas se alcanzan a ver los puntos en los que difieren. 
 
-Trabajemos con la muestra tamaño 25, ahora vamos a ver como se comportan los datos en relación con la función empírica y real, primero debemos ordenar los datos.
+Trabajemos con la muestra tamaC1o 25, ahora vamos a ver como se comportan los datos en relaciC3n con la funciC3n empC-rica y real, primero debemos ordenar los datos.
 
 
 ```r
@@ -618,14 +618,14 @@ x_data_ord=sort(x_data)
 f_empi_norm=f_empi(x_data_ord)
 ```
 
-Calculemos la función empírica con un lugar desfasado (salto de $\frac{1}{25}$).
+Calculemos la funciC3n empC-rica con un lugar desfasado (salto de $\frac{1}{25}$).
 
 
 ```r
 f_empi_des=f_empi_norm - (1/25)
 ```
 
-Calculemos las probabilidades de la muestra suponiendo una distribución $N(0,1)$. 
+Calculemos las probabilidades de la muestra suponiendo una distribuciC3n $N(0,1)$. 
 
 
 ```r
@@ -658,7 +658,7 @@ print(D_data_des_max)
 ```
 ## [1] 0.1125086
 ```
-Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la diferencia entre la función de distribución empírica y teórica, al final vamos a comparar con la de la simulación $10^{6}$. 
+Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la diferencia entre la funciC3n de distribuciC3n empC-rica y teC3rica, al final vamos a comparar con la de la simulaciC3n $10^{6}$. 
 
 
 ```r
@@ -669,7 +669,7 @@ print(D_max)
 ```
 ## [1] 0.1125086
 ```
-Veamos la información:
+Veamos la informaciCión:
 
 
 
@@ -704,7 +704,7 @@ print(tail(valores_25))
 ## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213
 ```
 
-Vamos a hacer lo mismo para los datos de la simulación $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
+Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
 
 
 ```r
@@ -712,14 +712,14 @@ x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)
 ```
 
-Calculamos la función desfasada ($\frac{1}{10^6}$).
+Calculamos la funcición desfasada ($\frac{1}{10^6}$).
 
 
 ```r
 f_empi_M_des = f_empi_M - (1/(10^3))
 ```
 
-Calculamos las probas bajo una distribución $N(0,1)$.
+Calculamos las probas bajo una distribuciones $N(0,1)$.
 
 
 ```r
@@ -798,6 +798,25 @@ print(tail(valores_M))
 
 
 
+## Tablas de contingencia 
+## Problema 1
+
+
+
+
+
+
+
+
+
+
+
+## Pruebas de correlación de rango 
+## Problema 1
+
+
+## Pruebas de correlación de rango 
+## Problema 2
 
 
 
