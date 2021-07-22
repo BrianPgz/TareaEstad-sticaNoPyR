@@ -593,7 +593,7 @@ print(tail(valores_M))
 
 
 
-## Pruebas de correlac??n de rango 
+## Pruebas de correlación de rango 
 ## Problema 1
 
 
