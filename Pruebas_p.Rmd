@@ -605,7 +605,6 @@ estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, Ne
 Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma población.En este caso los datos vienen por estado en ese orden. 
 
 ```{r echo=TRUE}
-library(dplyr)
 porcentaje=c(23,24,12,12,7,18,8,35,11)
 hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)
 ```
@@ -622,6 +621,7 @@ Vamos a calcular los rangos considerando a $X$ e $y$ como una sola muestra aleat
 ```{r echo=TRUE}
 paises$R_x = rank(paises$hispanos)
 paises$R_y=rank(paises$porcentaje)
+print(paises)
 ```
 
 
