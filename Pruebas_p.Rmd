@@ -672,7 +672,7 @@ Vamos a hacer la prueba por Kendall.
 
 
 
-
+Tenemos que ver si los datos son concordantes.
 
 
 
