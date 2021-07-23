@@ -605,18 +605,20 @@ paises<-data.frame(hispanos,porcentaje)
 paises
 ```
 
-Vamos a calcular los rangos considerando a $X$ e $y$ como una sola muestra aleatoria. 
+Vamos a calcular los rangos considerando a $X$ e $y$ como una sola muestra aleatoria, para calcularle los rangos. 
 
 ```{r echo=TRUE}
 paises$R_x = rank(paises$hispanos)
 paises$R_y=rank(paises$porcentaje)
 print(paises)
 ```
-Planteamos la prueba de hipC3tesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores mC!s grandes de X estC)n emparejados" con los valores mC!s grandes de Y y los valores mC!s chicos de X estC)n emparejados" con los valores mC!s chicos de Y.   
+Planteamos la prueba de hipotesis (prueba de una cola tipo c).
 
-Ha: No estC!n emparejados.  
+$H_{0}$:$\rho ??? 0$, existe una tendencia para que los valores mas grandes de X esten emparejados con los valores mas chicos de $Y$, y que los valores mas chicos de $X$ esten emparejados con los valores mas grandes de $Y$.
 
-Obtenemos las diferencias entre los rangos en error cuadrC!tico, que nos servirC! para calcular $T$, estadC-stica de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
+$H_{a}$:$p<0$ 
+
+Obtenemos las diferencias entre los rangos en error cuadratico, que nos sirve para calcular $T$, estadC-stica de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
 
 ```{r echo=TRUE}
 paises$diff_c = (paises$R_x - paises$R_y)^2 
@@ -632,20 +634,20 @@ $$ 1- \frac{6T}{n(n^{2}-1 )}$$
 rho_Spearman = 1 - (6 * estadistica ) / (n_tamanio*(n_tamanio^2 -1 ) )
 print(rho_Spearman)
 ```
-Definimos el nivel de significancia $\alpha$
+Definimos el nivel de significancia $\alpha$.
 
 
 ```{r echo=TRUE}
 alpha_spear= 0.05
 conf_spear = 1- alpha_spear 
 ```
-Ahora veamos que se rechaza Ho si $\rho < \omega_{\alpha}= 0.6$
+Ahora veamos que se rechaza Ho si $\rho < \omega_{\alpha}= 0.6$,se busco el cuantil en tablas.
 
 ```{r echo=TRUE}
 Rechazamos_H0_spear=rho_Spearman>0.6
 print(Rechazamos_H0_spear)
 ```
-
+Por lo anterior, debemos aceptar $H_{0}$, entonces la poblaci??n tiene una correlaci??n $\rho ??? 0$.
 
 
 Hacemos el test para comprobar la respuesta. 
@@ -655,27 +657,16 @@ test_spear=cor.test(porcentaje, hispanos,method="spearman",alternative="greater"
 p_value=test_spear$p.value
 print(p_value)
 ```
-Entonces aceptamos $H_{0}$ ya que $p-value>\alpha$.
+Entonces aceptamos $H_{0}$ ya que $p-value>\alpha= 0.05$.
 
-Vamos a hacer la prueba por Kendall. 
-
-
-
-Tenemos que ver si los datos son concor
-
-
-
-
-
-
-
-
-Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paqueterC-a nortest. 
+Vamos a hacer la prueba por Kendall, para comprobar nuestros datos. Tenemos que hacer la prueba con el test de la paqueterC-a nortest. 
 ```{r echo=TRUE}
 test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
-print(test_ken)
+print(test_ken$p.value)
 ```
-Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman. 
+Como el $p-value>alpha$ entonces aceptamos $H_{0}$, como en la prueba de Spearman. 
+
+Entonces concluimos que los datos tienen una corrlacipon positiva (mejor dicho no negativa), ya que $p???0$ con un nivel de confianza $\alpha=0.05$.
 
 
 
@@ -684,6 +675,11 @@ Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman
 
 
 Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.
+
+La prueba de Mann-Whitney-Wilcoxon es una prueba no parametrica que es usada
+cuando se tienen dos muestras aleatorias independientes y se desea probar que estas
+provienen de una misma poblacion, es decir, se observara si existe evidencia con un
+nivel signicancia $\alpha$, que dos muestras aleatorias independientes son iguales entre si.
 
 Creamos los vectores con los datos.
 
@@ -735,7 +731,7 @@ rango_nodiv<-suma_rango$suma_rango[2]
 print(suma_rango)
 ```
 
-Podemos ver la distribuciC3n de los datos: 
+Podemos ver la distribucion de los rangos: 
 
 ```{r echo=TRUE}
 ggplot(data = datos_div , aes(x = rango , y=0)) + 
@@ -749,7 +745,7 @@ ggplot(data = datos_div , aes(x = rango , y=0)) +
 Procedemos a calcular $U_{1}, \ U_{2}$. 
 $$U_{1}= n_{1} \ n_{2} + \frac{n_{1} (n_{1}-1)}{2} - R_{1}$$
 $$U_{2}= n_{1} \ n_{2} + \frac{n_{2} (n_{2}-1)}{2} - R_{2}$$
-Recordamos que $n_{1}=n_{2}$.
+Recordamos que $n_{1}=n_{2}$, entonces el factor al que se le debe restar $R_{1}, \  R_{2}$ es el mismo.
 ```{r echo=TRUE}
 factor_us= n_tamanio_muestra*n_tamanio_muestra+(n_tamanio_muestra*(n_tamanio_muestra+1))/2
 
@@ -768,6 +764,32 @@ Recordamos que $U=\min(U_{1},U_{2} )$.
 U_est= min(U_div,U_nd)
 
 ```
+
+Como suponemos que los datos vienen de la distribucion normal, obtengamos la esperanza y varianza de $U$, que ser??n los par??metros para la distribucion normal, como se sugiere en las notas.
+
+$$E[U]= \frac{n_{1}n_{2} }{2}$$
+$$Var[U] = \frac{n_{1}n_{2}}{12}(n_{1}+n_{2}+1) $$
+```{r echo=TRUE}
+mu_div = (n_tamanio_muestra^2)/2
+sigma_div = (n_tamanio_muestra^2 / 12 )*(n_tamanio_muestra+n_tamanio_muestra+1)
+
+```
+
+Por ser una prueba de dos colas tenemos que ver qu?? pasa con los cuantiles $\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}$.
+
+
+
+
+Para comprobar lo anterior tenemos que ver la prueba de paqueteria nortest. 
+
+```{r echo=TRUE}
+prueba_wilcox = wilcox.test(divorciados, nodivorciados, paired=FALSE)
+print(prueba_wilcox$p.value)
+
+```
+Como el $p-value>0.05$  $H_{0}$
+
+
 
 
 ## Pruebas de correlaciC3n de rango 
