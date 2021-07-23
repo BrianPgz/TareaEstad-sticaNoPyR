@@ -623,8 +623,52 @@ paises$R_x = rank(paises$hispanos)
 paises$R_y=rank(paises$porcentaje)
 print(paises)
 ```
+Planteamos la prueba de hipótesis (prueba de una cola) Ho: Existe una tendencia para que los valores más grandes de X estén emparejados" con los valores más grandes de Y y los valores más chicos de X estén emparejados" con los valores más chicos de Y.   
+
+Ha: No están emparejados.  
+
+Obtenemos las diferencias entre los rangos en error cuadrático, que nos servirá para calcular $T$, estadística de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
+
+```{r echo=TRUE}
+paises$diff_c = (paises$R_x - paises$R_y)^2 
+estadistica= sum(paises$diff_c)
+n_tamanio=length(paises$porcentaje)
+```
+
+Ahora vamos a calcular $\rho$ de Spearman. 
+
+$$ 1- \frac{6T}{n(n^{2}-1 )}$$
+```{r echo=TRUE}
+
+rho_Spearman = 1 - (6 * estadistica ) / (n_tamanio*(n_tamanio^2 -1 ) )
+print(rho_Spearman)
+```
+Definimos el nivel de significancia $\alpha$
 
 
+```{r echo=TRUE}
+alpha_spear= 0.05
+conf_spear = 1- alpha_spear 
+```
+Ahora veamos que se rechaza Ho si $\rho < \omega_{\alpha}= 0.6$
+
+```{r echo=TRUE}
+Rechazamos_H0_spear=rho_Spearman>0.6
+print(Rechazamos_H0_spear)
+```
+
+
+
+Hacemos el test para comprobar la respuesta. 
+
+```{r echo=TRUE}
+test_spear<-cor.test(porcentaje, hispanos,method="spearman",alternative="greater")
+p_value=test_spear$p.value
+print(p_value)
+```
+Entonces aceptamos $H_{0}$ ya que $p-value>\alpha$.
+
+Vamos a hacer la prueba por Kendall. 
 
 
 
