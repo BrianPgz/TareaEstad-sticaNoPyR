@@ -623,7 +623,7 @@ paises$R_x = rank(paises$hispanos)
 paises$R_y=rank(paises$porcentaje)
 print(paises)
 ```
-Planteamos la prueba de hipótesis (prueba de una cola) Ho: Existe una tendencia para que los valores más grandes de X estén emparejados" con los valores más grandes de Y y los valores más chicos de X estén emparejados" con los valores más chicos de Y.   
+Planteamos la prueba de hipótesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores más grandes de X estén emparejados" con los valores más grandes de Y y los valores más chicos de X estén emparejados" con los valores más chicos de Y.   
 
 Ha: No están emparejados.  
 
@@ -662,7 +662,7 @@ print(Rechazamos_H0_spear)
 Hacemos el test para comprobar la respuesta. 
 
 ```{r echo=TRUE}
-test_spear<-cor.test(porcentaje, hispanos,method="spearman",alternative="greater")
+test_spear=cor.test(porcentaje, hispanos,method="spearman",alternative="greater")
 p_value=test_spear$p.value
 print(p_value)
 ```
@@ -670,6 +670,23 @@ Entonces aceptamos $H_{0}$ ya que $p-value>\alpha$.
 
 Vamos a hacer la prueba por Kendall. 
 
+
+
+
+
+
+
+
+
+
+
+
+Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest. 
+```{r echo=TRUE}
+test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
+print(test_ken)
+```
+Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman. 
 
 
 
