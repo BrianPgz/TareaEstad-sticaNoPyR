@@ -775,8 +775,23 @@ sigma_div = (n_tamanio_muestra^2 / 12 )*(n_tamanio_muestra+n_tamanio_muestra+1)
 
 ```
 
-Por ser una prueba de dos colas tenemos que ver qu?? pasa con los cuantiles $\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}$.
+Por ser una prueba de dos colas para $\alpha= 0.05 $ tenemos que ver que pasa con los cuantiles $\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}$, recordamos que la distribuci??n normal es simetrica.
 
+```{r echo=TRUE}
+alpha_div = 0.05
+z_izq=qnorm(alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
+z_der=qnorm(1-alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
+print(z_izq)
+print(z_der)
+```
+
+Rechazamos $H_{0}$, si $U< Z_{\alpha}$ o $ U> Z_{1-\frac{\alpha}{2}}$. 
+
+```{r echo=TRUE}
+Rechazamos_H0_div=(U_est < z_izq || U_est > z_der)
+print(Rechazamos_H0_div)
+```
+Por lo anterior aceptamos $H_{0}$, entonces los datos vienen de la misma poblaci??n. No hay una diferencia en el aprovechamiento de los ni??os, con un $\alpha=0.05$ de confianza. 
 
 
 
@@ -787,7 +802,9 @@ prueba_wilcox = wilcox.test(divorciados, nodivorciados, paired=FALSE)
 print(prueba_wilcox$p.value)
 
 ```
-Como el $p-value>0.05$  $H_{0}$
+Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la misma poblaci??n. 
+
+
 
 
 
@@ -797,8 +814,7 @@ Como el $p-value>0.05$  $H_{0}$
 La tabla que se proporciona a continuaciC3n da el nC:mero de premios de postgraduados en ciencia mC)dica y la razC3n de muerte por millC3n de tuberculosis para los aC1os 1959-69.
 
 Demuestre que estos datos muestran una fuerte evidencia de correlaciC3n negativa
-entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este
-"extraC1o" resultado. Use = 0.05. 
+entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este "extraC1o" resultado. Use = 0.05. 
 
 
 
