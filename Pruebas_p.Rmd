@@ -682,7 +682,7 @@ Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman
 ## Problema 2 
 
 
-Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento académico de los niños. El psicologo cuenta con las calicaciones de un grupo de niños de escuela primaria cuyos padres tuvieron un divorcio durante el año anterior, y las calicaciones para un grupo de niños similares cuyos padres no se divorciaron.
+Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.
 
 Creamos los vectores con los datos.
 
@@ -691,13 +691,13 @@ nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
 divorciados= c(60, 70, 88, 75, 42, 30, 50)
 ```
 
-Planteamos la prueba de hipótesis como: 
+Planteamos la prueba de hipC3tesis como: 
 
-$H_{0}$: Las muestras vienen de la misma población, es decir, $E[X]=E[Y]$. 
+$H_{0}$: Las muestras vienen de la misma poblaciC3n, es decir, $E[X]=E[Y]$. 
 
-$H_{a}$: Las muestras no vienen de la misma población.
+$H_{a}$: Las muestras no vienen de la misma poblaciC3n.
 
-Obtenemos el tamaño de la muestra, para este caso ambas muestras tienen el mismo tamaño, entonces $n_{1}=n_{2}$.
+Obtenemos el tamaC1o de la muestra, para este caso ambas muestras tienen el mismo tamaC1o, entonces $n_{1}=n_{2}$.
 
 ```{r echo=TRUE}
 n_tamanio_muestra=length(nodivorciados)
@@ -719,9 +719,8 @@ print(datos_div)
 Vamos a obtener los rangos y a visualizarlos: 
 
 ```{r echo=TRUE}
-datos_div$rango=rank(Data$Promedio)
+datos_div$rango=rank(datos_div$Promedio)
 print(datos_div)
-
 ```
 
 Debemos obtener las sumas de los rangos. 
@@ -735,7 +734,7 @@ rango_nodiv<-suma_rango$suma_rango[2]
 print(suma_rango)
 ```
 
-Podemos ver la distribución de los datos: 
+Podemos ver la distribuciC3n de los datos: 
 
 ```{r echo=TRUE}
 ggplot(data = datos_div , aes(x = rango , y=0)) + 
@@ -751,7 +750,7 @@ $$U_{1}= n_{1} \ n_{2} + \frac{n_{1} (n_{1}-1)}{2} - R_{1}$$
 $$U_{2}= n_{1} \ n_{2} + \frac{n_{2} (n_{2}-1)}{2} - R_{2}$$
 Recordamos que $n_{1}=n_{2}$.
 ```{r echo=TRUE}
-factor_us= n_tamanio_muestra * n_tamanio_muestra + ( n_tamanio_muestra*(n_tamanio_muestra-1 ) / 2 )
+factor_us= n_tamanio_muestra*n_tamanio_muestra+(n_tamanio_muestra*(n_tamanio_muestra+1))/2
 
 ```
 
@@ -762,15 +761,21 @@ U_nd=factor_us - rango_nodiv
 print(U_div)
 print(U_nd)
 ```
+Recordamos que $U=\min(U_{1},U_{2} )$.
+
+```{r echo=TRUE}
+U_est= min(U_div,U_nd)
+
+```
 
 
 ## Pruebas de correlaciC3n de rango 
 ## Problema 3
-La tabla que se proporciona a continuación da el número de premios de postgraduados en ciencia médica y la razón de muerte por millón de tuberculosis para los años 1959-69.
+La tabla que se proporciona a continuaciC3n da el nC:mero de premios de postgraduados en ciencia mC)dica y la razC3n de muerte por millC3n de tuberculosis para los aC1os 1959-69.
 
-Demuestre que estos datos muestran una fuerte evidencia de correlación negativa
-entre el número de premios y la tasa de muerte por tuberculosis. Explique este
-"extraño" resultado. Use = 0.05. 
+Demuestre que estos datos muestran una fuerte evidencia de correlaciC3n negativa
+entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este
+"extraC1o" resultado. Use = 0.05. 
 
 
 
