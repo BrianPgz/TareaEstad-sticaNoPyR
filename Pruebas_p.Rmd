@@ -111,7 +111,7 @@ Di_p=f_n  -Probas
 Di_n= Probas - f_r
 ```
 
-Visualizamos todos los cálculos. 
+Visualizamos todos los cC!lculos. 
 
 ```{r echo=TRUE}
 Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)
@@ -581,29 +581,16 @@ print(tail(valores_M))
 
 
 
-## Tablas de contingencia 
-## Problema 1
-
-
-
-
-
-
-
-
-
-
-
 ## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
 ## Problema 1
 
-1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los
+1.- La oficina de Censo reportC3 que se espera que los hispanos sobrepasen a los
 afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o
 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el
-numero de Hispanos y el procentaje de la población del estado para los nueve
-estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
+numero de Hispanos y el procentaje de la poblaciC3n del estado para los nueve
+estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New MC)xico, Colorado.
 
-Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma población.En este caso los datos vienen por estado en ese orden. 
+Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma poblaciC3n.En este caso los datos vienen por estado en ese orden. 
 
 ```{r echo=TRUE}
 porcentaje=c(23,24,12,12,7,18,8,35,11)
@@ -624,11 +611,11 @@ paises$R_x = rank(paises$hispanos)
 paises$R_y=rank(paises$porcentaje)
 print(paises)
 ```
-Planteamos la prueba de hipótesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores más grandes de X estén emparejados" con los valores más grandes de Y y los valores más chicos de X estén emparejados" con los valores más chicos de Y.   
+Planteamos la prueba de hipC3tesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores mC!s grandes de X estC)n emparejados" con los valores mC!s grandes de Y y los valores mC!s chicos de X estC)n emparejados" con los valores mC!s chicos de Y.   
 
-Ha: No están emparejados.  
+Ha: No estC!n emparejados.  
 
-Obtenemos las diferencias entre los rangos en error cuadrático, que nos servirá para calcular $T$, estadística de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
+Obtenemos las diferencias entre los rangos en error cuadrC!tico, que nos servirC! para calcular $T$, estadC-stica de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
 
 ```{r echo=TRUE}
 paises$diff_c = (paises$R_x - paises$R_y)^2 
@@ -682,7 +669,7 @@ Tenemos que ver si los datos son concor
 
 
 
-Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest. 
+Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paqueterC-a nortest. 
 ```{r echo=TRUE}
 test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
 print(test_ken)
@@ -691,16 +678,31 @@ Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman
 
 
 
-## Pruebas de correlaciC3n de rango 
+## Pruebas de correlaciC3n de rango   
 ## Problema 2 
 
 
 Un psicologo esta investigando el impacto que el divorcio de los padres tiene
-sobre el aprovechamiento academico de los niños. El psicologo cuenta con las
+sobre el aprovechamiento academico de los niC1os. El psicologo cuenta con las
 calicaciones de un grupo de ni~nos de escuela primaria cuyos padres tuvieron
-un divorcio durante el añ anterior, y las calicaciones para un grupo de niños
+un divorcio durante el aC1o terior, y las calicaciones para un grupo de niC1os
 similares cuyos padres no se divorciaron.
 
+
+## Pruebas de correlaciC3n de rango 
+## Problema 3
+La tabla que se proporciona a continuaci??n da el n??mero de premios de postgraduados en ciencia m??dica y la raz??n de muerte por mill??n de tuberculosis para los a??os 1959-69.
+
+Demuestre que estos datos muestran una fuerte evidencia de correlaci??n negativa
+entre el n??mero de premios y la tasa de muerte por tuberculosis. Explique este
+"extra??o" resultado. Use = 0.05. 
+
+
+
+ 
+
+## Pruebas de correlaciC3n de rango 
+## Problema 4
 
 
 
