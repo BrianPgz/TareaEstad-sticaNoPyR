@@ -443,8 +443,8 @@ print(D_data_des_max)</code></pre>
 <pre class="r"><code>D_max= max(D_data_max,D_data_des_max)
 print(D_max)</code></pre>
 <pre><code>## [1] 0.1125086</code></pre>
-<p>Veamos la informaciCión:</p>
-<p>Mostremos los 5 primeros datos y últimos 5:</p>
+<p>Veamos la informaciCiC3n:</p>
+<p>Mostremos los 5 primeros datos y C:ltimos 5:</p>
 <pre class="r"><code>print(head(valores_25))</code></pre>
 <pre><code>##       x_data x_data_ord probras_data D_data_norm   D_data_des
 ## 1  0.7385227  -2.263225   0.01181090  0.02818910  0.011810905
@@ -461,10 +461,10 @@ print(D_max)</code></pre>
 ## 23  0.8673066  0.9684286    0.8335848  0.086415187 -0.046415187
 ## 24  1.3781350  1.3781350    0.9159192  0.044080808 -0.004080808
 ## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213</code></pre>
-<p>Vamos a hacer lo mismo para los datos de la simulaciC3n <span class="math inline">\(10^{6}\)</span>, y después vamos comparar las <span class="math inline">\(D\)</span>. Ordenamos la muestra.</p>
+<p>Vamos a hacer lo mismo para los datos de la simulaciC3n <span class="math inline">\(10^{6}\)</span>, y despuC)s vamos comparar las <span class="math inline">\(D\)</span>. Ordenamos la muestra.</p>
 <pre class="r"><code>x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)</code></pre>
-<p>Calculamos la funcición desfasada (<span class="math inline">\(\frac{1}{10^6}\)</span>).</p>
+<p>Calculamos la funciciC3n desfasada (<span class="math inline">\(\frac{1}{10^6}\)</span>).</p>
 <pre class="r"><code>f_empi_M_des = f_empi_M - (1/(10^3))</code></pre>
 <p>Calculamos las probas bajo una distribuciones <span class="math inline">\(N(0,1)\)</span>.</p>
 <pre class="r"><code>probas_dataM = pnorm(x_dataM_ord)</code></pre>
@@ -482,7 +482,7 @@ print(D_data_des_max)</code></pre>
 <pre class="r"><code>D_maxM = max(D_dataM_norm_max, D_data_des_max)
 print(D_data_des_max)</code></pre>
 <pre><code>## [1] 0.1125086</code></pre>
-<p>Mostremos los 5 primeros datos y últimos 5:</p>
+<p>Mostremos los 5 primeros datos y C:ltimos 5:</p>
 <pre class="r"><code>print(head(valores_M))</code></pre>
 <pre><code>##      x_dataM x_dataM_ord probas_dataM D_dataM_norm   D_dataM_des
 ## 1  0.7385227   -3.236082 0.0006059136 0.0003940864  0.0006059136
@@ -506,14 +506,88 @@ print(D_data_des_max)</code></pre>
 <div id="problema-1" class="section level2">
 <h2>Problema 1</h2>
 </div>
-<div id="pruebas-de-correlación-de-rango" class="section level2">
-<h2>Pruebas de correlación de rango</h2>
+<div id="pruebas-de-wilcoxon-kruskal-wallis-medidas-de-correlacion" class="section level2">
+<h2>Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion</h2>
 </div>
 <div id="problema-1-1" class="section level2">
 <h2>Problema 1</h2>
+<p>1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el numero de Hispanos y el procentaje de la población del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.</p>
+<p>Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma población.En este caso los datos vienen por estado en ese orden.</p>
+<pre class="r"><code>porcentaje=c(23,24,12,12,7,18,8,35,11)
+hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)</code></pre>
+<p>Vamos a meter los vectores en un data frame.</p>
+<pre class="r"><code>paises&lt;-data.frame(hispanos,porcentaje)
+paises</code></pre>
+<pre><code>##   hispanos porcentaje
+## 1      6.6         23
+## 2      4.1         24
+## 3      2.1         12
+## 4      1.5         12
+## 5      0.8          7
+## 6      0.6         18
+## 7      0.6          8
+## 8      0.5         35
+## 9      0.4         11</code></pre>
+<p>Vamos a calcular los rangos considerando a <span class="math inline">\(X\)</span> e <span class="math inline">\(y\)</span> como una sola muestra aleatoria.</p>
+<pre class="r"><code>paises$R_x = rank(paises$hispanos)
+paises$R_y=rank(paises$porcentaje)
+print(paises)</code></pre>
+<pre><code>##   hispanos porcentaje R_x R_y
+## 1      6.6         23 9.0 7.0
+## 2      4.1         24 8.0 8.0
+## 3      2.1         12 7.0 4.5
+## 4      1.5         12 6.0 4.5
+## 5      0.8          7 5.0 1.0
+## 6      0.6         18 3.5 6.0
+## 7      0.6          8 3.5 2.0
+## 8      0.5         35 2.0 9.0
+## 9      0.4         11 1.0 3.0</code></pre>
+<p>Planteamos la prueba de hipótesis (prueba de una cola) <span class="math inline">\(H_{0}\)</span>: Existe una tendencia para que los valores más grandes de X estén emparejados&quot; con los valores más grandes de Y y los valores más chicos de X estén emparejados&quot; con los valores más chicos de Y.</p>
+<p>Ha: No están emparejados.</p>
+<p>Obtenemos las diferencias entre los rangos en error cuadrático, que nos servirá para calcular <span class="math inline">\(T\)</span>, estadística de prueba. <span class="math display">\[T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) \]</span></p>
+<pre class="r"><code>paises$diff_c = (paises$R_x - paises$R_y)^2 
+estadistica= sum(paises$diff_c)
+n_tamanio=length(paises$porcentaje)</code></pre>
+<p>Ahora vamos a calcular <span class="math inline">\(\rho\)</span> de Spearman.</p>
+<p><span class="math display">\[ 1- \frac{6T}{n(n^{2}-1 )}\]</span></p>
+<pre class="r"><code>rho_Spearman = 1 - (6 * estadistica ) / (n_tamanio*(n_tamanio^2 -1 ) )
+print(rho_Spearman)</code></pre>
+<pre><code>## [1] 0.25</code></pre>
+<p>Definimos el nivel de significancia <span class="math inline">\(\alpha\)</span></p>
+<pre class="r"><code>alpha_spear= 0.05
+conf_spear = 1- alpha_spear </code></pre>
+<p>Ahora veamos que se rechaza Ho si <span class="math inline">\(\rho &lt; \omega_{\alpha}= 0.6\)</span></p>
+<pre class="r"><code>Rechazamos_H0_spear=rho_Spearman&gt;0.6
+print(Rechazamos_H0_spear)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Hacemos el test para comprobar la respuesta.</p>
+<pre class="r"><code>test_spear=cor.test(porcentaje, hispanos,method=&quot;spearman&quot;,alternative=&quot;greater&quot;)</code></pre>
+<pre><code>## Warning in cor.test.default(porcentaje, hispanos, method = &quot;spearman&quot;,
+## alternative = &quot;greater&quot;): Cannot compute exact p-value with ties</code></pre>
+<pre class="r"><code>p_value=test_spear$p.value
+print(p_value)</code></pre>
+<pre><code>## [1] 0.2637307</code></pre>
+<p>Entonces aceptamos <span class="math inline">\(H_{0}\)</span> ya que <span class="math inline">\(p-value&gt;\alpha\)</span>.</p>
+<p>Vamos a hacer la prueba por Kendall.</p>
+<p>Tenemos que ver si los datos son concordantes.</p>
+<p>Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest.</p>
+<pre class="r"><code>test_ken=cor.test(hispanos, porcentaje,method=&quot;kendall&quot;,alternative=&quot;greater&quot;,exact = NULL)</code></pre>
+<pre><code>## Warning in cor.test.default(hispanos, porcentaje, method = &quot;kendall&quot;,
+## alternative = &quot;greater&quot;, : Cannot compute exact p-value with ties</code></pre>
+<pre class="r"><code>print(test_ken)</code></pre>
+<pre><code>## 
+##  Kendall&#39;s rank correlation tau
+## 
+## data:  hispanos and porcentaje
+## z = 0.63236, p-value = 0.2636
+## alternative hypothesis: true tau is greater than 0
+## sample estimates:
+##       tau 
+## 0.1714286</code></pre>
+<p>Como el <span class="math inline">\(p-value&lt;alpha\)</span> entonces aceptamos <span class="math inline">\(H_{0}\)</span> como en la prueba de Spearman.</p>
 </div>
-<div id="pruebas-de-correlación-de-rango-1" class="section level2">
-<h2>Pruebas de correlación de rango</h2>
+<div id="pruebas-de-correlacic3n-de-rango" class="section level2">
+<h2>Pruebas de correlaciC3n de rango</h2>
 </div>
 <div id="problema-2" class="section level2">
 <h2>Problema 2</h2>

@@ -669,11 +669,11 @@ print(D_max)
 ```
 ## [1] 0.1125086
 ```
-Veamos la informaciCión:
+Veamos la informaciCiC3n:
 
 
 
-Mostremos los 5 primeros datos y últimos 5: 
+Mostremos los 5 primeros datos y C:ltimos 5: 
 
 
 ```r
@@ -704,7 +704,7 @@ print(tail(valores_25))
 ## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213
 ```
 
-Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
+Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y despuC)s vamos comparar las $D$. Ordenamos la muestra. 
 
 
 ```r
@@ -712,7 +712,7 @@ x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)
 ```
 
-Calculamos la funcición desfasada ($\frac{1}{10^6}$).
+Calculamos la funciciC3n desfasada ($\frac{1}{10^6}$).
 
 
 ```r
@@ -765,7 +765,7 @@ print(D_data_des_max)
 
 
 
-Mostremos los 5 primeros datos y últimos 5: 
+Mostremos los 5 primeros datos y C:ltimos 5: 
 
 
 ```r
@@ -811,11 +811,174 @@ print(tail(valores_M))
 
 
 
-## Pruebas de correlación de rango 
+## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
 ## Problema 1
 
+1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los
+afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o
+2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el
+numero de Hispanos y el procentaje de la población del estado para los nueve
+estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
 
-## Pruebas de correlación de rango 
+Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma población.En este caso los datos vienen por estado en ese orden. 
+
+
+```r
+porcentaje=c(23,24,12,12,7,18,8,35,11)
+hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)
+```
+
+Vamos a meter los vectores en un data frame. 
+
+
+```r
+paises<-data.frame(hispanos,porcentaje)
+paises
+```
+
+```
+##   hispanos porcentaje
+## 1      6.6         23
+## 2      4.1         24
+## 3      2.1         12
+## 4      1.5         12
+## 5      0.8          7
+## 6      0.6         18
+## 7      0.6          8
+## 8      0.5         35
+## 9      0.4         11
+```
+
+Vamos a calcular los rangos considerando a $X$ e $y$ como una sola muestra aleatoria. 
+
+
+```r
+paises$R_x = rank(paises$hispanos)
+paises$R_y=rank(paises$porcentaje)
+print(paises)
+```
+
+```
+##   hispanos porcentaje R_x R_y
+## 1      6.6         23 9.0 7.0
+## 2      4.1         24 8.0 8.0
+## 3      2.1         12 7.0 4.5
+## 4      1.5         12 6.0 4.5
+## 5      0.8          7 5.0 1.0
+## 6      0.6         18 3.5 6.0
+## 7      0.6          8 3.5 2.0
+## 8      0.5         35 2.0 9.0
+## 9      0.4         11 1.0 3.0
+```
+Planteamos la prueba de hipótesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores más grandes de X estén emparejados" con los valores más grandes de Y y los valores más chicos de X estén emparejados" con los valores más chicos de Y.   
+
+Ha: No están emparejados.  
+
+Obtenemos las diferencias entre los rangos en error cuadrático, que nos servirá para calcular $T$, estadística de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
+
+
+```r
+paises$diff_c = (paises$R_x - paises$R_y)^2 
+estadistica= sum(paises$diff_c)
+n_tamanio=length(paises$porcentaje)
+```
+
+Ahora vamos a calcular $\rho$ de Spearman. 
+
+$$ 1- \frac{6T}{n(n^{2}-1 )}$$
+
+```r
+rho_Spearman = 1 - (6 * estadistica ) / (n_tamanio*(n_tamanio^2 -1 ) )
+print(rho_Spearman)
+```
+
+```
+## [1] 0.25
+```
+Definimos el nivel de significancia $\alpha$
+
+
+
+```r
+alpha_spear= 0.05
+conf_spear = 1- alpha_spear 
+```
+Ahora veamos que se rechaza Ho si $\rho < \omega_{\alpha}= 0.6$
+
+
+```r
+Rechazamos_H0_spear=rho_Spearman>0.6
+print(Rechazamos_H0_spear)
+```
+
+```
+## [1] FALSE
+```
+
+
+
+Hacemos el test para comprobar la respuesta. 
+
+
+```r
+test_spear=cor.test(porcentaje, hispanos,method="spearman",alternative="greater")
+```
+
+```
+## Warning in cor.test.default(porcentaje, hispanos, method = "spearman",
+## alternative = "greater"): Cannot compute exact p-value with ties
+```
+
+```r
+p_value=test_spear$p.value
+print(p_value)
+```
+
+```
+## [1] 0.2637307
+```
+Entonces aceptamos $H_{0}$ ya que $p-value>\alpha$.
+
+Vamos a hacer la prueba por Kendall. 
+
+
+
+Tenemos que ver si los datos son concordantes.
+
+
+
+Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest. 
+
+
+```r
+test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
+```
+
+```
+## Warning in cor.test.default(hispanos, porcentaje, method = "kendall",
+## alternative = "greater", : Cannot compute exact p-value with ties
+```
+
+```r
+print(test_ken)
+```
+
+```
+## 
+## 	Kendall's rank correlation tau
+## 
+## data:  hispanos and porcentaje
+## z = 0.63236, p-value = 0.2636
+## alternative hypothesis: true tau is greater than 0
+## sample estimates:
+##       tau 
+## 0.1714286
+```
+Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman. 
+
+
+
+## Pruebas de correlaciC3n de rango 
 ## Problema 2
 
 

@@ -676,12 +676,8 @@ Tenemos que ver si los datos son concordantes.
 
 
 
-
-
-
-
-
 Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest. 
+
 ```{r echo=TRUE}
 test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
 print(test_ken)
