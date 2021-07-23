@@ -103,14 +103,15 @@ Probas
 ```
 
 
-Tenemos que calcular: $$D_{i}^{+}= | \phi(Z_{i}) - \frac{i}{n}|$$  
-$$D_{i}^{-}= | \phi(Z_{i}) - \frac{i-1}{n}|$$
+Tenemos que calcular: $$ \frac{i}{n} - D_{i}^{+}=  \phi(Z_{i}) $$  
+$$D_{i}^{-}=  \phi(Z_{i}) - \frac{i-1}{n}$$
+
 ```{r echo=TRUE}
-Di_p=abs(Probas-f_n)
-Di_n=abs(Probas-f_r)
+Di_p=f_n  -Probas
+Di_n= Probas - f_r
 ```
 
-Visualizamos todos los cC!lculos. 
+Visualizamos todos los cálculos. 
 
 ```{r echo=TRUE}
 Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)
@@ -672,12 +673,16 @@ Vamos a hacer la prueba por Kendall.
 
 
 
-Tenemos que ver si los datos son concordantes.
+Tenemos que ver si los datos son concor
+
+
+
+
+
 
 
 
 Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest. 
-
 ```{r echo=TRUE}
 test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
 print(test_ken)
@@ -687,7 +692,14 @@ Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman
 
 
 ## Pruebas de correlaciC3n de rango 
-## Problema 2
+## Problema 2 
+
+
+Un psicologo esta investigando el impacto que el divorcio de los padres tiene
+sobre el aprovechamiento academico de los ni~nos. El psicologo cuenta con las
+calicaciones de un grupo de ni~nos de escuela primaria cuyos padres tuvieron
+un divorcio durante el a~no anterior, y las calicaciones para un grupo de ni~nos
+similares cuyos padres no se divorciaron.
 
 
 
