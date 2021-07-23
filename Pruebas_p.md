@@ -1196,25 +1196,57 @@ print(prueba_wilcox$p.value)
 ```
 ## [1] 0.1412821
 ```
-Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la misma poblaci??n. 
+Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la misma poblacion. 
 
 
 
 
 
 
-## Pruebas de correlaciC3n de rango 
+## Pruebas de correlacion de rango 
 ## Problema 3
-La tabla que se proporciona a continuaciC3n da el nC:mero de premios de postgraduados en ciencia mC)dica y la razC3n de muerte por millC3n de tuberculosis para los aC1os 1959-69.
+La tabla que se proporciona a continuacion da el nC:mero de premios de postgraduados en ciencia medica y la razon de muerte por millon de tuberculosis para 1959-69.
 
-Demuestre que estos datos muestran una fuerte evidencia de correlaciC3n negativa
-entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este "extraC1o" resultado. Use = 0.05. 
+Demuestre que estos datos muestran una fuerte evidencia de correlacion negativa
+entre el numero de premios y la tasa de muerte por tuberculosis. Explique este resultado. Use $\alpha=0.05$.
+
+Primero veamos los datos en un data frame.
+
+
+```r
+tasa_muerte<-c(83,74,71,65,62,52,47,48,42,43,38)
+anio<-c(1959,1960,1961,1962,1963,1964,1965,1966,1967,1968,1969) 
+premios<-c(277,318,382,441,486,597,750,738,849,932,976)
+Datos_tuber<-data.frame(anio,premios,tasa_muerte)
+print(Datos_tuber)
+```
+
+```
+##    anio premios tasa_muerte
+## 1  1959     277          83
+## 2  1960     318          74
+## 3  1961     382          71
+## 4  1962     441          65
+## 5  1963     486          62
+## 6  1964     597          52
+## 7  1965     750          47
+## 8  1966     738          48
+## 9  1967     849          42
+## 10 1968     932          43
+## 11 1969     976          38
+```
+
+Queremos ver si se tiene una correlacion negativa (es una prueba tipo B), entonces proponemos la prueba de hipotesis:
+
+$H_{0}$: $\rho ???0$ VS $H_{a}$: $\rho>0$
+
+
 
 
 
  
 
-## Pruebas de correlaciC3n de rango 
+## Pruebas de correlacion de rango 
 ## Problema 4
 
 
