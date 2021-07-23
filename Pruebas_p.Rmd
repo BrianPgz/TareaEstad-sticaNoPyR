@@ -785,7 +785,7 @@ print(z_izq)
 print(z_der)
 ```
 
-Rechazamos $H_{0}$, si $U< Z_{\alpha}$ o $ U> Z_{1-\frac{\alpha}{2}}$. 
+Rechazamos $H_{0}$, si $U< Z_{\alpha}$ o $U> Z_{1-\frac{\alpha}{2}}$. 
 
 ```{r echo=TRUE}
 Rechazamos_H0_div=(U_est < z_izq || U_est > z_der)

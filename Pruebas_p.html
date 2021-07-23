@@ -531,7 +531,7 @@ paises</code></pre>
 ## 7      0.6          8
 ## 8      0.5         35
 ## 9      0.4         11</code></pre>
-<p>Vamos a calcular los rangos considerando a <span class="math inline">\(X\)</span> e <span class="math inline">\(y\)</span> como una sola muestra aleatoria.</p>
+<p>Vamos a calcular los rangos considerando a <span class="math inline">\(X\)</span> e <span class="math inline">\(y\)</span> como una sola muestra aleatoria, para calcularle los rangos.</p>
 <pre class="r"><code>paises$R_x = rank(paises$hispanos)
 paises$R_y=rank(paises$porcentaje)
 print(paises)</code></pre>
@@ -545,9 +545,10 @@ print(paises)</code></pre>
 ## 7      0.6          8 3.5 2.0
 ## 8      0.5         35 2.0 9.0
 ## 9      0.4         11 1.0 3.0</code></pre>
-<p>Planteamos la prueba de hipC3tesis (prueba de una cola) <span class="math inline">\(H_{0}\)</span>: Existe una tendencia para que los valores mC!s grandes de X estC)n emparejados&quot; con los valores mC!s grandes de Y y los valores mC!s chicos de X estC)n emparejados&quot; con los valores mC!s chicos de Y.</p>
-<p>Ha: No estC!n emparejados.</p>
-<p>Obtenemos las diferencias entre los rangos en error cuadrC!tico, que nos servirC! para calcular <span class="math inline">\(T\)</span>, estadC-stica de prueba. <span class="math display">\[T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) \]</span></p>
+<p>Planteamos la prueba de hipotesis (prueba de una cola tipo c).</p>
+<p><span class="math inline">\(H_{0}\)</span>:<span class="math inline">\(\rho ??? 0\)</span>, existe una tendencia para que los valores mas grandes de X esten emparejados con los valores mas chicos de <span class="math inline">\(Y\)</span>, y que los valores mas chicos de <span class="math inline">\(X\)</span> esten emparejados con los valores mas grandes de <span class="math inline">\(Y\)</span>.</p>
+<p><span class="math inline">\(H_{a}\)</span>:<span class="math inline">\(p&lt;0\)</span></p>
+<p>Obtenemos las diferencias entre los rangos en error cuadratico, que nos sirve para calcular <span class="math inline">\(T\)</span>, estadC-stica de prueba. <span class="math display">\[T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) \]</span></p>
 <pre class="r"><code>paises$diff_c = (paises$R_x - paises$R_y)^2 
 estadistica= sum(paises$diff_c)
 n_tamanio=length(paises$porcentaje)</code></pre>
@@ -556,13 +557,14 @@ n_tamanio=length(paises$porcentaje)</code></pre>
 <pre class="r"><code>rho_Spearman = 1 - (6 * estadistica ) / (n_tamanio*(n_tamanio^2 -1 ) )
 print(rho_Spearman)</code></pre>
 <pre><code>## [1] 0.25</code></pre>
-<p>Definimos el nivel de significancia <span class="math inline">\(\alpha\)</span></p>
+<p>Definimos el nivel de significancia <span class="math inline">\(\alpha\)</span>.</p>
 <pre class="r"><code>alpha_spear= 0.05
 conf_spear = 1- alpha_spear </code></pre>
-<p>Ahora veamos que se rechaza Ho si <span class="math inline">\(\rho &lt; \omega_{\alpha}= 0.6\)</span></p>
+<p>Ahora veamos que se rechaza Ho si <span class="math inline">\(\rho &lt; \omega_{\alpha}= 0.6\)</span>,se busco el cuantil en tablas.</p>
 <pre class="r"><code>Rechazamos_H0_spear=rho_Spearman&gt;0.6
 print(Rechazamos_H0_spear)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
+<p>Por lo anterior, debemos aceptar <span class="math inline">\(H_{0}\)</span>, entonces la poblaci??n tiene una correlaci??n <span class="math inline">\(\rho ??? 0\)</span>.</p>
 <p>Hacemos el test para comprobar la respuesta.</p>
 <pre class="r"><code>test_spear=cor.test(porcentaje, hispanos,method=&quot;spearman&quot;,alternative=&quot;greater&quot;)</code></pre>
 <pre><code>## Warning in cor.test.default(porcentaje, hispanos, method = &quot;spearman&quot;,
@@ -570,24 +572,15 @@ print(Rechazamos_H0_spear)</code></pre>
 <pre class="r"><code>p_value=test_spear$p.value
 print(p_value)</code></pre>
 <pre><code>## [1] 0.2637307</code></pre>
-<p>Entonces aceptamos <span class="math inline">\(H_{0}\)</span> ya que <span class="math inline">\(p-value&gt;\alpha\)</span>.</p>
-<p>Vamos a hacer la prueba por Kendall.</p>
-<p>Tenemos que ver si los datos son concor</p>
-<p>Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paqueterC-a nortest.</p>
+<p>Entonces aceptamos <span class="math inline">\(H_{0}\)</span> ya que <span class="math inline">\(p-value&gt;\alpha= 0.05\)</span>.</p>
+<p>Vamos a hacer la prueba por Kendall, para comprobar nuestros datos. Tenemos que hacer la prueba con el test de la paqueterC-a nortest.</p>
 <pre class="r"><code>test_ken=cor.test(hispanos, porcentaje,method=&quot;kendall&quot;,alternative=&quot;greater&quot;,exact = NULL)</code></pre>
 <pre><code>## Warning in cor.test.default(hispanos, porcentaje, method = &quot;kendall&quot;,
 ## alternative = &quot;greater&quot;, : Cannot compute exact p-value with ties</code></pre>
-<pre class="r"><code>print(test_ken)</code></pre>
-<pre><code>## 
-##  Kendall&#39;s rank correlation tau
-## 
-## data:  hispanos and porcentaje
-## z = 0.63236, p-value = 0.2636
-## alternative hypothesis: true tau is greater than 0
-## sample estimates:
-##       tau 
-## 0.1714286</code></pre>
-<p>Como el <span class="math inline">\(p-value&lt;alpha\)</span> entonces aceptamos <span class="math inline">\(H_{0}\)</span> como en la prueba de Spearman.</p>
+<pre class="r"><code>print(test_ken$p.value)</code></pre>
+<pre><code>## [1] 0.2635765</code></pre>
+<p>Como el <span class="math inline">\(p-value&gt;alpha\)</span> entonces aceptamos <span class="math inline">\(H_{0}\)</span>, como en la prueba de Spearman.</p>
+<p>Entonces concluimos que los datos tienen una corrlacipon positiva (mejor dicho no negativa), ya que <span class="math inline">\(p???0\)</span> con un nivel de confianza <span class="math inline">\(\alpha=0.05\)</span>.</p>
 </div>
 <div id="pruebas-de-correlacic3n-de-rango" class="section level2">
 <h2>Pruebas de correlaciC3n de rango</h2>
@@ -595,6 +588,7 @@ print(p_value)</code></pre>
 <div id="problema-2" class="section level2">
 <h2>Problema 2</h2>
 <p>Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.</p>
+<p>La prueba de Mann-Whitney-Wilcoxon es una prueba no parametrica que es usada cuando se tienen dos muestras aleatorias independientes y se desea probar que estas provienen de una misma poblacion, es decir, se observara si existe evidencia con un nivel signicancia <span class="math inline">\(\alpha\)</span>, que dos muestras aleatorias independientes son iguales entre si.</p>
 <p>Creamos los vectores con los datos.</p>
 <pre class="r"><code>library(ggplot2)
 nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
@@ -653,13 +647,13 @@ print(suma_rango)</code></pre>
 ##   &lt;chr&gt;               &lt;dbl&gt;
 ## 1 divorciados          40.5
 ## 2 no divorciados       64.5</code></pre>
-<p>Podemos ver la distribuciC3n de los datos:</p>
+<p>Podemos ver la distribucion de los rangos:</p>
 <pre class="r"><code>ggplot(data = datos_div , aes(x = rango , y=0)) + 
   geom_point(aes(colour = Estado), size = 8) + 
   ggtitle(&quot;Comportamiento de los rangos&quot;)+ ylab(&quot;&quot;) + 
   xlab(&quot;rango&quot;) +theme_bw() + theme(axis.text.y = element_blank())</code></pre>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>Procedemos a calcular <span class="math inline">\(U_{1}, \ U_{2}\)</span>. <span class="math display">\[U_{1}= n_{1} \ n_{2} + \frac{n_{1} (n_{1}-1)}{2} - R_{1}\]</span> <span class="math display">\[U_{2}= n_{1} \ n_{2} + \frac{n_{2} (n_{2}-1)}{2} - R_{2}\]</span> Recordamos que <span class="math inline">\(n_{1}=n_{2}\)</span>.</p>
+<p>Procedemos a calcular <span class="math inline">\(U_{1}, \ U_{2}\)</span>. <span class="math display">\[U_{1}= n_{1} \ n_{2} + \frac{n_{1} (n_{1}-1)}{2} - R_{1}\]</span> <span class="math display">\[U_{2}= n_{1} \ n_{2} + \frac{n_{2} (n_{2}-1)}{2} - R_{2}\]</span> Recordamos que <span class="math inline">\(n_{1}=n_{2}\)</span>, entonces el factor al que se le debe restar <span class="math inline">\(R_{1}, \  R_{2}\)</span> es el mismo.</p>
 <pre class="r"><code>factor_us= n_tamanio_muestra*n_tamanio_muestra+(n_tamanio_muestra*(n_tamanio_muestra+1))/2</code></pre>
 <p>Calculamos <span class="math inline">\(U_{1}, \ U_{2}\)</span>.</p>
 <pre class="r"><code>U_div=factor_us - rango_div
@@ -670,6 +664,30 @@ print(U_div)</code></pre>
 <pre><code>## [1] 12.5</code></pre>
 <p>Recordamos que <span class="math inline">\(U=\min(U_{1},U_{2} )\)</span>.</p>
 <pre class="r"><code>U_est= min(U_div,U_nd)</code></pre>
+<p>Como suponemos que los datos vienen de la distribucion normal, obtengamos la esperanza y varianza de <span class="math inline">\(U\)</span>, que ser??n los par??metros para la distribucion normal, como se sugiere en las notas.</p>
+<p><span class="math display">\[E[U]= \frac{n_{1}n_{2} }{2}\]</span> <span class="math display">\[Var[U] = \frac{n_{1}n_{2}}{12}(n_{1}+n_{2}+1) \]</span></p>
+<pre class="r"><code>mu_div = (n_tamanio_muestra^2)/2
+sigma_div = (n_tamanio_muestra^2 / 12 )*(n_tamanio_muestra+n_tamanio_muestra+1)</code></pre>
+<p>Por ser una prueba de dos colas para $= 0.05 $ tenemos que ver que pasa con los cuantiles <span class="math inline">\(\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}\)</span>, recordamos que la distribuci??n normal es simetrica.</p>
+<pre class="r"><code>alpha_div = 0.05
+z_izq=qnorm(alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
+z_der=qnorm(1-alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
+print(z_izq)</code></pre>
+<pre><code>## [1] 9.160856</code></pre>
+<pre class="r"><code>print(z_der)</code></pre>
+<pre><code>## [1] 39.83914</code></pre>
+<p>Rechazamos <span class="math inline">\(H_{0}\)</span>, si <span class="math inline">\(U&lt; Z_{\alpha}\)</span> o <span class="math inline">\(U&gt; Z_{1-\frac{\alpha}{2}}\)</span>.</p>
+<pre class="r"><code>Rechazamos_H0_div=(U_est &lt; z_izq || U_est &gt; z_der)
+print(Rechazamos_H0_div)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Por lo anterior aceptamos <span class="math inline">\(H_{0}\)</span>, entonces los datos vienen de la misma poblaci??n. No hay una diferencia en el aprovechamiento de los ni??os, con un <span class="math inline">\(\alpha=0.05\)</span> de confianza.</p>
+<p>Para comprobar lo anterior tenemos que ver la prueba de paqueteria nortest.</p>
+<pre class="r"><code>prueba_wilcox = wilcox.test(divorciados, nodivorciados, paired=FALSE)</code></pre>
+<pre><code>## Warning in wilcox.test.default(divorciados, nodivorciados, paired = FALSE):
+## cannot compute exact p-value with ties</code></pre>
+<pre class="r"><code>print(prueba_wilcox$p.value)</code></pre>
+<pre><code>## [1] 0.1412821</code></pre>
+<p>Como el <span class="math inline">\(p-value&gt;0.05\)</span> aceptamos <span class="math inline">\(H_{0}\)</span>, entonces las muestras vienen de la misma poblaci??n. </p>
 </div>
 <div id="pruebas-de-correlacic3n-de-rango-1" class="section level2">
 <h2>Pruebas de correlaciC3n de rango</h2>

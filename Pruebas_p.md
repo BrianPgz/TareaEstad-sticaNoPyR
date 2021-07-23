@@ -858,7 +858,7 @@ paises
 ## 9      0.4         11
 ```
 
-Vamos a calcular los rangos considerando a $X$ e $y$ como una sola muestra aleatoria. 
+Vamos a calcular los rangos considerando a $X$ e $y$ como una sola muestra aleatoria, para calcularle los rangos. 
 
 
 ```r
@@ -879,11 +879,13 @@ print(paises)
 ## 8      0.5         35 2.0 9.0
 ## 9      0.4         11 1.0 3.0
 ```
-Planteamos la prueba de hipC3tesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores mC!s grandes de X estC)n emparejados" con los valores mC!s grandes de Y y los valores mC!s chicos de X estC)n emparejados" con los valores mC!s chicos de Y.   
+Planteamos la prueba de hipotesis (prueba de una cola tipo c).
 
-Ha: No estC!n emparejados.  
+$H_{0}$:$\rho ??? 0$, existe una tendencia para que los valores mas grandes de X esten emparejados con los valores mas chicos de $Y$, y que los valores mas chicos de $X$ esten emparejados con los valores mas grandes de $Y$.
 
-Obtenemos las diferencias entre los rangos en error cuadrC!tico, que nos servirC! para calcular $T$, estadC-stica de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
+$H_{a}$:$p<0$ 
+
+Obtenemos las diferencias entre los rangos en error cuadratico, que nos sirve para calcular $T$, estadC-stica de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
 
 
 ```r
@@ -904,7 +906,7 @@ print(rho_Spearman)
 ```
 ## [1] 0.25
 ```
-Definimos el nivel de significancia $\alpha$
+Definimos el nivel de significancia $\alpha$.
 
 
 
@@ -912,7 +914,7 @@ Definimos el nivel de significancia $\alpha$
 alpha_spear= 0.05
 conf_spear = 1- alpha_spear 
 ```
-Ahora veamos que se rechaza Ho si $\rho < \omega_{\alpha}= 0.6$
+Ahora veamos que se rechaza Ho si $\rho < \omega_{\alpha}= 0.6$,se busco el cuantil en tablas.
 
 
 ```r
@@ -923,7 +925,7 @@ print(Rechazamos_H0_spear)
 ```
 ## [1] FALSE
 ```
-
+Por lo anterior, debemos aceptar $H_{0}$, entonces la poblaci??n tiene una correlaci??n $\rho ??? 0$.
 
 
 Hacemos el test para comprobar la respuesta. 
@@ -946,22 +948,9 @@ print(p_value)
 ```
 ## [1] 0.2637307
 ```
-Entonces aceptamos $H_{0}$ ya que $p-value>\alpha$.
+Entonces aceptamos $H_{0}$ ya que $p-value>\alpha= 0.05$.
 
-Vamos a hacer la prueba por Kendall. 
-
-
-
-Tenemos que ver si los datos son concor
-
-
-
-
-
-
-
-
-Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paqueterC-a nortest. 
+Vamos a hacer la prueba por Kendall, para comprobar nuestros datos. Tenemos que hacer la prueba con el test de la paqueterC-a nortest. 
 
 ```r
 test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
@@ -973,21 +962,15 @@ test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",ex
 ```
 
 ```r
-print(test_ken)
+print(test_ken$p.value)
 ```
 
 ```
-## 
-## 	Kendall's rank correlation tau
-## 
-## data:  hispanos and porcentaje
-## z = 0.63236, p-value = 0.2636
-## alternative hypothesis: true tau is greater than 0
-## sample estimates:
-##       tau 
-## 0.1714286
+## [1] 0.2635765
 ```
-Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman. 
+Como el $p-value>alpha$ entonces aceptamos $H_{0}$, como en la prueba de Spearman. 
+
+Entonces concluimos que los datos tienen una corrlacipon positiva (mejor dicho no negativa), ya que $p???0$ con un nivel de confianza $\alpha=0.05$.
 
 
 
@@ -996,6 +979,11 @@ Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman
 
 
 Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.
+
+La prueba de Mann-Whitney-Wilcoxon es una prueba no parametrica que es usada
+cuando se tienen dos muestras aleatorias independientes y se desea probar que estas
+provienen de una misma poblacion, es decir, se observara si existe evidencia con un
+nivel signicancia $\alpha$, que dos muestras aleatorias independientes son iguales entre si.
 
 Creamos los vectores con los datos.
 
@@ -1094,7 +1082,7 @@ print(suma_rango)
 ## 2 no divorciados       64.5
 ```
 
-Podemos ver la distribuciC3n de los datos: 
+Podemos ver la distribucion de los rangos: 
 
 
 ```r
@@ -1110,7 +1098,7 @@ ggplot(data = datos_div , aes(x = rango , y=0)) +
 Procedemos a calcular $U_{1}, \ U_{2}$. 
 $$U_{1}= n_{1} \ n_{2} + \frac{n_{1} (n_{1}-1)}{2} - R_{1}$$
 $$U_{2}= n_{1} \ n_{2} + \frac{n_{2} (n_{2}-1)}{2} - R_{2}$$
-Recordamos que $n_{1}=n_{2}$.
+Recordamos que $n_{1}=n_{2}$, entonces el factor al que se le debe restar $R_{1}, \  R_{2}$ es el mismo.
 
 ```r
 factor_us= n_tamanio_muestra*n_tamanio_muestra+(n_tamanio_muestra*(n_tamanio_muestra+1))/2
@@ -1142,14 +1130,85 @@ Recordamos que $U=\min(U_{1},U_{2} )$.
 U_est= min(U_div,U_nd)
 ```
 
+Como suponemos que los datos vienen de la distribucion normal, obtengamos la esperanza y varianza de $U$, que ser??n los par??metros para la distribucion normal, como se sugiere en las notas.
+
+$$E[U]= \frac{n_{1}n_{2} }{2}$$
+$$Var[U] = \frac{n_{1}n_{2}}{12}(n_{1}+n_{2}+1) $$
+
+```r
+mu_div = (n_tamanio_muestra^2)/2
+sigma_div = (n_tamanio_muestra^2 / 12 )*(n_tamanio_muestra+n_tamanio_muestra+1)
+```
+
+Por ser una prueba de dos colas para $\alpha= 0.05 $ tenemos que ver que pasa con los cuantiles $\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}$, recordamos que la distribuci??n normal es simetrica.
+
+
+```r
+alpha_div = 0.05
+z_izq=qnorm(alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
+z_der=qnorm(1-alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
+print(z_izq)
+```
+
+```
+## [1] 9.160856
+```
+
+```r
+print(z_der)
+```
+
+```
+## [1] 39.83914
+```
+
+Rechazamos $H_{0}$, si $U< Z_{\alpha}$ o $U> Z_{1-\frac{\alpha}{2}}$. 
+
+
+```r
+Rechazamos_H0_div=(U_est < z_izq || U_est > z_der)
+print(Rechazamos_H0_div)
+```
+
+```
+## [1] FALSE
+```
+Por lo anterior aceptamos $H_{0}$, entonces los datos vienen de la misma poblaci??n. No hay una diferencia en el aprovechamiento de los ni??os, con un $\alpha=0.05$ de confianza. 
+
+
+
+Para comprobar lo anterior tenemos que ver la prueba de paqueteria nortest. 
+
+
+```r
+prueba_wilcox = wilcox.test(divorciados, nodivorciados, paired=FALSE)
+```
+
+```
+## Warning in wilcox.test.default(divorciados, nodivorciados, paired = FALSE):
+## cannot compute exact p-value with ties
+```
+
+```r
+print(prueba_wilcox$p.value)
+```
+
+```
+## [1] 0.1412821
+```
+Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la misma poblaci??n. 
+
+
+
+
+
 
 ## Pruebas de correlaciC3n de rango 
 ## Problema 3
 La tabla que se proporciona a continuaciC3n da el nC:mero de premios de postgraduados en ciencia mC)dica y la razC3n de muerte por millC3n de tuberculosis para los aC1os 1959-69.
 
 Demuestre que estos datos muestran una fuerte evidencia de correlaciC3n negativa
-entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este
-"extraC1o" resultado. Use = 0.05. 
+entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este "extraC1o" resultado. Use = 0.05. 
 
 
 
