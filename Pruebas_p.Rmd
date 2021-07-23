@@ -696,9 +696,9 @@ Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman
 
 
 Un psicologo esta investigando el impacto que el divorcio de los padres tiene
-sobre el aprovechamiento academico de los ni~nos. El psicologo cuenta con las
+sobre el aprovechamiento academico de los niños. El psicologo cuenta con las
 calicaciones de un grupo de ni~nos de escuela primaria cuyos padres tuvieron
-un divorcio durante el a~no anterior, y las calicaciones para un grupo de ni~nos
+un divorcio durante el añ anterior, y las calicaciones para un grupo de niños
 similares cuyos padres no se divorciaron.
 
 
