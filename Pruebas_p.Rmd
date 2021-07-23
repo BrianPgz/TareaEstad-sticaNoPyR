@@ -593,6 +593,7 @@ estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, Ne
 Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma poblaciC3n.En este caso los datos vienen por estado en ese orden. 
 
 ```{r echo=TRUE}
+library(dplyr)
 porcentaje=c(23,24,12,12,7,18,8,35,11)
 hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)
 ```
@@ -687,6 +688,7 @@ Un psicologo esta investigando el impacto que el divorcio de los padres tiene so
 Creamos los vectores con los datos.
 
 ```{r echo=TRUE}
+library(ggplot2)
 nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
 divorciados= c(60, 70, 88, 75, 42, 30, 50)
 ```
@@ -727,8 +729,7 @@ Debemos obtener las sumas de los rangos.
 
 $$R_{1}=\sum _{i=1}^{n_{1}} R(X_{i}) \quad   R_{2}=\sum _{i=1}^{n_{2}} R(Y_{i}) $$
 ```{r echo=TRUE}
-suma_rango<-datos_div %>%
-group_by(Estado) %>% summarise(suma_rango = sum(rango))
+suma_rango<-datos_div %>% group_by(Estado) %>% summarise(suma_rango = sum(rango))
 rango_div<-suma_rango$suma_rango[1]
 rango_nodiv<-suma_rango$suma_rango[2]
 print(suma_rango)

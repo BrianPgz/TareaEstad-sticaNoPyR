@@ -216,33 +216,33 @@ f_r=f_n-(1/n) </code></pre>
 <pre><code>##  [1] 0.1287245 0.1299888 0.1439240 0.1525868 0.1536969 0.2435260 0.2495574
 ##  [8] 0.5092363 0.6233487 0.7334559 0.8168282 0.8558517 0.8868347 0.8965102
 ## [15] 0.9100407</code></pre>
-<p>Tenemos que calcular: <span class="math display">\[D_{i}^{+}= | \phi(Z_{i}) - \frac{i}{n}|\]</span><br />
-<span class="math display">\[D_{i}^{-}= | \phi(Z_{i}) - \frac{i-1}{n}|\]</span></p>
-<pre class="r"><code>Di_p=abs(Probas-f_n)
-Di_n=abs(Probas-f_r)</code></pre>
+<p>Tenemos que calcular: <span class="math display">\[ \frac{i}{n} - D_{i}^{+}=  \phi(Z_{i}) \]</span><br />
+<span class="math display">\[D_{i}^{-}=  \phi(Z_{i}) - \frac{i-1}{n}\]</span></p>
+<pre class="r"><code>Di_p=f_n  -Probas
+Di_n= Probas - f_r</code></pre>
 <p>Visualizamos todos los cC!lculos.</p>
 <pre class="r"><code>Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)</code></pre>
-<pre><code>##    Dirty_data    Data           Z    Probas        Di_p       Di_n
-## 1     0.25130 0.25130 -1.13244110 0.1287245 0.062057851 0.12872452
-## 2     0.25660 0.25660 -1.12644418 0.1299888 0.003344555 0.06332211
-## 3     0.34590 0.31280 -1.06285419 0.1439240 0.056075960 0.01059071
-## 4     0.63790 0.34590 -1.02540173 0.1525868 0.114079830 0.04741316
-## 5     2.05050 0.35005 -1.02070603 0.1536969 0.179636464 0.11296980
-## 6     1.80300 0.63790 -0.69500536 0.2435260 0.156474028 0.08980736
-## 7     2.19060 0.65480 -0.67588310 0.2495574 0.217109233 0.15044257
-## 8     1.52990 1.27260  0.02315415 0.5092363 0.024096990 0.04256968
-## 9     0.35005 1.52990  0.31428766 0.6233487 0.023348715 0.09001538
-## 10    0.31280 1.80300  0.62329879 0.7334559 0.066789235 0.13345590
-## 11    1.27260 2.05050  0.90334365 0.8168282 0.083494899 0.15016157
-## 12    2.36740 2.19060  1.06186602 0.8558517 0.055851744 0.12251841
-## 13    2.32140 2.32140  1.20986549 0.8868347 0.020168078 0.08683474
-## 14    2.43730 2.36740  1.26191423 0.8965102 0.036823158 0.02984351
-## 15    0.65480 2.43730  1.34100569 0.9100407 0.089959302 0.02329264</code></pre>
+<pre><code>##    Dirty_data    Data           Z    Probas         Di_p        Di_n
+## 1     0.25130 0.25130 -1.13244110 0.1287245 -0.062057851  0.12872452
+## 2     0.25660 0.25660 -1.12644418 0.1299888  0.003344555  0.06332211
+## 3     0.34590 0.31280 -1.06285419 0.1439240  0.056075960  0.01059071
+## 4     0.63790 0.34590 -1.02540173 0.1525868  0.114079830 -0.04741316
+## 5     2.05050 0.35005 -1.02070603 0.1536969  0.179636464 -0.11296980
+## 6     1.80300 0.63790 -0.69500536 0.2435260  0.156474028 -0.08980736
+## 7     2.19060 0.65480 -0.67588310 0.2495574  0.217109233 -0.15044257
+## 8     1.52990 1.27260  0.02315415 0.5092363  0.024096990  0.04256968
+## 9     0.35005 1.52990  0.31428766 0.6233487 -0.023348715  0.09001538
+## 10    0.31280 1.80300  0.62329879 0.7334559 -0.066789235  0.13345590
+## 11    1.27260 2.05050  0.90334365 0.8168282 -0.083494899  0.15016157
+## 12    2.36740 2.19060  1.06186602 0.8558517 -0.055851744  0.12251841
+## 13    2.32140 2.32140  1.20986549 0.8868347 -0.020168078  0.08683474
+## 14    2.43730 2.36740  1.26191423 0.8965102  0.036823158  0.02984351
+## 15    0.65480 2.43730  1.34100569 0.9100407  0.089959302 -0.02329264</code></pre>
 <p>Definimos <span class="math display">\[D^{+}= max\{D_{i}^{+}\}\]</span> <span class="math display">\[D^{-}= max\{D_{i}^{-}\}\]</span></p>
 <pre class="r"><code>D_p=max(Di_p)
 D_n=max(Di_n)</code></pre>
 <pre><code>## [1] 0.2171092</code></pre>
-<pre><code>## [1] 0.1504426</code></pre>
+<pre><code>## [1] 0.1501616</code></pre>
 <p>Definimos <span class="math display">\[D= max\{ D^{+}, D^{-} \}\]</span></p>
 <pre class="r"><code>Dn=max(D_p,D_n)</code></pre>
 <pre><code>## [1] 0.2171092</code></pre>
@@ -500,19 +500,22 @@ print(D_data_des_max)</code></pre>
 ## 999  -0.7634958    3.262782    0.9994484 -0.0004483775 0.0014483775
 ## 1000  0.9604393    3.541459    0.9998010  0.0001989603 0.0008010397</code></pre>
 </div>
-<div id="tablas-de-contingencia" class="section level2">
-<h2>Tablas de contingencia</h2>
-</div>
-<div id="problema-1" class="section level2">
-<h2>Problema 1</h2>
-</div>
 <div id="pruebas-de-wilcoxon-kruskal-wallis-medidas-de-correlacion" class="section level2">
 <h2>Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion</h2>
 </div>
-<div id="problema-1-1" class="section level2">
+<div id="problema-1" class="section level2">
 <h2>Problema 1</h2>
-<p>1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el numero de Hispanos y el procentaje de la población del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.</p>
-<p>Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma población.En este caso los datos vienen por estado en ese orden.</p>
+<p>1.- La oficina de Censo reportC3 que se espera que los hispanos sobrepasen a los afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el numero de Hispanos y el procentaje de la poblaciC3n del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New MC)xico, Colorado.</p>
+<p>Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma poblaciC3n.En este caso los datos vienen por estado en ese orden.</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>porcentaje=c(23,24,12,12,7,18,8,35,11)
 hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)</code></pre>
 <p>Vamos a meter los vectores en un data frame.</p>
@@ -542,9 +545,9 @@ print(paises)</code></pre>
 ## 7      0.6          8 3.5 2.0
 ## 8      0.5         35 2.0 9.0
 ## 9      0.4         11 1.0 3.0</code></pre>
-<p>Planteamos la prueba de hipótesis (prueba de una cola) <span class="math inline">\(H_{0}\)</span>: Existe una tendencia para que los valores más grandes de X estén emparejados&quot; con los valores más grandes de Y y los valores más chicos de X estén emparejados&quot; con los valores más chicos de Y.</p>
-<p>Ha: No están emparejados.</p>
-<p>Obtenemos las diferencias entre los rangos en error cuadrático, que nos servirá para calcular <span class="math inline">\(T\)</span>, estadística de prueba. <span class="math display">\[T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) \]</span></p>
+<p>Planteamos la prueba de hipC3tesis (prueba de una cola) <span class="math inline">\(H_{0}\)</span>: Existe una tendencia para que los valores mC!s grandes de X estC)n emparejados&quot; con los valores mC!s grandes de Y y los valores mC!s chicos de X estC)n emparejados&quot; con los valores mC!s chicos de Y.</p>
+<p>Ha: No estC!n emparejados.</p>
+<p>Obtenemos las diferencias entre los rangos en error cuadrC!tico, que nos servirC! para calcular <span class="math inline">\(T\)</span>, estadC-stica de prueba. <span class="math display">\[T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) \]</span></p>
 <pre class="r"><code>paises$diff_c = (paises$R_x - paises$R_y)^2 
 estadistica= sum(paises$diff_c)
 n_tamanio=length(paises$porcentaje)</code></pre>
@@ -569,8 +572,8 @@ print(p_value)</code></pre>
 <pre><code>## [1] 0.2637307</code></pre>
 <p>Entonces aceptamos <span class="math inline">\(H_{0}\)</span> ya que <span class="math inline">\(p-value&gt;\alpha\)</span>.</p>
 <p>Vamos a hacer la prueba por Kendall.</p>
-<p>Tenemos que ver si los datos son concordantes.</p>
-<p>Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest.</p>
+<p>Tenemos que ver si los datos son concor</p>
+<p>Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paqueterC-a nortest.</p>
 <pre class="r"><code>test_ken=cor.test(hispanos, porcentaje,method=&quot;kendall&quot;,alternative=&quot;greater&quot;,exact = NULL)</code></pre>
 <pre><code>## Warning in cor.test.default(hispanos, porcentaje, method = &quot;kendall&quot;,
 ## alternative = &quot;greater&quot;, : Cannot compute exact p-value with ties</code></pre>
@@ -591,6 +594,96 @@ print(p_value)</code></pre>
 </div>
 <div id="problema-2" class="section level2">
 <h2>Problema 2</h2>
+<p>Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.</p>
+<p>Creamos los vectores con los datos.</p>
+<pre class="r"><code>library(ggplot2)
+nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
+divorciados= c(60, 70, 88, 75, 42, 30, 50)</code></pre>
+<p>Planteamos la prueba de hipC3tesis como:</p>
+<p><span class="math inline">\(H_{0}\)</span>: Las muestras vienen de la misma poblaciC3n, es decir, <span class="math inline">\(E[X]=E[Y]\)</span>.</p>
+<p><span class="math inline">\(H_{a}\)</span>: Las muestras no vienen de la misma poblaciC3n.</p>
+<p>Obtenemos el tamaC1o de la muestra, para este caso ambas muestras tienen el mismo tamaC1o, entonces <span class="math inline">\(n_{1}=n_{2}\)</span>.</p>
+<pre class="r"><code>n_tamanio_muestra=length(nodivorciados)</code></pre>
+<p>Hacemos las muestras una sola, las juntamos para darles un rango dentro de un data frame.</p>
+<pre class="r"><code>datos_div = data.frame(Estado =rep(c(&quot;no divorciados&quot;, &quot;divorciados&quot;), 
+                              each = n_tamanio_muestra),
+                              Promedio= c(nodivorciados, divorciados))
+print(datos_div)</code></pre>
+<pre><code>##            Estado Promedio
+## 1  no divorciados       80
+## 2  no divorciados       72
+## 3  no divorciados       99
+## 4  no divorciados       82
+## 5  no divorciados       62
+## 6  no divorciados       50
+## 7  no divorciados       85
+## 8     divorciados       60
+## 9     divorciados       70
+## 10    divorciados       88
+## 11    divorciados       75
+## 12    divorciados       42
+## 13    divorciados       30
+## 14    divorciados       50</code></pre>
+<p>Vamos a obtener los rangos y a visualizarlos:</p>
+<pre class="r"><code>datos_div$rango=rank(datos_div$Promedio)
+print(datos_div)</code></pre>
+<pre><code>##            Estado Promedio rango
+## 1  no divorciados       80  10.0
+## 2  no divorciados       72   8.0
+## 3  no divorciados       99  14.0
+## 4  no divorciados       82  11.0
+## 5  no divorciados       62   6.0
+## 6  no divorciados       50   3.5
+## 7  no divorciados       85  12.0
+## 8     divorciados       60   5.0
+## 9     divorciados       70   7.0
+## 10    divorciados       88  13.0
+## 11    divorciados       75   9.0
+## 12    divorciados       42   2.0
+## 13    divorciados       30   1.0
+## 14    divorciados       50   3.5</code></pre>
+<p>Debemos obtener las sumas de los rangos.</p>
+<p><span class="math display">\[R_{1}=\sum _{i=1}^{n_{1}} R(X_{i}) \quad   R_{2}=\sum _{i=1}^{n_{2}} R(Y_{i}) \]</span></p>
+<pre class="r"><code>suma_rango&lt;-datos_div %&gt;% group_by(Estado) %&gt;% summarise(suma_rango = sum(rango))
+rango_div&lt;-suma_rango$suma_rango[1]
+rango_nodiv&lt;-suma_rango$suma_rango[2]
+print(suma_rango)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   Estado         suma_rango
+##   &lt;chr&gt;               &lt;dbl&gt;
+## 1 divorciados          40.5
+## 2 no divorciados       64.5</code></pre>
+<p>Podemos ver la distribuciC3n de los datos:</p>
+<pre class="r"><code>ggplot(data = datos_div , aes(x = rango , y=0)) + 
+  geom_point(aes(colour = Estado), size = 8) + 
+  ggtitle(&quot;Comportamiento de los rangos&quot;)+ ylab(&quot;&quot;) + 
+  xlab(&quot;rango&quot;) +theme_bw() + theme(axis.text.y = element_blank())</code></pre>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Procedemos a calcular <span class="math inline">\(U_{1}, \ U_{2}\)</span>. <span class="math display">\[U_{1}= n_{1} \ n_{2} + \frac{n_{1} (n_{1}-1)}{2} - R_{1}\]</span> <span class="math display">\[U_{2}= n_{1} \ n_{2} + \frac{n_{2} (n_{2}-1)}{2} - R_{2}\]</span> Recordamos que <span class="math inline">\(n_{1}=n_{2}\)</span>.</p>
+<pre class="r"><code>factor_us= n_tamanio_muestra*n_tamanio_muestra+(n_tamanio_muestra*(n_tamanio_muestra+1))/2</code></pre>
+<p>Calculamos <span class="math inline">\(U_{1}, \ U_{2}\)</span>.</p>
+<pre class="r"><code>U_div=factor_us - rango_div
+U_nd=factor_us - rango_nodiv
+print(U_div)</code></pre>
+<pre><code>## [1] 36.5</code></pre>
+<pre class="r"><code>print(U_nd)</code></pre>
+<pre><code>## [1] 12.5</code></pre>
+<p>Recordamos que <span class="math inline">\(U=\min(U_{1},U_{2} )\)</span>.</p>
+<pre class="r"><code>U_est= min(U_div,U_nd)</code></pre>
+</div>
+<div id="pruebas-de-correlacic3n-de-rango-1" class="section level2">
+<h2>Pruebas de correlaciC3n de rango</h2>
+</div>
+<div id="problema-3-1" class="section level2">
+<h2>Problema 3</h2>
+<p>La tabla que se proporciona a continuaciC3n da el nC:mero de premios de postgraduados en ciencia mC)dica y la razC3n de muerte por millC3n de tuberculosis para los aC1os 1959-69.</p>
+<p>Demuestre que estos datos muestran una fuerte evidencia de correlaciC3n negativa entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este “extraC1o” resultado. Use = 0.05.</p>
+</div>
+<div id="pruebas-de-correlacic3n-de-rango-2" class="section level2">
+<h2>Pruebas de correlaciC3n de rango</h2>
+</div>
+<div id="problema-4-1" class="section level2">
+<h2>Problema 4</h2>
 </div>
 
 

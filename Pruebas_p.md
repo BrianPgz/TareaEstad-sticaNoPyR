@@ -120,12 +120,13 @@ Probas=pnorm(Z)
 ```
 
 
-Tenemos que calcular: $$D_{i}^{+}= | \phi(Z_{i}) - \frac{i}{n}|$$  
-$$D_{i}^{-}= | \phi(Z_{i}) - \frac{i-1}{n}|$$
+Tenemos que calcular: $$ \frac{i}{n} - D_{i}^{+}=  \phi(Z_{i}) $$  
+$$D_{i}^{-}=  \phi(Z_{i}) - \frac{i-1}{n}$$
+
 
 ```r
-Di_p=abs(Probas-f_n)
-Di_n=abs(Probas-f_r)
+Di_p=f_n  -Probas
+Di_n= Probas - f_r
 ```
 
 Visualizamos todos los cC!lculos. 
@@ -137,22 +138,22 @@ Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)
 
 
 ```
-##    Dirty_data    Data           Z    Probas        Di_p       Di_n
-## 1     0.25130 0.25130 -1.13244110 0.1287245 0.062057851 0.12872452
-## 2     0.25660 0.25660 -1.12644418 0.1299888 0.003344555 0.06332211
-## 3     0.34590 0.31280 -1.06285419 0.1439240 0.056075960 0.01059071
-## 4     0.63790 0.34590 -1.02540173 0.1525868 0.114079830 0.04741316
-## 5     2.05050 0.35005 -1.02070603 0.1536969 0.179636464 0.11296980
-## 6     1.80300 0.63790 -0.69500536 0.2435260 0.156474028 0.08980736
-## 7     2.19060 0.65480 -0.67588310 0.2495574 0.217109233 0.15044257
-## 8     1.52990 1.27260  0.02315415 0.5092363 0.024096990 0.04256968
-## 9     0.35005 1.52990  0.31428766 0.6233487 0.023348715 0.09001538
-## 10    0.31280 1.80300  0.62329879 0.7334559 0.066789235 0.13345590
-## 11    1.27260 2.05050  0.90334365 0.8168282 0.083494899 0.15016157
-## 12    2.36740 2.19060  1.06186602 0.8558517 0.055851744 0.12251841
-## 13    2.32140 2.32140  1.20986549 0.8868347 0.020168078 0.08683474
-## 14    2.43730 2.36740  1.26191423 0.8965102 0.036823158 0.02984351
-## 15    0.65480 2.43730  1.34100569 0.9100407 0.089959302 0.02329264
+##    Dirty_data    Data           Z    Probas         Di_p        Di_n
+## 1     0.25130 0.25130 -1.13244110 0.1287245 -0.062057851  0.12872452
+## 2     0.25660 0.25660 -1.12644418 0.1299888  0.003344555  0.06332211
+## 3     0.34590 0.31280 -1.06285419 0.1439240  0.056075960  0.01059071
+## 4     0.63790 0.34590 -1.02540173 0.1525868  0.114079830 -0.04741316
+## 5     2.05050 0.35005 -1.02070603 0.1536969  0.179636464 -0.11296980
+## 6     1.80300 0.63790 -0.69500536 0.2435260  0.156474028 -0.08980736
+## 7     2.19060 0.65480 -0.67588310 0.2495574  0.217109233 -0.15044257
+## 8     1.52990 1.27260  0.02315415 0.5092363  0.024096990  0.04256968
+## 9     0.35005 1.52990  0.31428766 0.6233487 -0.023348715  0.09001538
+## 10    0.31280 1.80300  0.62329879 0.7334559 -0.066789235  0.13345590
+## 11    1.27260 2.05050  0.90334365 0.8168282 -0.083494899  0.15016157
+## 12    2.36740 2.19060  1.06186602 0.8558517 -0.055851744  0.12251841
+## 13    2.32140 2.32140  1.20986549 0.8868347 -0.020168078  0.08683474
+## 14    2.43730 2.36740  1.26191423 0.8965102  0.036823158  0.02984351
+## 15    0.65480 2.43730  1.34100569 0.9100407  0.089959302 -0.02329264
 ```
 
 Definimos $$D^{+}= max\{D_{i}^{+}\}$$ $$D^{-}= max\{D_{i}^{-}\}$$ 
@@ -169,7 +170,7 @@ D_n=max(Di_n)
 ```
 
 ```
-## [1] 0.1504426
+## [1] 0.1501616
 ```
 
 Definimos $$D= max\{ D^{+}, D^{-} \}$$
@@ -798,30 +799,38 @@ print(tail(valores_M))
 
 
 
-## Tablas de contingencia 
-## Problema 1
-
-
-
-
-
-
-
-
-
-
-
 ## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
 ## Problema 1
 
-1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los
+1.- La oficina de Censo reportC3 que se espera que los hispanos sobrepasen a los
 afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o
 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el
-numero de Hispanos y el procentaje de la población del estado para los nueve
-estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
+numero de Hispanos y el procentaje de la poblaciC3n del estado para los nueve
+estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New MC)xico, Colorado.
 
-Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma población.En este caso los datos vienen por estado en ese orden. 
+Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma poblaciC3n.En este caso los datos vienen por estado en ese orden. 
 
+
+```r
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
 
 ```r
 porcentaje=c(23,24,12,12,7,18,8,35,11)
@@ -870,11 +879,11 @@ print(paises)
 ## 8      0.5         35 2.0 9.0
 ## 9      0.4         11 1.0 3.0
 ```
-Planteamos la prueba de hipótesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores más grandes de X estén emparejados" con los valores más grandes de Y y los valores más chicos de X estén emparejados" con los valores más chicos de Y.   
+Planteamos la prueba de hipC3tesis (prueba de una cola) $H_{0}$: Existe una tendencia para que los valores mC!s grandes de X estC)n emparejados" con los valores mC!s grandes de Y y los valores mC!s chicos de X estC)n emparejados" con los valores mC!s chicos de Y.   
 
-Ha: No están emparejados.  
+Ha: No estC!n emparejados.  
 
-Obtenemos las diferencias entre los rangos en error cuadrático, que nos servirá para calcular $T$, estadística de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
+Obtenemos las diferencias entre los rangos en error cuadrC!tico, que nos servirC! para calcular $T$, estadC-stica de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
 
 
 ```r
@@ -943,12 +952,16 @@ Vamos a hacer la prueba por Kendall.
 
 
 
-Tenemos que ver si los datos son concordantes.
+Tenemos que ver si los datos son concor
 
 
 
-Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paquetería nortest. 
 
+
+
+
+
+Para comprobar nuestros datos tenemos que hacer la prueba con el test de la paqueterC-a nortest. 
 
 ```r
 test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
@@ -978,9 +991,172 @@ Como el $p-value<alpha$ entonces aceptamos $H_{0}$ como en la prueba de Spearman
 
 
 
-## Pruebas de correlaciC3n de rango 
-## Problema 2
+## Pruebas de correlaciC3n de rango   
+## Problema 2 
 
+
+Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.
+
+Creamos los vectores con los datos.
+
+
+```r
+library(ggplot2)
+nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
+divorciados= c(60, 70, 88, 75, 42, 30, 50)
+```
+
+Planteamos la prueba de hipC3tesis como: 
+
+$H_{0}$: Las muestras vienen de la misma poblaciC3n, es decir, $E[X]=E[Y]$. 
+
+$H_{a}$: Las muestras no vienen de la misma poblaciC3n.
+
+Obtenemos el tamaC1o de la muestra, para este caso ambas muestras tienen el mismo tamaC1o, entonces $n_{1}=n_{2}$.
+
+
+```r
+n_tamanio_muestra=length(nodivorciados)
+```
+
+
+Hacemos las muestras una sola, las juntamos para darles un rango dentro de un data frame. 
+
+
+
+```r
+datos_div = data.frame(Estado =rep(c("no divorciados", "divorciados"), 
+                              each = n_tamanio_muestra),
+                              Promedio= c(nodivorciados, divorciados))
+print(datos_div)
+```
+
+```
+##            Estado Promedio
+## 1  no divorciados       80
+## 2  no divorciados       72
+## 3  no divorciados       99
+## 4  no divorciados       82
+## 5  no divorciados       62
+## 6  no divorciados       50
+## 7  no divorciados       85
+## 8     divorciados       60
+## 9     divorciados       70
+## 10    divorciados       88
+## 11    divorciados       75
+## 12    divorciados       42
+## 13    divorciados       30
+## 14    divorciados       50
+```
+
+Vamos a obtener los rangos y a visualizarlos: 
+
+
+```r
+datos_div$rango=rank(datos_div$Promedio)
+print(datos_div)
+```
+
+```
+##            Estado Promedio rango
+## 1  no divorciados       80  10.0
+## 2  no divorciados       72   8.0
+## 3  no divorciados       99  14.0
+## 4  no divorciados       82  11.0
+## 5  no divorciados       62   6.0
+## 6  no divorciados       50   3.5
+## 7  no divorciados       85  12.0
+## 8     divorciados       60   5.0
+## 9     divorciados       70   7.0
+## 10    divorciados       88  13.0
+## 11    divorciados       75   9.0
+## 12    divorciados       42   2.0
+## 13    divorciados       30   1.0
+## 14    divorciados       50   3.5
+```
+
+Debemos obtener las sumas de los rangos. 
+
+$$R_{1}=\sum _{i=1}^{n_{1}} R(X_{i}) \quad   R_{2}=\sum _{i=1}^{n_{2}} R(Y_{i}) $$
+
+```r
+suma_rango<-datos_div %>% group_by(Estado) %>% summarise(suma_rango = sum(rango))
+rango_div<-suma_rango$suma_rango[1]
+rango_nodiv<-suma_rango$suma_rango[2]
+print(suma_rango)
+```
+
+```
+## # A tibble: 2 x 2
+##   Estado         suma_rango
+##   <chr>               <dbl>
+## 1 divorciados          40.5
+## 2 no divorciados       64.5
+```
+
+Podemos ver la distribuciC3n de los datos: 
+
+
+```r
+ggplot(data = datos_div , aes(x = rango , y=0)) + 
+  geom_point(aes(colour = Estado), size = 8) + 
+  ggtitle("Comportamiento de los rangos")+ ylab("") + 
+  xlab("rango") +theme_bw() + theme(axis.text.y = element_blank())
+```
+
+![](Pruebas_p_files/figure-html/unnamed-chunk-87-1.png)<!-- -->
+
+
+Procedemos a calcular $U_{1}, \ U_{2}$. 
+$$U_{1}= n_{1} \ n_{2} + \frac{n_{1} (n_{1}-1)}{2} - R_{1}$$
+$$U_{2}= n_{1} \ n_{2} + \frac{n_{2} (n_{2}-1)}{2} - R_{2}$$
+Recordamos que $n_{1}=n_{2}$.
+
+```r
+factor_us= n_tamanio_muestra*n_tamanio_muestra+(n_tamanio_muestra*(n_tamanio_muestra+1))/2
+```
+
+Calculamos $U_{1}, \ U_{2}$. 
+
+```r
+U_div=factor_us - rango_div
+U_nd=factor_us - rango_nodiv
+print(U_div)
+```
+
+```
+## [1] 36.5
+```
+
+```r
+print(U_nd)
+```
+
+```
+## [1] 12.5
+```
+Recordamos que $U=\min(U_{1},U_{2} )$.
+
+
+```r
+U_est= min(U_div,U_nd)
+```
+
+
+## Pruebas de correlaciC3n de rango 
+## Problema 3
+La tabla que se proporciona a continuaciC3n da el nC:mero de premios de postgraduados en ciencia mC)dica y la razC3n de muerte por millC3n de tuberculosis para los aC1os 1959-69.
+
+Demuestre que estos datos muestran una fuerte evidencia de correlaciC3n negativa
+entre el nC:mero de premios y la tasa de muerte por tuberculosis. Explique este
+"extraC1o" resultado. Use = 0.05. 
+
+
+
+ 
+
+## Pruebas de correlaciC3n de rango 
+## Problema 4
 
 
 
