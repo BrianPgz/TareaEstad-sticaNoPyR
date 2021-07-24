@@ -797,7 +797,10 @@ print(tail(valores_M))
 ## 1000  0.9604393    3.541459    0.9998010  0.0001989603 0.0008010397
 ```
 
+## Tablas de Contingencia
+## Problema 1
 
+1.-  Hola voy un poco atrasado XD
 
 ## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
 ## Problema 1
