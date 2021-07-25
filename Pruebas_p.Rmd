@@ -25,6 +25,7 @@ cierta acciC3n a lo largo del tiempo.
 Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.
 ```{r echo=TRUE}
 library(nortest)
+library(dplyr)
 ```
 Ho: La muestra sigue una distribuciC3n normal VS Ha: La muestra no sigue una distribuciC3n normal
 
@@ -830,13 +831,45 @@ Queremos ver si se tiene una correlacion negativa (es una prueba tipo B), entonc
 
 $H_{0}$: $\rho ???0$ VS $H_{a}$: $\rho>0$
 
-```{r}
+Tenemos que hacer los rangos y obtener las diferencias al cuadrado para calular $T$.
+
+$$T=\sum_{i=1}^{n} (R(X_{i})-R(Y_{i})) ^{2} $$
+
+```{r echo=TRUE}
+Datos_tuber$R_x=rank(Datos_tuber$premios)
+Datos_tuber$R_y=rank(Datos_tuber$tasa_muerte)
+Datos_tuber$Dif_cuadrada=(Datos_tuber$R_x-Datos_tuber$R_y)^2
+Est_tuber<-Datos_tuber %>% summarize(Estadistica_t=sum(Dif_cuadrada))
+Est<-unlist(Est_tuber)
+n_tuber=length(tasa_muerte)
+print(Datos_tuber)
 
 ```
 
-```{r}
+Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.
+
+Con un $\alpha = 0.05$ y un tamaño de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
+
+
+```{r echo=TRUE}
+rho_tuber=(1-(6*Est_tuber)/(n_tuber*(n_tuber^2 -1)))
+Rechazamos_H0_tuber=rho_tuber<0.536
+print(Rechazamos_H0_tuber)
 
 ```
+Entonces rechazamos $H_{0}$, no hay evidencia suficiente para que tengan una correlacion negativa. 
+
+Vamos a verificar lo anterior haciendo el test.
+
+```{r echo=TRUE}
+test_tuber = cor.test(tasa_muerte, premios,method="spearman",alternative="less")
+p_value_tuber=test_tuber$p.value
+print(p_value_tuber)
+
+```
+Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlación no es negativa.
+
+
 
  
 
