@@ -176,7 +176,17 @@ pre code {
 <p>La siguiente muestra aleatoria hace referencia a los rendimientos positivos de cierta acciC3n a lo largo del tiempo.</p>
 <p>0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906, 1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548</p>
 <p>Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.</p>
-<pre class="r"><code>library(nortest)</code></pre>
+<pre class="r"><code>library(nortest)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)</code></pre>
 <p>Ho: La muestra sigue una distribuciC3n normal VS Ha: La muestra no sigue una distribuciC3n normal</p>
 <p>Metemos los datos en un vector y ordenamos los datos.</p>
 <pre class="r"><code>Dirty_data=c(0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
@@ -266,8 +276,8 @@ Rechazamos_p_value=p_value&lt;alpha</code></pre>
 ##  [8] 0.5952465 0.6646554 0.7222209 0.7636471 0.7835314 0.8001537 0.8055991
 ## [15] 0.8135061</code></pre>
 <p>Calculamos $ D_{i}^{+}$ y $D_{i}^{-} $</p>
-<pre class="r"><code>Di_pB=abs(ProbasB-f_n)
-Di_nB=abs(ProbasB-f_r)</code></pre>
+<pre class="r"><code>Di_pB=(f_n-ProbasB)
+Di_nB=(ProbasB-f_r)</code></pre>
 <p>Ahora para <span class="math inline">\(D^{+} \quad D^{-}\)</span></p>
 <pre class="r"><code>D_pB=max(Di_pB)
 #Calculamos D-
@@ -500,119 +510,15 @@ print(D_data_des_max)</code></pre>
 ## 999  -0.7634958    3.262782    0.9994484 -0.0004483775 0.0014483775
 ## 1000  0.9604393    3.541459    0.9998010  0.0001989603 0.0008010397</code></pre>
 </div>
-<div id="tablas-de-contingencia" class="section level2">
-<h2>Tablas de Contingencia</h2>
-</div>
-<div id="problema-1" class="section level2">
-<h2>Problema 1</h2>
-<p>1.- Se recopilaron datos macroecnomicos de diversos paises durante el 2017 del Fondo Monetario Internacional entre los cuales destacan el tamano del territorio del pais en km2 y la tasa de fertilidad. Se clasifico la informacion de la siguiente manera:</p>
-<p>-&gt;Microestado cuando su territorio se menor o igual a 23,180 km2</p>
-<p>-&gt;Pais pequeno cuando su territorio este ente los 23,181 y 112,760 km2</p>
-<p>-&gt;Pais mediano cuando su territorio este entre 112,761 y los 527,970 km2</p>
-<p>-&gt;Pais grande cuando su territorio sea mayor a los 527,970 km2</p>
-<p>A su vez los paises se subclasifican en dos grupos dependiendo de la tasa de fecundidad del pais de la forma:</p>
-<p>-&gt;Tasa de Fecundidad menor o igual a 2.7 hijos por mujer.</p>
-<p>-&gt;Tasa de Fecundidad mayor a 2.7 hijos por mujer.</p>
-<p>Con esa informacion se construyo la siguiente tabla de contingencia:</p>
-<pre class="r"><code>Microestado&lt;-c(35,12)
-Pais_pequeC1o&lt;-c(31,15)
-Pais_mediano&lt;-c(28,18)
-Pais_grande&lt;-c(26,26)</code></pre>
-<pre class="r"><code>Tabla&lt;-data.frame(Microestado,Pais_pequeC1o,Pais_mediano,Pais_grande,
-                  row.names = c(&#39;Tasa&lt;=2.7&#39;,&#39;Tasa&gt;2.7&#39;))</code></pre>
-<pre><code>##               Microestado       Pais Pequeno     Pais Mediano     Pais Grande    
-## Tasa &lt;= 2.7        35                31               28              26
-## Tasa &gt; 2.7         12                15               18              26</code></pre>
-<ol style="list-style-type: lower-alpha">
-<li>Establecer <span class="math inline">\(H_0\)</span> vs. <span class="math inline">\(H_a\)</span></li>
-</ol>
-<p>Establecemos las hipotesis nulas y alternativas como propone la prueba para tablas contingencia.</p>
-<p><span class="math inline">\(H_0\)</span> = La probabilidad de que un pais tenga tasa de fertilidad &lt;= 2.7 o &gt; 2.7 es independiente de su clasificacion como microestado, pais pequeno, pais mediano o pais grande. Es decir la fertilidad y el tamano de una poblacion son independientes.</p>
-<p><span class="math inline">\(H_a\)</span> = La fertilidad y el tamano de una poblacion no son independientes.</p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>De la tabla de contigencia realice el procedimiento obtenido la estadistica necesaria para rechazar o aceptar con un nivel de significancia alpha = 0.05 la hipotesis de que la tasa de fecundidad y el tamano del territorio se comportan de manera independiente entre s con los parametros dados.</li>
-</ol>
-<pre class="r"><code>alpha=0.05
-suma_renglones=rowSums(Tabla)
-suma_columnas=colSums(Tabla)
-n=sum(suma_columnas)
-aux=suma_renglones*suma_columnas
-e1j=list()
-e2j=list()
-for (i in 1:2){
-  for(j in 1:4){
-    if (i==1){
-      e1j[j]=(suma_columnas[j]*suma_renglones[i])/n
-    }else{
-      e2j[j]=(suma_columnas[j]*suma_renglones[i])/n
-    }
-  }
-}
-e1j=unlist(e1j)
-e2j=unlist(e2j)
-Est&lt;-0
-Matriz&lt;-data.matrix(Tabla)
-for (i in 1:2){
-  for(j in 1:4){
-    if (i==1){
-      Est=Est+((Matriz[1,j]-e1j[j])^2)/e1j[j]
-    }else{
-      Est=Est+((Matriz[2,j]-e2j[j])^2)/e2j[j]
-    }
-  }
-}
-v=(4-1)*(2-1)
-critico=qchisq(1-alpha,df=v)
-Rechazamos_H0=Est&gt;critico</code></pre>
-<p>Es decir, no hay suficiente evidencia como para decir que la fertilidad y el tamano el territorio NO son independientes. Aceptamos entonces la hipotesis nula y decimos que la fertilidad y tamano del territorio son independientes, a un nivel de confianza alpha = 0.05.</p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Calcula el coeficiente de contigencia, ??como lo interpretarias?</li>
-</ol>
-<pre class="r"><code>Contingencia=sqrt(Est/(Est+n))</code></pre>
-<p>Como valores crecientes de C implican un crecimiento en el grado de asociacion y tenemos que C es pequena, puesto que C esta en el intervalo abierto (0,1) y obtuvimos C= 0.1864 aproximadamente, podemos decir que, con un poco mas de confianza basandonos en esta estadistica y la prueba realizada, parecen ser independientes, o por lo menos, tener muy poca correlacion o asociacion entre ellas.</p>
-<ol start="4" style="list-style-type: lower-alpha">
-<li>Calcular el p ??? value de la prueba anterior.</li>
-</ol>
-<pre class="r"><code>p_value=pchisq(Est,df=v,lower.tail = FALSE)
-Rechazamos_H0_p_value=p_value&lt;alpha</code></pre>
-<p>El p_value es de 0.076 aproximadamente, que es mayor a 0.05, por lo que tampoco rechazamos la hipotesis de que son independientes.</p>
-<ol start="5" style="list-style-type: lower-alpha">
-<li>Realiza el procedimiento mediante la prueba de la Ji-Cuadrada; De esta forma ??Se rechaza o no la prueba?.</li>
-</ol>
-<p>Realizaremos la prueba de la ji-cuadrada tomando como categorias o casillas cada entrada de la matriz ‘Matriz’ (Es decir, las parejas ordenadas del tamano del pais y tasa de fecundidad) que son 8 en total, y sus respectivos valores esperados que encontramos en los vectores e1j y e2j. Aunque volver a hacer el calculo no es necesario puesto que es la misma estadistica, en esencia, que en la prueba de tablas de contingencia, que es la diferencia al cuadrado de los observados menos los esperados, dividida entre los esperados. Como tenemos 8 categorias, v=8-1=7. Procedemos directamente:</p>
-<pre class="r"><code>esperados_completo=c(cbind(e1j,e2j))
-probas=esperados_completo/n
-vector_obs=as.vector(t(Tabla))
-v_chi=8-1
-critico_chi=qchisq(1-alpha,df=v_chi)
-Rechazamos_H0_chi=Est&gt;critico_chi
-
-p_value_chi=pchisq(Est,df=v_chi,lower.tail = FALSE)
-Rechazamos_H0_p_value_chi=p_value_chi&lt;alpha
-chisq.test(x=vector_obs,p=probas)</code></pre>
-<p>Como vemos, tampoco hay evidencia suficiente para rechazar <span class="math inline">\(H_0\)</span> mediante la prueba de la ji-cuadrada, por lo que con un nivel de confianza alpha=0.05 podemos decir que esas son las probabilidades de caer en cada casilla, al igual que cuando realizamos la de tablas de contingencia.</p>
-<ol start="6" style="list-style-type: lower-alpha">
-<li>??Economicamente tiene sentido la proposicion de que el PIB y la poblacion se comportan de manera independiente?</li>
-</ol>
-<p>No necesariamente,Pues porque PIB como sabemos es el conjunto de bienes y servicios producidos durante el ano, pero tenemos que fijarnos en la poblacion que esta laboralmente activa y obviamente depende depende de como este distribuida la poblacion.</p>
-</div>
 <div id="pruebas-de-wilcoxon-kruskal-wallis-medidas-de-correlacion" class="section level2">
 <h2>Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion</h2>
 </div>
-<div id="problema-1-1" class="section level2">
+<div id="problema-1" class="section level2">
 <h2>Problema 1</h2>
 <p>1.- La oficina de Censo reportC3 que se espera que los hispanos sobrepasen a los afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el numero de Hispanos y el procentaje de la poblaciC3n del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New MC)xico, Colorado.</p>
 <p>Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma poblaciC3n.En este caso los datos vienen por estado en ese orden.</p>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>porcentaje=c(23,24,12,12,7,18,8,35,11)
+<pre class="r"><code>library(dplyr)
+porcentaje=c(23,24,12,12,7,18,8,35,11)
 hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)</code></pre>
 <p>Vamos a meter los vectores en un data frame.</p>
 <pre class="r"><code>paises&lt;-data.frame(hispanos,porcentaje)
@@ -810,14 +716,57 @@ print(Datos_tuber)</code></pre>
 ## 9  1967     849          42
 ## 10 1968     932          43
 ## 11 1969     976          38</code></pre>
-<p>Queremos ver si se tiene una correlacion negativa (es una prueba tipo B), entonces proponemos la prueba de hipotesis:</p>
-<p><span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\rho&lt;=0\)</span> VS <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\rho&gt;0\)</span></p>
+<p>Queremos ver si se tiene una correlacion negativa (es una prueba tipo C), entonces proponemos la prueba de hipotesis:</p>
+<p><span class="math inline">\(H_{0}\)</span>: Las muestras son mutuamente independientes VS <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\rho&gt;0\)</span></p>
+<p>Tenemos que hacer los rangos y obtener las diferencias al cuadrado para calular <span class="math inline">\(T\)</span>.</p>
+<p><span class="math display">\[T=\sum_{i=1}^{n} (R(X_{i})-R(Y_{i})) ^{2} \]</span></p>
+<pre class="r"><code>Datos_tuber$R_x=rank(Datos_tuber$premios)
+Datos_tuber$R_y=rank(Datos_tuber$tasa_muerte)
+Datos_tuber$Dif_cuadrada=(Datos_tuber$R_x-Datos_tuber$R_y)^2
+Est_tuber&lt;-Datos_tuber %&gt;% summarize(Estadistica_t=sum(Dif_cuadrada))
+Est&lt;-unlist(Est_tuber)
+n_tuber=length(tasa_muerte)
+print(Datos_tuber)</code></pre>
+<pre><code>##    anio premios tasa_muerte R_x R_y Dif_cuadrada
+## 1  1959     277          83   1  11          100
+## 2  1960     318          74   2  10           64
+## 3  1961     382          71   3   9           36
+## 4  1962     441          65   4   8           16
+## 5  1963     486          62   5   7            4
+## 6  1964     597          52   6   6            0
+## 7  1965     750          47   8   4           16
+## 8  1966     738          48   7   5            4
+## 9  1967     849          42   9   2           49
+## 10 1968     932          43  10   3           49
+## 11 1969     976          38  11   1          100</code></pre>
+<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.</p>
+<p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaño de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
+<pre class="r"><code>rho_tuber=(1-(6*Est_tuber)/(n_tuber*(n_tuber^2 -1)))
+Rechazamos_H0_tuber=rho_tuber&lt;0.536
+print(Rechazamos_H0_tuber)</code></pre>
+<pre><code>##      Estadistica_t
+## [1,]          TRUE</code></pre>
+<p>Entonces rechazamos <span class="math inline">\(H_{0}\)</span>, no hay evidencia suficiente para que sean muestras independientes, entonces los datos tienen una correlacion negativa.</p>
+<p>Vamos a verificar lo anterior haciendo el test.</p>
+<pre class="r"><code>test_tuber = cor.test(tasa_muerte, premios,method=&quot;spearman&quot;,alternative=&quot;less&quot;)
+p_value_tuber=test_tuber$p.value
+print(p_value_tuber)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_{o}\)</span>, entonces la correlación es negativa.</p>
+<p>Hagamos una segunda prueba para estar más seguros.</p>
+<pre class="r"><code>kendall_tuber=cor.test(premios,tasa_muerte,method=&quot;kendall&quot;,alternative=&quot;less&quot;,exact = NULL)
+p_value_ken_tuber = kendall_tuber$p.value
+print(p_value_ken_tuber)</code></pre>
+<pre><code>## [1] 2.755732e-07</code></pre>
+<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, rechazamos <span class="math inline">\(H_{o}\)</span>. Confirmmos nuestros calculos.</p>
 </div>
 <div id="pruebas-de-correlacion-de-rango-1" class="section level2">
 <h2>Pruebas de correlacion de rango</h2>
 </div>
 <div id="problema-4-1" class="section level2">
 <h2>Problema 4</h2>
+<p>El personal de un hospital mental desea saber que clase de tratamiento es mas efectivo para un tipo particular de desorden mental. Una bateria de pruebas administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes fueron considerados de diagnostico similar y tambien personalidad, inteligencia y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y (4) ningun tipo de tratamiento. Al final de este periodo la bateria de pruebas fue repetida en cada paciente. El unico tipo de medida posible para estas pruebas es un ordenamiento (ranking) de los 40 pacientes de acuerdo a su grado relativo de mejora al final del periodo de tratamiento; rango 1 indica el nivel mas alto de mejora, rango 2 el segundo mejor, y asi sucesivamente.</p>
+<p>De acuerdo con estos datos, existe diferencia en efectividad de los tipos de tratamiento? Use <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 </div>
 
 

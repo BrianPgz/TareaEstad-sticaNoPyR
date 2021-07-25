@@ -888,6 +888,23 @@ Como el $p-value<\alpha$, rechazamos $H_{o}$. Confirmmos nuestros calculos.
 ## Pruebas de correlacion de rango 
 ## Problema 4
 
+El personal de un hospital mental desea saber que clase de tratamiento es mas
+efectivo para un tipo particular de desorden mental. Una bateria de pruebas
+administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes
+fueron considerados de diagnostico similar y tambien personalidad, inteligencia
+y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes
+grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos
+recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y
+(4) ningun tipo de tratamiento. Al final de este periodo la bateria de pruebas fue
+repetida en cada paciente. El unico tipo de medida posible para estas pruebas
+es un ordenamiento (ranking) de los 40 pacientes de acuerdo a su grado relativo
+de mejora al final del periodo de tratamiento; rango 1 indica el nivel mas alto
+de mejora, rango 2 el segundo mejor, y asi sucesivamente.
+
+De acuerdo con estos datos, existe diferencia en efectividad de los tipos de tratamiento? Use $\alpha = 0.05$.
+
+
+
 
 
 
