@@ -1,2 +1,2 @@
 # TareaEstad-sticaNoPyR
-Documento de RmarkDown
+Documento de RmarkDown Estadística
