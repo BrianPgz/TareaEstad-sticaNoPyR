@@ -198,8 +198,8 @@ ProbasB
 Calculamos $ D_{i}^{+}$ y $D_{i}^{-} $
 
 ```{r echo=TRUE}
-Di_pB=abs(ProbasB-f_n)
-Di_nB=abs(ProbasB-f_r)
+Di_pB=(f_n-ProbasB)
+Di_nB=(ProbasB-f_r)
 
 ```
 
