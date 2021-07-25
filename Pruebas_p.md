@@ -1272,9 +1272,9 @@ print(Datos_tuber)
 ## 11 1969     976          38  11   1          100
 ```
 
-Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.
+Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadC-stica normal.
 
-Con un $\alpha = 0.05$ y un tamaño de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
+Con un $\alpha = 0.05$ y un tamaC1o de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
 
 
 
@@ -1302,12 +1302,12 @@ print(p_value_tuber)
 ```
 ## [1] 0
 ```
-Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlación es negativa.
+Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlaciC3n es negativa.
 
 
 
 
-Hagamos una segunda prueba para estar más seguros.
+Hagamos una segunda prueba para estar mC!s seguros.
 
 
 ```r
@@ -1320,6 +1320,8 @@ print(p_value_ken_tuber)
 ## [1] 2.755732e-07
 ```
 Como el $p-value<\alpha$, rechazamos $H_{o}$. Confirmmos nuestros calculos.
+
+
 
  
 

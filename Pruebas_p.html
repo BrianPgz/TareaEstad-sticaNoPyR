@@ -739,8 +739,8 @@ print(Datos_tuber)</code></pre>
 ## 9  1967     849          42   9   2           49
 ## 10 1968     932          43  10   3           49
 ## 11 1969     976          38  11   1          100</code></pre>
-<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.</p>
-<p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaño de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
+<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadC-stica normal.</p>
+<p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaC1o de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
 <pre class="r"><code>rho_tuber=(1-(6*Est_tuber)/(n_tuber*(n_tuber^2 -1)))
 Rechazamos_H0_tuber=rho_tuber&lt;0.536
 print(Rechazamos_H0_tuber)</code></pre>
@@ -752,8 +752,8 @@ print(Rechazamos_H0_tuber)</code></pre>
 p_value_tuber=test_tuber$p.value
 print(p_value_tuber)</code></pre>
 <pre><code>## [1] 0</code></pre>
-<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_{o}\)</span>, entonces la correlación es negativa.</p>
-<p>Hagamos una segunda prueba para estar más seguros.</p>
+<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_{o}\)</span>, entonces la correlaciC3n es negativa.</p>
+<p>Hagamos una segunda prueba para estar mC!s seguros.</p>
 <pre class="r"><code>kendall_tuber=cor.test(premios,tasa_muerte,method=&quot;kendall&quot;,alternative=&quot;less&quot;,exact = NULL)
 p_value_ken_tuber = kendall_tuber$p.value
 print(p_value_ken_tuber)</code></pre>
