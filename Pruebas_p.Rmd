@@ -903,7 +903,31 @@ de mejora, rango 2 el segundo mejor, y asi sucesivamente.
 
 De acuerdo con estos datos, existe diferencia en efectividad de los tipos de tratamiento? Use $\alpha = 0.05$.
 
+Primero hagamos un data frame para visualizar los datos:
 
+```{r echo=TRUE}
+Electro<-c(19,22,25,24,29,26,37,23,27,28)
+Psico<-c(14,21,2,6,10,16,17,11,18,7)
+Ambos<-c(12,1,5,8,4,13,9,15,3,20)
+Ninguno<-c(38,39,40,30,31,32,33,36,34,35)
+
+```
+
+Los datos representan el rango que ocupan en una escala relativa de mejoria
+respecto al estado inicial, donde 1 es la 'mejor mejoria' y 40 la 'peor mejoria'
+. 
+
+Tenemos 4 grupos donde cada grupo tiene 10 pacientes, entonces en total tenemos 40 pacientes
+```{r echo=TRUE}
+m_categorias=4
+k_total=40
+n_pacientes = 10
+
+```
+
+
+
+```{}
 
 
 
