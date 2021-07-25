@@ -1397,7 +1397,7 @@ print(Datos_tuber)
 
 Queremos ver si se tiene una correlacion negativa (es una prueba tipo B), entonces proponemos la prueba de hipotesis:
 
-$H_{0}$: $\rho ???0$ VS $H_{a}$: $\rho>0$
+$H_{0}$: $\rho<=0$ VS $H_{a}$: $\rho>0$
 
 
 
