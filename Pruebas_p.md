@@ -1272,9 +1272,9 @@ print(Datos_tuber)
 ## 11 1969     976          38  11   1          100
 ```
 
-Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadC-stica normal.
+Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.
 
-Con un $\alpha = 0.05$ y un tamaC1o de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
+Con un $\alpha = 0.05$ y un tamaño de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
 
 
 
@@ -1302,12 +1302,12 @@ print(p_value_tuber)
 ```
 ## [1] 0
 ```
-Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlaciC3n es negativa.
+Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlación es negativa.
 
 
 
 
-Hagamos una segunda prueba para estar mC!s seguros.
+Hagamos una segunda prueba para estar más seguros.
 
 
 ```r
@@ -1320,8 +1320,6 @@ print(p_value_ken_tuber)
 ## [1] 2.755732e-07
 ```
 Como el $p-value<\alpha$, rechazamos $H_{o}$. Confirmmos nuestros calculos.
-
-
 
  
 
@@ -1343,10 +1341,112 @@ de mejora, rango 2 el segundo mejor, y asi sucesivamente.
 
 De acuerdo con estos datos, existe diferencia en efectividad de los tipos de tratamiento? Use $\alpha = 0.05$.
 
+Primero hagamos un data frame para visualizar los datos:
 
 
+```r
+Electro<-c(19,22,25,24,29,26,37,23,27,28)
+Psico<-c(14,21,2,6,10,16,17,11,18,7)
+Ambos<-c(12,1,5,8,4,13,9,15,3,20)
+Ninguno<-c(38,39,40,30,31,32,33,36,34,35)
+```
+
+Los datos representan el rango que ocupan en una escala relativa de mejoria
+respecto al estado inicial, donde 1 es la 'mejor mejoria' y 40 la 'peor mejoria'
+. 
+
+Tenemos 4 grupos donde cada grupo tiene 10 pacientes, entonces en total tenemos 40 pacientes
+
+```r
+m_categorias=4
+k_total=40
+n_pacientes = 10
+```
+
+Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.
 
 
+```r
+DataVisual_pacientes<-data.frame(Electro,Psico,Ambos,Ninguno)
+Data_pacientes<- data.frame(Tratamiento =rep(c("Electro","Psico",'Ambos','Ninguno'), each = n_pacientes), Rango =c(Electro,Psico,Ambos,Ninguno))
+print(DataVisual_pacientes)
+```
+
+```
+##    Electro Psico Ambos Ninguno
+## 1       19    14    12      38
+## 2       22    21     1      39
+## 3       25     2     5      40
+## 4       24     6     8      30
+## 5       29    10     4      31
+## 6       26    16    13      32
+## 7       37    17     9      33
+## 8       23    11    15      36
+## 9       27    18     3      34
+## 10      28     7    20      35
+```
+
+```r
+print(Data_pacientes)
+```
+
+```
+##    Tratamiento Rango
+## 1      Electro    19
+## 2      Electro    22
+## 3      Electro    25
+## 4      Electro    24
+## 5      Electro    29
+## 6      Electro    26
+## 7      Electro    37
+## 8      Electro    23
+## 9      Electro    27
+## 10     Electro    28
+## 11       Psico    14
+## 12       Psico    21
+## 13       Psico     2
+## 14       Psico     6
+## 15       Psico    10
+## 16       Psico    16
+## 17       Psico    17
+## 18       Psico    11
+## 19       Psico    18
+## 20       Psico     7
+## 21       Ambos    12
+## 22       Ambos     1
+## 23       Ambos     5
+## 24       Ambos     8
+## 25       Ambos     4
+## 26       Ambos    13
+## 27       Ambos     9
+## 28       Ambos    15
+## 29       Ambos     3
+## 30       Ambos    20
+## 31     Ninguno    38
+## 32     Ninguno    39
+## 33     Ninguno    40
+## 34     Ninguno    30
+## 35     Ninguno    31
+## 36     Ninguno    32
+## 37     Ninguno    33
+## 38     Ninguno    36
+## 39     Ninguno    34
+## 40     Ninguno    35
+```
+
+Podemos ver las clasificaciones y sus calificaciones en una grafica. 
+
+
+```r
+plot_pacientes=ggplot(data = Data_pacientes , aes(x = Rango , y=0)) + geom_point(aes(colour = Tratamiento), size = 4) + 
+  ggtitle("Comportamiento de los rangos")+ ylab("") + xlab("Rango") +  theme_bw() +
+  theme(axis.text.y = element_blank())
+print(plot_pacientes)
+```
+
+![](Pruebas_p_files/figure-html/unnamed-chunk-103-1.png)<!-- -->
+
+Observamos que les ha ido mejor a los de ningun tratamiento. 
 
 
 

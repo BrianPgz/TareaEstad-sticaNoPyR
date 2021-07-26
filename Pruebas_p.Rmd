@@ -925,12 +925,28 @@ n_pacientes = 10
 
 ```
 
+Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.
 
+```{r echo=TRUE}
 
-```{}
+DataVisual_pacientes<-data.frame(Electro,Psico,Ambos,Ninguno)
+Data_pacientes<- data.frame(Tratamiento =rep(c("Electro","Psico",'Ambos','Ninguno'), each = n_pacientes), Rango =c(Electro,Psico,Ambos,Ninguno))
+print(DataVisual_pacientes)
+print(Data_pacientes)
 
+```
 
+Podemos ver las clasificaciones y sus calificaciones en una grafica. 
 
+```{r echo=TRUE}
+plot_pacientes=ggplot(data = Data_pacientes , aes(x = Rango , y=0)) + geom_point(aes(colour = Tratamiento), size = 4) + 
+  ggtitle("Comportamiento de los rangos")+ ylab("") + xlab("Rango") +  theme_bw() +
+  theme(axis.text.y = element_blank())
+print(plot_pacientes)
+
+```
+
+Observamos que les ha ido mejor a los de ningun tratamiento. 
 
 
 

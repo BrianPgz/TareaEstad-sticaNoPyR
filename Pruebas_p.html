@@ -739,8 +739,8 @@ print(Datos_tuber)</code></pre>
 ## 9  1967     849          42   9   2           49
 ## 10 1968     932          43  10   3           49
 ## 11 1969     976          38  11   1          100</code></pre>
-<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadC-stica normal.</p>
-<p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaC1o de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
+<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.</p>
+<p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaño de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
 <pre class="r"><code>rho_tuber=(1-(6*Est_tuber)/(n_tuber*(n_tuber^2 -1)))
 Rechazamos_H0_tuber=rho_tuber&lt;0.536
 print(Rechazamos_H0_tuber)</code></pre>
@@ -752,8 +752,8 @@ print(Rechazamos_H0_tuber)</code></pre>
 p_value_tuber=test_tuber$p.value
 print(p_value_tuber)</code></pre>
 <pre><code>## [1] 0</code></pre>
-<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_{o}\)</span>, entonces la correlaciC3n es negativa.</p>
-<p>Hagamos una segunda prueba para estar mC!s seguros.</p>
+<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_{o}\)</span>, entonces la correlación es negativa.</p>
+<p>Hagamos una segunda prueba para estar más seguros.</p>
 <pre class="r"><code>kendall_tuber=cor.test(premios,tasa_muerte,method=&quot;kendall&quot;,alternative=&quot;less&quot;,exact = NULL)
 p_value_ken_tuber = kendall_tuber$p.value
 print(p_value_ken_tuber)</code></pre>
@@ -767,6 +767,80 @@ print(p_value_ken_tuber)</code></pre>
 <h2>Problema 4</h2>
 <p>El personal de un hospital mental desea saber que clase de tratamiento es mas efectivo para un tipo particular de desorden mental. Una bateria de pruebas administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes fueron considerados de diagnostico similar y tambien personalidad, inteligencia y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y (4) ningun tipo de tratamiento. Al final de este periodo la bateria de pruebas fue repetida en cada paciente. El unico tipo de medida posible para estas pruebas es un ordenamiento (ranking) de los 40 pacientes de acuerdo a su grado relativo de mejora al final del periodo de tratamiento; rango 1 indica el nivel mas alto de mejora, rango 2 el segundo mejor, y asi sucesivamente.</p>
 <p>De acuerdo con estos datos, existe diferencia en efectividad de los tipos de tratamiento? Use <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>Primero hagamos un data frame para visualizar los datos:</p>
+<pre class="r"><code>Electro&lt;-c(19,22,25,24,29,26,37,23,27,28)
+Psico&lt;-c(14,21,2,6,10,16,17,11,18,7)
+Ambos&lt;-c(12,1,5,8,4,13,9,15,3,20)
+Ninguno&lt;-c(38,39,40,30,31,32,33,36,34,35)</code></pre>
+<p>Los datos representan el rango que ocupan en una escala relativa de mejoria respecto al estado inicial, donde 1 es la ‘mejor mejoria’ y 40 la ‘peor mejoria’ .</p>
+<p>Tenemos 4 grupos donde cada grupo tiene 10 pacientes, entonces en total tenemos 40 pacientes</p>
+<pre class="r"><code>m_categorias=4
+k_total=40
+n_pacientes = 10</code></pre>
+<p>Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.</p>
+<pre class="r"><code>DataVisual_pacientes&lt;-data.frame(Electro,Psico,Ambos,Ninguno)
+Data_pacientes&lt;- data.frame(Tratamiento =rep(c(&quot;Electro&quot;,&quot;Psico&quot;,&#39;Ambos&#39;,&#39;Ninguno&#39;), each = n_pacientes), Rango =c(Electro,Psico,Ambos,Ninguno))
+print(DataVisual_pacientes)</code></pre>
+<pre><code>##    Electro Psico Ambos Ninguno
+## 1       19    14    12      38
+## 2       22    21     1      39
+## 3       25     2     5      40
+## 4       24     6     8      30
+## 5       29    10     4      31
+## 6       26    16    13      32
+## 7       37    17     9      33
+## 8       23    11    15      36
+## 9       27    18     3      34
+## 10      28     7    20      35</code></pre>
+<pre class="r"><code>print(Data_pacientes)</code></pre>
+<pre><code>##    Tratamiento Rango
+## 1      Electro    19
+## 2      Electro    22
+## 3      Electro    25
+## 4      Electro    24
+## 5      Electro    29
+## 6      Electro    26
+## 7      Electro    37
+## 8      Electro    23
+## 9      Electro    27
+## 10     Electro    28
+## 11       Psico    14
+## 12       Psico    21
+## 13       Psico     2
+## 14       Psico     6
+## 15       Psico    10
+## 16       Psico    16
+## 17       Psico    17
+## 18       Psico    11
+## 19       Psico    18
+## 20       Psico     7
+## 21       Ambos    12
+## 22       Ambos     1
+## 23       Ambos     5
+## 24       Ambos     8
+## 25       Ambos     4
+## 26       Ambos    13
+## 27       Ambos     9
+## 28       Ambos    15
+## 29       Ambos     3
+## 30       Ambos    20
+## 31     Ninguno    38
+## 32     Ninguno    39
+## 33     Ninguno    40
+## 34     Ninguno    30
+## 35     Ninguno    31
+## 36     Ninguno    32
+## 37     Ninguno    33
+## 38     Ninguno    36
+## 39     Ninguno    34
+## 40     Ninguno    35</code></pre>
+<p>Podemos ver las clasificaciones y sus calificaciones en una grafica.</p>
+<pre class="r"><code>plot_pacientes=ggplot(data = Data_pacientes , aes(x = Rango , y=0)) + geom_point(aes(colour = Tratamiento), size = 4) + 
+  ggtitle(&quot;Comportamiento de los rangos&quot;)+ ylab(&quot;&quot;) + xlab(&quot;Rango&quot;) +  theme_bw() +
+  theme(axis.text.y = element_blank())
+print(plot_pacientes)</code></pre>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Observamos que les ha ido mejor a los de ningun tratamiento.</p>
 </div>
 
 
