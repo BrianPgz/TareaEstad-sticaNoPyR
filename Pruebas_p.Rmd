@@ -925,6 +925,12 @@ n_pacientes = 10
 
 ```
 
+Tenemos que plantear la prueba de hipotesis:
+
+$H_{0} : \ E[X_{1}=E[X_{2}]=E[X_{3}]=E[X_{4}]$. 
+$H_{a}:$ Los datos no tienen el mismo valor esperado.
+
+
 Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.
 
 ```{r echo=TRUE}
@@ -947,16 +953,34 @@ print(plot_pacientes)
 ```
 
 Observamos que les ha ido mejor a los de ningun tratamiento. 
-Debemos obtener los rangos, los tomaremos por tratamiento.
+Ahora debemos obtener las suma de los rangos. 
 
 
 ```{r echo=TRUE}
+Suma_rangos= Data_pacientes %>%
+  group_by(Tratamiento) %>%
+  summarize(suma_rangos=sum(Rango))
+print(Suma_rangos)
+```
+
+Notemos que no hay empates, por lo que podemos usar la siguiente estadistica. 
+
+```{r echo=TRUE}
+Est_pacientes=(12/(k_total*(k_total+1)))*sum(unlist(lapply(Suma_rangos$suma_rangos,function(x){(x^2)/10})))-3*(k_total+1)
+print(Est_pacientes)
 
 ```
 
+Para este caso tenemos que:
+$$T=\frac{12}{N(N+1)}\ \sum_{i=1}^{k} \frac{R_{i}^{2}}{n_{i}}-(3N+1)$$ 
+Donde $T \sim \chi^{2}_{k-1}$, y vamos a usar $\alpha = 0.05$. Los grados de libertad se 
 
-
-
+```{recho=TRUE}
+alpha_pacientes =0.05
+v=m_categorias-1
+valor_critico=qchisq(1-alpha_pacientes,df=v)
+Rechazamos_H0=Est>valor_critico
+```
 
 
 
