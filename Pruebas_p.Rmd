@@ -1159,3 +1159,383 @@ Entonces rechazamos $H_{0}$, es decir, las muestras no tienen el mismo valor esp
 
 
 
+## En R realiza
+
+```{r echo=TRUE}
+Datos_R1<-read.csv('pregunta1.csv')
+n_R1<-1000
+Xi_R1<-unlist(Datos_R1$Xi)
+Yi_R1<-unlist(Datos_R1$Yi)
+sd_Xi_R1<-sqrt((sum((Xi_R1-mean(Xi_R1))^2))/(n_R1))
+sd_Yi_R1<-sqrt((sum((Yi_R1-mean(Yi_R1))^2))/(n_R1))
+cov_R1<-sum((Xi_R1-mean(Xi_R1))*(Yi_R1-mean(Yi_R1)))/(n_R1)
+pearson_R1<-cov_R1/(sd_Xi_R1*sd_Yi_R1)
+
+alpha_R1=0.05
+Datos_R1$R_x_R1<-rank(Datos_R1$Xi)
+Datos_R1$R_y_R1<-rank(Datos_R1$Yi)
+Datos_R1$Dif_cuadrada_R1<-(Datos_R1$R_x_R1-Datos_R1$R_y_R1)^2
+Est_R1<-Datos_R1 %>%
+summarize(Estadistica=sum(Dif_cuadrada_R1))
+Est_R1<-unlist(Est_R1)
+n_R1=length(Yi_R1)
+```
+
+
+#Test de Spearman
+
+Haremos la prueba de una cola donde $H_0$ es que son independientes, y 
+$H_a$: Existe una tendencia para que los valores más grandes de $X$ estén 
+“emparejados” con los valores más grandes de $Y$ y los valores más chicos de $X$ estén “emparejados” con los valores más chicos de $Y$ ($/rho$ > 0)
+
+Como no hay muchos empates, solo uno en $X$ y uno en $Y$, procederemos usando la estadística simplificada como en el ejemplo, pero después procederemos con la estadística normal
+```{r echo=TRUE}
+rho_se_R1<-1-(6*Est_R1)/(n_R1*(n_R1^2-1))
+Rechazamos_H0se_R1<-rho_se_R1>0.6
+
+test_R1<-cor.test(Yi_R1, Xi_R1,method="spearman",alternative="greater")
+p_value_R1=test_R1$p.value
+
+Rechazamos_H0se_p_value_R1=p_value_R1<alpha_R1
+```
+
+
+
+Usando spearman al 5$\%$, nos dice que existe una relación, por lo que rechazamos la hipótesis nula de que son independientes.
+
+#Test de Kendall
+```{r echo=TRUE}
+DatosK_R1<-(data.frame(Xi_R1,Yi_R1))
+DatosK_R1<-DatosK_R1[order(Xi_R1,Yi_R1),]
+ordenados_Yi_R1<-unlist(DatosK_R1$Yi_R1)
+ordenados_Xi_R1<-unlist(DatosK_R1$Xi_R1)
+concordantes_debajo_R1=list()
+discordantes_debajo_R1=list()
+for (i in 1:n_R1){
+  counter_c=0
+  counter_d=0
+  for (j in i:n_R1){
+    if (ordenados_Xi_R1[[i]]==ordenados_Xi_R1[[j]]){
+      next
+    }else{
+      M=(ordenados_Yi_R1[[j]]-ordenados_Yi_R1[[i]])/(ordenados_Xi_R1[[j]]-ordenados_Xi_R1[[i]])
+      if(M>0){
+        counter_c=counter_c+1
+      } else if(M<0){
+        counter_d=counter_d+1
+      }else if(M==0){
+        counter_d=counter_d+0.5
+        counter_c=counter_c+0.5
+      }
+    }
+    concordantes_debajo_R1[i]=counter_c
+    discordantes_debajo_R1[i]=counter_d
+  }
+}
+concordantes_debajo_R1[n_R1]=0
+discordantes_debajo_R1[n_R1]=0
+concordantes_debajo_R1=unlist(concordantes_debajo_R1)
+discordantes_debajo_R1=unlist(discordantes_debajo_R1)
+N_c_R1=sum(concordantes_debajo_R1)
+N_d_R1=sum(discordantes_debajo_R1)
+DatosK_F_Visual_R1<-data.frame(ordenados_Xi_R1,ordenados_Yi_R1,concordantes_debajo_R1,
+                            discordantes_debajo_R1)
+
+T_Kendall_R1=N_c_R1-N_d_R1
+```
+
+
+Usaremos ambas estadísticas propuestas
+```{r echo=TRUE}
+tau_R1=T_Kendall_R1/((n_R1*(n_R1-1))/2)
+tau2_R1=(N_c_R1-N_d_R1)/(N_c_R1+N_d_R1)
+```
+
+
+Al final vimos que esta aproximación era solo para valores grandes de n
+```{r echo=TRUE}
+w_p_R1=qnorm(1-alpha_R1)*(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1))))
+Rechazamos_Kendall_tau_R1=tau_R1>w_p_R1
+p_value_kendall_tau_R1=pnorm(tau_R1,sd=(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1)))),
+                          lower.tail = FALSE)
+rechazamos_H0_kendall_p_value_R1=p_value_kendall_tau_R1<alpha_R1
+p_value_kendall_tau2_R1=pnorm(tau2_R1,sd=(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1)))),
+                           lower.tail = FALSE)
+rechazamos_H0_kendall_p_value2_R1=p_value_kendall_tau2_R1<alpha_R1
+```
+
+
+
+Realizamos el test con la función de R para ver la diferencia con nuestro código.
+```{r echo=TRUE}
+cor.test(Xi_R1, Yi_R1,method="kendall",alternative="greater",exact = NULL)
+
+```
+
+
+Como vemos, también rechazamos la hipótesis nula de que son independientes y hay evidencia estadísticamente significativa como para decir que hay una relación entre ambas variables, positiva.
+
+
+## Ejercicio 2
+
+```{r echo=TRUE}
+DAtosK_R2<-read.csv('pregunta2.csv')
+alpha_R2=0.5
+Xi_R2<-unlist(DAtosK_R2$Xi)
+Yi_R2<-unlist(DAtosK_R2$Yi)
+DAtosK_R2<-DAtosK_R2[order(Xi_R2,Yi_R2),]
+ordenados_Yi_R2<-unlist(DAtosK_R2$Yi)
+ordenados_Xi_R2<-unlist(DAtosK_R2$Xi)
+concordantes_debajo_R2=list()
+discordantes_debajo_R2=list()
+n_R2=length(ordenados_Xi_R2)
+empates_R2=list()
+for (i in 1:n_R2){
+  counter_c=0
+  counter_d=0
+  counter_e=0
+  for (j in i:n_R2){
+    if (ordenados_Xi_R2[[i]]==ordenados_Xi_R2[[j]]){
+      next
+    }else{
+      M=(ordenados_Yi_R2[[j]]-ordenados_Yi_R2[[i]])/(ordenados_Xi_R2[[j]]-ordenados_Xi_R2[[i]])
+      if(M>0){
+        counter_c=counter_c+1
+      } else if(M<0){
+        counter_d=counter_d+1
+      }else if(M==0){
+        counter_d=counter_d+0.5
+        counter_c=counter_c+0.5
+        counter_e=counter_e+1
+      }
+    }
+    concordantes_debajo_R2[i]=counter_c
+    discordantes_debajo_R2[i]=counter_d
+    empates_R2[i]=counter_e
+  }
+}
+concordantes_debajo_R2[n_R2]=0
+discordantes_debajo_R2[n_R2]=0
+empates_R2[n_R2]=0
+concordantes_debajo_R2=unlist(concordantes_debajo_R2)
+discordantes_debajo_R2=unlist(discordantes_debajo_R2)
+N_c_R2=sum(concordantes_debajo_R2)
+N_d_R2=sum(discordantes_debajo_R2)
+DatosK_F_Visual_R2<-data.frame(ordenados_Xi_R2,ordenados_Yi_R2,concordantes_debajo_R2,
+                            discordantes_debajo_R2)
+T_Kendall_R2=N_c_R2-N_d_R2
+```
+
+
+Usaremos ambas estadísticas propuestas
+```{r echo=TRUE}
+tau_R2=T_Kendall_R2/((n_R2*(n_R2-1))/2)
+tau2_R2=(N_c_R2-N_d_R2)/(N_c_R2+N_d_R2)
+```
+
+Al final vimos que esta aproximación_R2 era solo para valores grandes de n_R2
+```{r echo=TRUE}
+w_p_R2=qnorm(1-alpha_R2)*(sqrt((2*(2*n_R2+5)))/(3*sqrt(n_R2*(n_R2-1))))
+Rechazamos_Kendall_tau_R2=tau_R2>w_p_R2
+p_value_kendall_tau_R2=pnorm(tau_R2,sd=(sqrt((2*(2*n_R2+5)))/(3*sqrt(n_R2*(n_R2-1)))),
+                          lower.tail = FALSE)
+rechazamos_H0_kendall_p_value_R2=p_value_kendall_tau_R2<alpha_R2
+p_value_kendall_tau2_R2=pnorm(tau2_R2,sd=(sqrt((2*(2*n_R2+5)))/(3*sqrt(n_R2*(n_R2-1)))),
+                           lower.tail = FALSE)
+rechazamos_H0_kendall_p_value2_R2=p_value_kendall_tau2_R2<alpha_R2
+```
+
+
+
+Realizamos el test con la función_R2 de R para ver la diferencia con nuestro código.
+```{r echo=TRUE}
+cor.test(ordenados_Xi_R2, ordenados_Yi_R2,method="kendall",alternative="greater",exact = NULL)
+```
+
+
+Como vemos, rechazamos la hipótesis nula de que son independientes y  
+hay evidencia estadísticamente significativa como para decir que hay una 
+relación positiva entre ambas variables
+
+
+
+
+## Pregunta 3
+```{r echo=TRUE}
+library(ggplot2)
+library(dplyr)
+
+Data_In<-read.csv('pregunta3.csv')
+alpha_R3=0.05
+X_R3<-unlist(Data_In$X[!is.na(Data_In$X)])
+Y_R3<-unlist(Data_In$Y)
+n1_R3=length(X_R3)
+n2_R3=length(Y_R3)
+N_R3=n1_R3+n2_R3
+Data_R3 = data.frame(Dato =c(rep("X",each = n1_R3),rep("Y",each = n2_R3)),
+                  Valor= c(X_R3, Y_R3))
+Data_R3$rango=rank(Data_R3$Valor)
+print(Data_R3)
+suma_rango_R3<-Data_R3 %>% group_by(Dato) %>% summarise(suma_rango_R3 = sum(rango))
+```
+
+
+Pequeña visualizacion
+```{r echo=TRUE}
+ggplot(data = Data_R3 , aes(x = rango , y=0)) + 
+  geom_point(aes(colour = Dato), size = 1) + 
+  ggtitle("Comportamiento de los rangos")+ ylab("") + 
+  xlab("rango") +theme_bw() + theme(axis.text.y = element_blank())
+rango_X<-suma_rango_R3$suma_rango_R3[1]
+rango_Y<-suma_rango_R3$suma_rango_R3[2]
+U_div=n1_R3*n2_R3+(n1_R3*(n1_R3+1))/2-rango_X
+U_nd=n1_R3*n2_R3+(n2_R3*(n2_R3+1))/2-rango_Y
+U=min(U_div,U_nd)
+mu_R3=(n1_R3*n2_R3)/2
+var_R3=(n1_R3*n2_R3*(n1_R3+n2_R3+1))/12
+z_izq=qnorm(alpha_R3/2,mean=mu_R3,sd=sqrt(var_R3))
+z_der=qnorm(1-alpha_R3/2,mean=mu_R3,sd=sqrt(var_R3))
+p_value_R3=2*min(pnorm(U,mean=mu_R3,sd=sqrt(var_R3)),pnorm(U,mean=mu_R3,sd=sqrt(var_R3),
+                                                  lower.tail = FALSE))
+Rechazamos_H0_R3=(U<z_izq|| U>z_der)
+wilcox.test(X_R3, Y_R3, paired=FALSE)
+```
+
+Existe evidencia estadisticamente significativa para rechazar la hipotesis nula, por lo que no podemos decir que provienen de distribuciones distintas
+
+## Pregunta 4
+```{r echo=TRUE}
+Data<-read.csv('pregunta4.csv')
+alpha=0.05
+rangos<-list()
+for (i in 1:10){
+  rangos[[i]]=rank(Data[i,])
+}
+suma=list()
+for (i in 1:7){
+  counter=0
+  for (j in 1:10){
+    counter=counter+rangos[[j]][i]
+  }
+  suma[i]=counter
+}
+n=10
+k=7
+suma<-unlist(suma)
+Est=((12*n)/(k*(k+1)))*sum((suma/n-(k+1)/2)^2)
+valor_critico=qchisq(1-alpha,df=k-1)
+p_value=pchisq(Est,df=k-1,lower.tail = FALSE)
+Rechazamos_H0=Est>valor_critico
+Rechazamos_H0_p_value=p_value<alpha
+friedman.test(data.matrix(Data))
+```
+
+No rechazamos la hipótesis nula
+
+
+## Pregunta 5
+Realice la prueba de Bartlett para los  datos que se dan  en el archivo pregunta5.r. Realice la prueba dividiendo la poblcion en 3 grupos del mismo tamaño, despues realice la prueba dividiendo la población en 4 grupos del mismo tamaño y finalmente realice la prueba con 
+$ni = \{49, 82, 103, 66\}$. Use $\alpha = 0.05$. 
+```{r echo=TRUE}
+Data_In<-read.csv('pregunta5.csv')
+alpha=0.05
+Datos<-unlist(Data_In$Muestra)
+X1<-Datos[1:100]
+X2<-Datos[101:200]
+X3<-Datos[201:300]
+N=length(unlist(Data_In$Muestra))
+ci=c(length(X1),length(X2),length(X3))
+r=length(ci)
+Data<-data.frame(X1,X2,X3)
+Suma=colSums(Data)
+Suma_cuadrada=colSums(Data^2)
+SCi=Suma_cuadrada-(Suma^2)/ci
+Si2=SCi/(ci-1)
+SP2=sum(SCi)/(N-r)
+Est=((N-r)*log(SP2)-sum((ci-1)*log(Si2)))/(1+(1/(3*(r-1)))*(sum((1/(ci-1)))-1/(N-r)))
+valor_critico=qchisq(1-alpha,df=r-1)
+p_value=pchisq(Est,df=r-1,lower.tail = FALSE)
+Rechazamos_H0=Est>valor_critico
+Rechazamos_H0_p_value=p_value<alpha
+bartlett.test(Data)
+```
+
+
+No hay evidencia para rechazar H0
+
+```{r echo=TRUE}
+Data_In<-read.csv('pregunta5.csv')
+alpha=0.05
+Datos<-unlist(Data_In$Muestra)
+X1<-Datos[1:75]
+X2<-Datos[76:150]
+X3<-Datos[151:225]
+X4<-Datos[226:300]
+N=length(unlist(Data_In$Muestra))
+ci=c(length(X1),length(X2),length(X3),length(X4))
+r=length(ci)
+Data<-data.frame(X1,X2,X3,X4)
+Suma=colSums(Data)
+Suma_cuadrada=colSums(Data^2)
+SCi=Suma_cuadrada-(Suma^2)/ci
+Si2=SCi/(ci-1)
+SP2=sum(SCi)/(N-r)
+Est_2=((N-r)*log(SP2)-sum((ci-1)*log(Si2)))/(1+(1/(3*(r-1)))*(sum((1/(ci-1)))-1/(N-r)))
+valor_critico_2=qchisq(1-alpha,df=r-1)
+p_value_2=pchisq(Est_2,df=r-1,lower.tail = FALSE)
+Rechazamos_H0_2=Est_2>valor_critico_2
+Rechazamos_H0_p_value_2=p_value_2<alpha
+bartlett.test(Data)
+```
+
+
+Rechazamos H_0
+
+```{r echo=TRUE}
+Data_In<-read.csv('pregunta5.csv')
+alpha=0.05
+Datos<-unlist(Data_In$Muestra)
+X1<-Datos[1:49]
+X2<-Datos[50:131]
+X3<-Datos[132:234]
+X4<-Datos[235:300]
+N=length(unlist(Data_In$Muestra))
+ci=c(length(X1),length(X2),length(X3),length(X4))
+r=length(ci)
+Data<-list(X1,X2,X3,X4)
+Suma=c(sum(X1),sum(X2),sum(X3),sum(X4))
+Suma_cuadrada=c(sum(X1^2),sum(X2^2),sum(X3^2),sum(X4^2))
+SCi=Suma_cuadrada-(Suma^2)/ci
+Si2=SCi/(ci-1)
+SP2=sum(SCi)/(N-r)
+Est_3=((N-r)*log(SP2)-sum((ci-1)*log(Si2)))/(1+(1/(3*(r-1)))*(sum((1/(ci-1)))-1/(N-r)))
+valor_critico_3=qchisq(1-alpha,df=r-1)
+p_value_3=pchisq(Est_3,df=r-1,lower.tail = FALSE)
+Rechazamos_H0_3=Est_3>valor_critico_3
+Rechazamos_H0_p_value_3=p_value_3<alpha
+bartlett.test(Data)
+```
+
+No rechazamos H_0 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
