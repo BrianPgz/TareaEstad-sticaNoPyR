@@ -1363,6 +1363,12 @@ k_total=40
 n_pacientes = 10
 ```
 
+Tenemos que plantear la prueba de hipotesis:
+
+$H_{0} : \ E[X_{1}=E[X_{2}]=E[X_{3}]=E[X_{4}]$. 
+$H_{a}:$ Los datos no tienen el mismo valor esperado.
+
+
 Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.
 
 
@@ -1439,14 +1445,56 @@ Podemos ver las clasificaciones y sus calificaciones en una grafica.
 ![](Pruebas_p_files/figure-html/unnamed-chunk-103-1.png)<!-- -->
 
 Observamos que les ha ido mejor a los de ningun tratamiento. 
-Debemos obtener los rangos, los tomaremos por tratamiento.
+Ahora debemos obtener las suma de los rangos. 
 
 
 
+```r
+Suma_rangos= Data_pacientes %>%
+  group_by(Tratamiento) %>%
+  summarize(suma_rangos=sum(Rango))
+print(Suma_rangos)
+```
+
+```
+## # A tibble: 4 x 2
+##   Tratamiento suma_rangos
+##   <chr>             <dbl>
+## 1 Ambos                90
+## 2 Electro             260
+## 3 Ninguno             348
+## 4 Psico               122
+```
+
+Notemos que no hay empates, por lo que podemos usar la siguiente estadistica. 
 
 
+```r
+Est_pacientes=(12/(k_total*(k_total+1)))*sum(unlist(lapply(Suma_rangos$suma_rangos,function(x){(x^2)/10})))-3*(k_total+1)
+print(Est_pacientes)
+```
+
+```
+## [1] 31.89366
+```
+
+Para este caso tenemos que:
+$$T=\frac{12}{N(N+1)}\ \sum_{i=1}^{k} \frac{R_{i}^{2}}{n_{i}}-(3N+1)$$ 
+Donde $T \sim \chi^{2}_{k-1}$, y vamos a usar $\alpha = 0.05$. Los grados de libertad se tienen por el numero de muestras o categorias menos 1, y se calcula el cuantil $1-\alpha$.
 
 
+```r
+alpha_pacientes =0.05
+v=m_categorias-1
+valor_critico_pacientes=qchisq(1-alpha_pacientes,df=v)
+Rechazamos_H0_pacientes=Est>valor_critico_pacientes
+print(Rechazamos_H0_pacientes)
+```
+
+```
+## Estadistica_t 
+##          TRUE
+```
 
 
 
