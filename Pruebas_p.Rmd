@@ -938,7 +938,7 @@ print(Data_pacientes)
 
 Podemos ver las clasificaciones y sus calificaciones en una grafica. 
 
-```{r echo=TRUE}
+```{r echo=FALSE}
 plot_pacientes=ggplot(data = Data_pacientes , aes(x = Rango , y=0)) + geom_point(aes(colour = Tratamiento), size = 4) + 
   ggtitle("Comportamiento de los rangos")+ ylab("") + xlab("Rango") +  theme_bw() +
   theme(axis.text.y = element_blank())
@@ -947,6 +947,13 @@ print(plot_pacientes)
 ```
 
 Observamos que les ha ido mejor a los de ningun tratamiento. 
+Debemos obtener los rangos, los tomaremos por tratamiento.
+
+
+```{r echo=TRUE}
+
+```
+
 
 
 
