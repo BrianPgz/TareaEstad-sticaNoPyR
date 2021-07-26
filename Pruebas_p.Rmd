@@ -28,10 +28,9 @@ library(nortest)
 library(dplyr)
 library(ggplot2)
 ```
-```{r echo=TRUE}
-setwd("C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR")
-```
-Ho: La muestra sigue una distribuciC3n normal VS Ha: La muestra no sigue una distribuciC3n normal
+
+
+Ho: La muestra sigue una distribucion normal VS Ha: La muestra no sigue una distribucion normal.
 
 Metemos los datos en un vector y ordenamos los datos.
 
@@ -1165,7 +1164,8 @@ Entonces rechazamos $H_{0}$, es decir, las muestras no tienen el mismo valor esp
 ## En R realiza
 
 ```{r echo=TRUE}
-Datos_R1<-read.csv('pregunta1.csv')
+#Porfavor poner el path correcto de sus archivos
+Datos_R1<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta1.csv')
 n_R1<-1000
 Xi_R1<-unlist(Datos_R1$Xi)
 Yi_R1<-unlist(Datos_R1$Yi)
@@ -1281,7 +1281,7 @@ Como vemos, también rechazamos la hipótesis nula de que son independientes y h
 ## Ejercicio 2
 
 ```{r echo=TRUE}
-DAtosK_R2<-read.csv('pregunta2.csv')
+DAtosK_R2<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta2.csv')
 alpha_R2=0.5
 Xi_R2<-unlist(DAtosK_R2$Xi)
 Yi_R2<-unlist(DAtosK_R2$Yi)
@@ -1367,7 +1367,7 @@ relación positiva entre ambas variables
 library(ggplot2)
 library(dplyr)
 
-Data_In<-read.csv('pregunta3.csv')
+Data_In<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta3.csv')
 alpha_R3=0.05
 X_R3<-unlist(Data_In$X[!is.na(Data_In$X)])
 Y_R3<-unlist(Data_In$Y)
@@ -1407,7 +1407,7 @@ Existe evidencia estadisticamente significativa para rechazar la hipotesis nula,
 
 ## Pregunta 4
 ```{r echo=TRUE}
-Data<-read.csv('pregunta4.csv')
+Data<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta4.csv')
 alpha=0.05
 rangos<-list()
 for (i in 1:10){
@@ -1439,7 +1439,7 @@ No rechazamos la hipótesis nula
 Realice la prueba de Bartlett para los  datos que se dan  en el archivo pregunta5.r. Realice la prueba dividiendo la poblcion en 3 grupos del mismo tamaño, despues realice la prueba dividiendo la población en 4 grupos del mismo tamaño y finalmente realice la prueba con 
 $ni = \{49, 82, 103, 66\}$. Use $\alpha = 0.05$. 
 ```{r echo=TRUE}
-Data_In<-read.csv('pregunta5.csv')
+Data_In<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta5.csv')
 alpha=0.05
 Datos<-unlist(Data_In$Muestra)
 X1<-Datos[1:100]
@@ -1466,7 +1466,7 @@ bartlett.test(Data)
 No hay evidencia para rechazar H0
 
 ```{r echo=TRUE}
-Data_In<-read.csv('pregunta5.csv')
+Data_In<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta5.csv')
 alpha=0.05
 Datos<-unlist(Data_In$Muestra)
 X1<-Datos[1:75]
@@ -1494,7 +1494,7 @@ bartlett.test(Data)
 Rechazamos H_0
 
 ```{r echo=TRUE}
-Data_In<-read.csv('pregunta5.csv')
+Data_In<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta5.csv')
 alpha=0.05
 Datos<-unlist(Data_In$Muestra)
 X1<-Datos[1:49]
