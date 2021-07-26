@@ -983,10 +983,7 @@ Rechazamos_H0_pacientes=Est>valor_critico_pacientes
 print(Rechazamos_H0_pacientes)
 ```
 
-
-
-
-
+Entonces rechazamos $H_{0}$, es decir, las muestras no tienen el mismo valor esperado, por ello eisten diferencias en la efectividad de los tratamientos. 
 
 
 
