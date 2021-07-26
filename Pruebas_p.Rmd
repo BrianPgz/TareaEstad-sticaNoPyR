@@ -28,6 +28,9 @@ library(nortest)
 library(dplyr)
 library(ggplot2)
 ```
+```{r echo=TRUE}
+setwd("C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR")
+```
 Ho: La muestra sigue una distribuciC3n normal VS Ha: La muestra no sigue una distribuciC3n normal
 
 Metemos los datos en un vector y ordenamos los datos.
@@ -1175,8 +1178,7 @@ alpha_R1=0.05
 Datos_R1$R_x_R1<-rank(Datos_R1$Xi)
 Datos_R1$R_y_R1<-rank(Datos_R1$Yi)
 Datos_R1$Dif_cuadrada_R1<-(Datos_R1$R_x_R1-Datos_R1$R_y_R1)^2
-Est_R1<-Datos_R1 %>%
-summarize(Estadistica=sum(Dif_cuadrada_R1))
+Est_R1<-Datos_R1 %>% summarize(Estadistica=sum(Dif_cuadrada_R1))
 Est_R1<-unlist(Est_R1)
 n_R1=length(Yi_R1)
 ```
