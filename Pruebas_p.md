@@ -22,6 +22,7 @@ Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.
 ```r
 library(nortest)
 library(dplyr)
+library(ggplot2)
 ```
 
 ```

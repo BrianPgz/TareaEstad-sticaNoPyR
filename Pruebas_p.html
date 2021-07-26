@@ -177,7 +177,8 @@ pre code {
 <p>0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906, 1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548</p>
 <p>Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.</p>
 <pre class="r"><code>library(nortest)
-library(dplyr)</code></pre>
+library(dplyr)
+library(ggplot2)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
@@ -739,8 +740,8 @@ print(Datos_tuber)</code></pre>
 ## 9  1967     849          42   9   2           49
 ## 10 1968     932          43  10   3           49
 ## 11 1969     976          38  11   1          100</code></pre>
-<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.</p>
-<p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaño de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
+<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadC-stica normal.</p>
+<p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaC1o de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
 <pre class="r"><code>rho_tuber=(1-(6*Est_tuber)/(n_tuber*(n_tuber^2 -1)))
 Rechazamos_H0_tuber=rho_tuber&lt;0.536
 print(Rechazamos_H0_tuber)</code></pre>
@@ -752,8 +753,8 @@ print(Rechazamos_H0_tuber)</code></pre>
 p_value_tuber=test_tuber$p.value
 print(p_value_tuber)</code></pre>
 <pre><code>## [1] 0</code></pre>
-<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_{o}\)</span>, entonces la correlación es negativa.</p>
-<p>Hagamos una segunda prueba para estar más seguros.</p>
+<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_{o}\)</span>, entonces la correlaciC3n es negativa.</p>
+<p>Hagamos una segunda prueba para estar mC!s seguros.</p>
 <pre class="r"><code>kendall_tuber=cor.test(premios,tasa_muerte,method=&quot;kendall&quot;,alternative=&quot;less&quot;,exact = NULL)
 p_value_ken_tuber = kendall_tuber$p.value
 print(p_value_ken_tuber)</code></pre>
@@ -779,7 +780,7 @@ k_total=40
 n_pacientes = 10</code></pre>
 <p>Tenemos que plantear la prueba de hipotesis:</p>
 <p><span class="math inline">\(H_{0} : \ E[X_{1}=E[X_{2}]=E[X_{3}]=E[X_{4}]\)</span>. <span class="math inline">\(H_{a}:\)</span> Los datos no tienen el mismo valor esperado.</p>
-<p>Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.</p>
+<p>Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cC!lculos.</p>
 <pre class="r"><code>DataVisual_pacientes&lt;-data.frame(Electro,Psico,Ambos,Ninguno)
 Data_pacientes&lt;- data.frame(Tratamiento =rep(c(&quot;Electro&quot;,&quot;Psico&quot;,&#39;Ambos&#39;,&#39;Ninguno&#39;), each = n_pacientes), Rango =c(Electro,Psico,Ambos,Ninguno))
 print(DataVisual_pacientes)</code></pre>
