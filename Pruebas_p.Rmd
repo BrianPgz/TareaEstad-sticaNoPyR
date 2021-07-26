@@ -973,13 +973,14 @@ print(Est_pacientes)
 
 Para este caso tenemos que:
 $$T=\frac{12}{N(N+1)}\ \sum_{i=1}^{k} \frac{R_{i}^{2}}{n_{i}}-(3N+1)$$ 
-Donde $T \sim \chi^{2}_{k-1}$, y vamos a usar $\alpha = 0.05$. Los grados de libertad se 
+Donde $T \sim \chi^{2}_{k-1}$, y vamos a usar $\alpha = 0.05$. Los grados de libertad se tienen por el numero de muestras o categorias menos 1, y se calcula el cuantil $1-\alpha$.
 
-```{recho=TRUE}
+```{r echo=TRUE}
 alpha_pacientes =0.05
 v=m_categorias-1
-valor_critico=qchisq(1-alpha_pacientes,df=v)
-Rechazamos_H0=Est>valor_critico
+valor_critico_pacientes=qchisq(1-alpha_pacientes,df=v)
+Rechazamos_H0_pacientes=Est>valor_critico_pacientes
+print(Rechazamos_H0_pacientes)
 ```
 
 
