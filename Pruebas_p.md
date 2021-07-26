@@ -1711,9 +1711,3 @@ Entonces rechazamos $H_{0}$, es decir, las muestras no tienen el mismo valor esp
 
 
 
-
-
-
-
-
-
