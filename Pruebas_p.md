@@ -9,8 +9,6 @@ output:
 
 
 
-
-
 ## Pruebas de bondad de ajuste
 ## Problema 3
 La siguiente muestra aleatoria hace referencia a los rendimientos positivos de
@@ -1272,9 +1270,9 @@ print(Datos_tuber)
 ## 11 1969     976          38  11   1          100
 ```
 
-Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.
+Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadC-stica normal.
 
-Con un $\alpha = 0.05$ y un tamaño de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
+Con un $\alpha = 0.05$ y un tamaC1o de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
 
 
 
@@ -1302,12 +1300,12 @@ print(p_value_tuber)
 ```
 ## [1] 0
 ```
-Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlación es negativa.
+Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlaciC3n es negativa.
 
 
 
 
-Hagamos una segunda prueba para estar más seguros.
+Hagamos una segunda prueba para estar mC!s seguros.
 
 
 ```r
@@ -1369,7 +1367,7 @@ $H_{0} : \ E[X_{1}=E[X_{2}]=E[X_{3}]=E[X_{4}]$.
 $H_{a}:$ Los datos no tienen el mismo valor esperado.
 
 
-Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.
+Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cC!lculos.
 
 
 ```r
