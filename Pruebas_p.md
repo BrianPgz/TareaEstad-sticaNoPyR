@@ -9,6 +9,8 @@ output:
 
 
 
+
+
 ## Pruebas de bondad de ajuste
 ## Problema 3
 La siguiente muestra aleatoria hace referencia a los rendimientos positivos de
@@ -22,7 +24,6 @@ Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.
 ```r
 library(nortest)
 library(dplyr)
-library(ggplot2)
 ```
 
 ```
@@ -787,7 +788,7 @@ print(D_data_des_max)
 
 
 
-Mostremos los 5 primeros datos y C:ltimos 5: 
+Mostremos los 5 primeros datos y ultimos 5: 
 
 
 ```r
@@ -817,6 +818,217 @@ print(tail(valores_M))
 ## 999  -0.7634958    3.262782    0.9994484 -0.0004483775 0.0014483775
 ## 1000  0.9604393    3.541459    0.9998010  0.0001989603 0.0008010397
 ```
+
+
+
+## Tablas de Contingencia
+## Problema 1
+
+1.- Se recopilaron datos macroecnomicos de diversos paises durante el 2017 del
+Fondo Monetario Internacional entre los cuales destacan el tamano del territorio
+del pais en km2 y la tasa de fertilidad. Se clasifico la informacion de la siguiente
+manera:
+
+->Microestado cuando su territorio se menor o igual a 23,180 km2
+
+->Pais pequeno cuando su territorio este ente los 23,181 y 112,760 km2
+
+->Pais mediano cuando su territorio este entre 112,761 y los 527,970 km2
+
+->Pais grande cuando su territorio sea mayor a los 527,970 km2
+
+A su vez los paises se subclasifican en dos grupos dependiendo de la tasa de
+fecundidad del pais de la forma:
+
+->Tasa de Fecundidad menor o igual a 2.7 hijos por mujer.
+
+->Tasa de Fecundidad mayor a 2.7 hijos por mujer.
+
+Con esa informacion se construyo la siguiente tabla de contingencia:
+
+
+```r
+Microestado<-c(35,12)
+Pais_pequenio<-c(31,15)
+Pais_mediano<-c(28,18)
+Pais_grande<-c(26,26)
+```
+
+
+```r
+Tabla_pais<-data.frame(Microestado,Pais_pequenio,Pais_mediano,Pais_grande,
+                  row.names = c('Tasa<=2.7','Tasa>2.7'))
+print(Tabla_pais)
+```
+
+```
+##           Microestado Pais_pequenio Pais_mediano Pais_grande
+## Tasa<=2.7          35            31           28          26
+## Tasa>2.7           12            15           18          26
+```
+
+
+
+a) Establecer $H_0$ vs. $H_a$
+
+Establecemos las hipotesis nulas y alternativas como propone la prueba para tablas 
+contingencia.
+
+$H_0$ = La probabilidad de que un pais tenga tasa de fertilidad <= 2.7 o > 2.7
+es independiente de su clasificacion como microestado, pais pequeno, pais mediano
+o pais grande. Es decir la fertilidad y el tamano de una poblacion son independientes.
+
+$H_a$ = La fertilidad y el tamano de una poblacion no son independientes.
+
+b) De la tabla de contigencia realice el procedimiento obtenido la estadistica 
+necesaria para rechazar o aceptar con un nivel de significancia alpha = 0.05 la 
+hipotesis de que la tasa de fecundidad y el tamano del territorio se comportan 
+de manera independiente entre s con los parametros dados.
+
+
+```r
+alpha_pais=0.05
+suma_renglones=rowSums(Tabla_pais)
+suma_columnas=colSums(Tabla_pais)
+n_pais=sum(suma_columnas)
+aux=suma_renglones*suma_columnas
+e1j=list()
+e2j=list()
+for (i in 1:2){
+  for(j in 1:4){
+    if (i==1){
+      e1j[j]=(suma_columnas[j]*suma_renglones[i])/n_pais
+    }else{
+      e2j[j]=(suma_columnas[j]*suma_renglones[i])/n_pais
+    }
+  }
+}
+e1j=unlist(e1j)
+e2j=unlist(e2j)
+Est_pais<-0
+Matriz<-data.matrix(Tabla_pais)
+for (i in 1:2){
+  for(j in 1:4){
+    if (i==1){
+      Est_pais=Est_pais+((Matriz[1,j]-e1j[j])^2)/e1j[j]
+    }else{
+      Est_pais=Est_pais+((Matriz[2,j]-e2j[j])^2)/e2j[j]
+    }
+  }
+}
+v=(4-1)*(2-1)
+critico_pais1=qchisq(1-alpha_pais,df=v)
+Rechazamos_H0_pais1=Est_pais>critico_pais1
+ 
+print(Rechazamos_H0_pais1)
+```
+
+```
+## [1] FALSE
+```
+
+Es decir, no hay suficiente evidencia como para decir que la fertilidad y el
+tamano el territorio NO son independientes. Aceptamos entonces la hipotesis nula 
+y decimos que la fertilidad y tamano del territorio son independientes, a un nivel 
+de confianza alpha = 0.05.
+
+c) Calcula el coeficiente de contigencia, ??como lo interpretarias?
+
+
+```r
+Contingencia=sqrt(Est_pais/(Est_pais+n_pais))
+```
+
+Como valores crecientes de C implican un crecimiento en el grado de asociacion 
+y tenemos que C es pequena, puesto que C esta en el intervalo abierto (0,1)
+y obtuvimos C= 0.1864 aproximadamente, podemos decir que, con un poco mas de 
+confianza basandonos en esta estadistica y la prueba realizada, parecen
+ser independientes, o por lo menos, tener muy poca correlacion o asociacion entre 
+ellas.
+
+d) Calcular el p value de la prueba anterior.
+
+
+```r
+p_value_pais=pchisq(Est_pais,df=v,lower.tail = FALSE)
+Rechazamos_H0_p_value_pais=p_value_pais<alpha_pais
+print(p_value_pais)
+```
+
+```
+## [1] 0.07594559
+```
+
+```r
+print(Rechazamos_H0_p_value_pais)
+```
+
+```
+## [1] FALSE
+```
+El p_value es de 0.076 aproximadamente, que es mayor a 0.05, por lo que tampoco
+rechazamos la hipotesis de que son independientes.
+
+e) Realiza el procedimiento mediante la prueba de la Ji-Cuadrada; De esta
+forma ??Se rechaza o no la prueba?.
+
+Realizaremos la prueba de la ji-cuadrada tomando como categorias o casillas
+cada entrada de la matriz 'Matriz' (Es decir, las parejas ordenadas del tamano del 
+pais y tasa de fecundidad) que son 8 en total, y sus respectivos valores 
+esperados que encontramos en los vectores e1j y e2j. Aunque volver a hacer
+el calculo no es necesario puesto que es la misma estadistica, en esencia, que
+en la prueba de tablas de contingencia, que es la diferencia al cuadrado de los
+observados menos los esperados, dividida entre los esperados. Como tenemos
+8 categorias, v=8-1=7. Procedemos directamente:
+
+
+
+```r
+esperados_completo=c(cbind(e1j,e2j))
+probas_pais=esperados_completo/n_pais
+vector_obs=as.vector(t(Tabla_pais))
+v_chi=8-1
+critico_chi=qchisq(1-alpha_pais,df=v_chi)
+Rechazamos_H0_chi_pais=Est_pais>critico_chi
+p_value_chi_pais=pchisq(Est_pais,df=v_chi,lower.tail = FALSE)
+Rechazamos_H0_p_value_chi_pais=p_value_chi_pais<alpha_pais
+p_value_pais2=chisq.test(x=vector_obs,p=probas_pais)
+
+print(p_value_pais2)
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  vector_obs
+## X-squared = 6.8763, df = 7, p-value = 0.4419
+```
+
+```r
+print(Rechazamos_H0_p_value_chi_pais)
+```
+
+```
+## [1] FALSE
+```
+Como vemos, tampoco hay evidencia suficiente para rechazar $H_0$ mediante la 
+prueba de la ji-cuadrada, por lo que con un nivel de confianza alpha=0.05
+podemos decir que esas son las probabilidades de caer en cada casilla, al igual
+que cuando realizamos la de tablas de contingencia.
+
+f) Economicamente tiene sentido la proposicion de que el PIB y la poblacion 
+se comportan de manera independiente.
+
+No necesariamente,Pues porque PIB como sabemos es el conjunto de bienes y 
+servicios producidos durante el ano, pero tenemos que fijarnos en la poblacion 
+que esta laboralmente activa y obviamente depende depende de como este distribuida 
+la poblacion.
+
+
+
+
+
 
 
 
@@ -1093,7 +1305,7 @@ ggplot(data = datos_div , aes(x = rango , y=0)) +
   xlab("rango") +theme_bw() + theme(axis.text.y = element_blank())
 ```
 
-![](Pruebas_p_files/figure-html/unnamed-chunk-87-1.png)<!-- -->
+![](Pruebas_p_files/figure-html/unnamed-chunk-93-1.png)<!-- -->
 
 
 Procedemos a calcular $U_{1}, \ U_{2}$. 
@@ -1271,9 +1483,9 @@ print(Datos_tuber)
 ## 11 1969     976          38  11   1          100
 ```
 
-Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadC-stica normal.
+Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.
 
-Con un $\alpha = 0.05$ y un tamaC1o de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
+Con un $\alpha = 0.05$ y un tamaño de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
 
 
 
@@ -1301,12 +1513,12 @@ print(p_value_tuber)
 ```
 ## [1] 0
 ```
-Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlaciC3n es negativa.
+Como el $p-value<\alpha$, entonces se rechaza $H_{o}$, entonces la correlación es negativa.
 
 
 
 
-Hagamos una segunda prueba para estar mC!s seguros.
+Hagamos una segunda prueba para estar más seguros.
 
 
 ```r
@@ -1368,7 +1580,7 @@ $H_{0} : \ E[X_{1}=E[X_{2}]=E[X_{3}]=E[X_{4}]$.
 $H_{a}:$ Los datos no tienen el mismo valor esperado.
 
 
-Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cC!lculos.
+Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.
 
 
 ```r
@@ -1441,7 +1653,7 @@ print(Data_pacientes)
 
 Podemos ver las clasificaciones y sus calificaciones en una grafica. 
 
-![](Pruebas_p_files/figure-html/unnamed-chunk-103-1.png)<!-- -->
+![](Pruebas_p_files/figure-html/unnamed-chunk-109-1.png)<!-- -->
 
 Observamos que les ha ido mejor a los de ningun tratamiento. 
 Ahora debemos obtener las suma de los rangos. 
@@ -1495,10 +1707,7 @@ print(Rechazamos_H0_pacientes)
 ##          TRUE
 ```
 
-
-
-
-
+Entonces rechazamos $H_{0}$, es decir, las muestras no tienen el mismo valor esperado, por ello eisten diferencias en la efectividad de los tratamientos. 
 
 
 
