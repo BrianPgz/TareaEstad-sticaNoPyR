@@ -410,17 +410,17 @@ Calcula y grC!fica la funciC3n de distribuciC3n empírica de las observaciones g
 Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
 A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
-Vuelve a fijar la semilla 2019, y genera un millC3n de observaciones distribuidas como una N(0; 1) y con ello realiza:
+Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0: 1) y con ello realiza:
 
 Calcula y gráfica la función de distribución empírica de las observaciones generadas.
 
-Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
-A partir de las gráficas anteriores B?La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
+Agrega sobre esa misma gráficaa, la curva de la distribuciC3n verdadera (N(0; 1)).
+A partir de las gráficas anteriores ¿La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
 
-Realiza la diferencia entre el valor de la funciC3n empC-rica y la funciC3n real,
-(Hint: no olvides que debes ordenar de menor a mayor los valores de la distribuciC3n conocida y sC3lo mostrar los primeros 5 y los C:ltimos 5 resultados)
+Realiza la diferencia entre el valor de la función empírica y la función real,
+(Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y mostrar los primeros 5 y los últimos 5 resultados)
 
-B?Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
+¿Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
 el resultado obtenido?.
 
 
