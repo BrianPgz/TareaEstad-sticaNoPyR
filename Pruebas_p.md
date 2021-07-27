@@ -13,8 +13,7 @@ output:
 
 ## Pruebas de bondad de ajuste
 ## Problema 3
-La siguiente muestra aleatoria hace referencia a los rendimientos positivos de
-cierta acción a lo largo del tiempo.
+La siguiente muestra aleatoria hace referencia a los rendimientos positivos de cierta acción a lo largo del tiempo.
 
 0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
 1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548
@@ -44,7 +43,7 @@ library(dplyr)
 ```
 
 ```r
-library(ggplot2)
+library(ggplot2) #favor de abrir el rchivo en codificacion UTF-8
 ```
 
 
@@ -211,11 +210,11 @@ Dn=max(D_p,D_n)
 ```
 
 
-Declaramos nuestro nivel de significancia $$\alpha = 0.10$$ entonces $$1-\alpha = 0.90$$.
+Declaramos nuestro nivel de significancia $\alpha = 0.10$ entonces $1-\alpha = 0.90$.
 
 
 
-Comparamos con el nivel crítico $$ W_{0.10}^{15}= 0.2016 $$, para el tamaño de muestra 15 en tablas.
+Comparamos con el nivel crítico $ W_{0.10}^{15}= 0.2016 $, para el tamaño de muestra 15 en tablas.
 
 
 ```r
@@ -343,11 +342,7 @@ Confirmamos la prueba anterior.
 ## Problema 4
 
 
-Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal
-manera que los acreditados pueden pagar en cualquier momento desde que piden
-el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa
-preferencial. Se seleccionaron aleatoriamente a 1,000 personas y observaron su
-comportamiento, generando de esta manera la siguiente tabla de frecuencia:
+Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal manera que los acreditados pueden pagar en cualquier momento desde que piden el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa preferencial. Se seleccionaron aleatoriamente a 1,000 personas y observaron su comportamiento, generando de esta manera la siguiente tabla de frecuencia:
 
 
 ```r
@@ -543,20 +538,19 @@ No rechazamos Ho.
 ## Problema 5
 
 
-En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1)
-y con ella realiza:
+En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0: 1) y con ella realiza:
 
-Calcula y grC!fica la funciC3n de distribuciC3n empírica de las observaciones generadas.
+Calcula y grC!fica la función de distribuciC3n empírica de las observaciones generadas.
 
-Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
+Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)).
 A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
 Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0: 1) y con ello realiza:
 
 Calcula y gráfica la función de distribución empírica de las observaciones generadas.
 
-Agrega sobre esa misma gráficaa, la curva de la distribuciC3n verdadera (N(0; 1)).
-A partir de las gráficas anteriores ¿La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
+Agrega sobre esa misma gráficaa, la curva de la distribución verdadera (N(0: 1)).
+A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
 Realiza la diferencia entre el valor de la función empírica y la función real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y mostrar los primeros 5 y los últimos 5 resultados).
 
@@ -570,7 +564,7 @@ Para la primera parte del ejercicio fijemos la semilla inicial.
 set.seed(2019)
 ```
 
-Obtengamos 25 datos de una distribuciC3n normal estándar.
+Obtengamos 25 datos de una distribución normal estándar.
 
 ```r
 x_data=rnorm(25,mean=0,sd=1)
@@ -584,7 +578,7 @@ print(x_data)
 ## [19] -0.3271264 -2.2632252  0.2855605  0.9684286  0.8673066  1.3781350
 ## [25] -0.8082596
 ```
-Calculemos la función de distribuciC3n empírica y obtengamos su gráfica.
+Calculemos la función de distribución empírica y obtengamos su gráfica.
 
 
 ```r
@@ -623,7 +617,7 @@ Veamos las gráficas:
 
 
 ```r
-plot(f_empiM, xlab="Observados", ylab="FunciC3n de probabilidad", 
+plot(f_empiM, xlab="Observados", ylab="Función de probabilidad", 
      main="Muestra con 10^6 valores", col="darkcyan")
 curve(pnorm(x), add=TRUE, col="red")
 ```
@@ -726,7 +720,7 @@ print(tail(valores_25))
 ## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213
 ```
 
-Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
+Vamos a hacer lo mismo para los datos de la simulación $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
 
 
 ```r
@@ -734,7 +728,7 @@ x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)
 ```
 
-Calculamos la funcición desfasada ($\frac{1}{10^6}$).
+Calculamos la función desfasada ($\frac{1}{10^6}$).
 
 
 ```r
@@ -823,10 +817,7 @@ print(tail(valores_M))
 ## Tablas de Contingencia
 ## Problema 1
 
-1.- Se recopilaron datos macroecnomicos de diversos paises durante el 2017 del
-Fondo Monetario Internacional entre los cuales destacan el tamano del territorio
-del pais en km2 y la tasa de fertilidad. Se clasifico la informacion de la siguiente
-manera:
+1.- Se recopilaron datos macroecnomicos de diversos paises durante el 2017 del Fondo Monetario Internacional entre los cuales destacan el tamano del territorio del pais en km2 y la tasa de fertilidad. Se clasifico la informacion de la siguiente manera:
 
 ->Microestado cuando su territorio se menor o igual a 23,180 km2
 
@@ -870,8 +861,7 @@ print(Tabla_pais)
 
 a) Establecer $H_0$ vs. $H_a$
 
-Establecemos las hipotesis nulas y alternativas como propone la prueba para tablas 
-contingencia.
+Establecemos las hipotesis nulas y alternativas como propone la prueba para tablas contingencia.
 
 $H_0$ = La probabilidad de que un pais tenga tasa de fertilidad <= 2.7 o > 2.7
 es independiente de su clasificacion como microestado, pais pequeno, pais mediano
@@ -879,10 +869,7 @@ o pais grande. Es decir la fertilidad y el tamano de una poblacion son independi
 
 $H_a$ = La fertilidad y el tamano de una poblacion no son independientes.
 
-b) De la tabla de contigencia realice el procedimiento obtenido la estadistica 
-necesaria para rechazar o aceptar con un nivel de significancia alpha = 0.05 la 
-hipotesis de que la tasa de fecundidad y el tamano del territorio se comportan 
-de manera independiente entre s con los parametros dados.
+b) De la tabla de contigencia realice el procedimiento obtenido la estadistica necesaria para rechazar o aceptar con un nivel de significancia alpha = 0.05 lahipotesis de que la tasa de fecundidad y el tamano del territorio se comportan de manera independiente entre s con los parametros dados.
 
 
 ```r
@@ -926,24 +913,16 @@ print(Rechazamos_H0_pais1)
 ## [1] FALSE
 ```
 
-Es decir, no hay suficiente evidencia como para decir que la fertilidad y el
-tamano el territorio NO son independientes. Aceptamos entonces la hipotesis nula 
-y decimos que la fertilidad y tamano del territorio son independientes, a un nivel 
-de confianza alpha = 0.05.
+Es decir, no hay suficiente evidencia como para decir que la fertilidad y el tamaño el territorio NO son independientes. Aceptamos entonces la hipótesis nula  y decimos que la fertilidad y tamano del territorio son independientes, a un nivel de confianza alpha = 0.05.
 
-c) Calcula el coeficiente de contigencia, ??como lo interpretarias?
+c) Calcula el coeficiente de contigencia, ¿cómo lo interpretarías?
 
 
 ```r
 Contingencia=sqrt(Est_pais/(Est_pais+n_pais))
 ```
 
-Como valores crecientes de C implican un crecimiento en el grado de asociacion 
-y tenemos que C es pequena, puesto que C esta en el intervalo abierto (0,1)
-y obtuvimos C= 0.1864 aproximadamente, podemos decir que, con un poco mas de 
-confianza basandonos en esta estadistica y la prueba realizada, parecen
-ser independientes, o por lo menos, tener muy poca correlacion o asociacion entre 
-ellas.
+Como valores crecientes de C implican un crecimiento en el grado de asociación  y tenemos que C es pequena, puesto que C esta en el intervalo abierto (0,1) y obtuvimos C= 0.1864 aproximadamente, podemos decir que, con un poco mas de confianza basandonos en esta estadística y la prueba realizada, parecen ser independientes, o por lo menos, tener muy poca correlación o asociacion entre ellas.
 
 d) Calcular el p value de la prueba anterior.
 
@@ -1011,10 +990,7 @@ print(Rechazamos_H0_p_value_chi_pais)
 ```
 ## [1] FALSE
 ```
-Como vemos, tampoco hay evidencia suficiente para rechazar $H_0$ mediante la 
-prueba de la ji-cuadrada, por lo que con un nivel de confianza alpha=0.05
-podemos decir que esas son las probabilidades de caer en cada casilla, al igual
-que cuando realizamos la de tablas de contingencia.
+Como vemos, tampoco hay evidencia suficiente para rechazar $H_0$ mediante la  prueba de la ji-cuadrada, por lo que con un nivel de confianza alpha=0.05 podemos decir que esas son las probabilidades de caer en cada casilla, al igual que cuando realizamos la de tablas de contingencia.
 
 f) Economicamente tiene sentido la proposicion de que el PIB y la poblacion 
 se comportan de manera independiente.
@@ -1031,10 +1007,10 @@ la poblacion.
 
 
 
-## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
+## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlación
 ## Problema 1
 
-1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minoría más grande en los Estados Unidos para el año 2030. Use dos pruebas diferentes para ver si hay una relación directa entre el número de Hispanos y el procentaje de la poblaciC3n del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
+1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minoría más grande en los Estados Unidos para el año 2030. Use dos pruebas diferentes para ver si hay una relación directa entre el número de Hispanos y el procentaje de la población del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
 
 Necesitamos los datos de dos muestras y queremos ver si vienen de la misma población. En este caso los datos vienen por estado en ese orden. 
 
@@ -1179,11 +1155,11 @@ Entonces concluimos que los datos tienen una corrlaciÓn positiva, ya que $p>0$ 
 
 
 
-## Pruebas de correlaciC3n de rango   
+## Pruebas de correlación de rango   
 ## Problema 2 
 
 
-Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento académico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niños similares cuyos padres no se divorciaron.
+Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento académico de los niños. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niños similares cuyos padres no se divorciaron.
 
 La prueba de Mann-Whitney-Wilcoxon es una prueba no paramétrica que es usada cuando se tienen dos muestras aleatorias independientes y se desea probar que estas provienen de una misma poblacion, es decir, se observara si existe evidencia con un nivel signicancia $\alpha$, que dos muestras aleatorias independientes son iguales entre si.
 
@@ -1404,7 +1380,7 @@ Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la mis
 
 
 
-## Pruebas de correlacion de rango 
+## Pruebas de correlación de rango 
 ## Problema 3
 La tabla que se proporciona a continuacion da el número de premios de postgraduados en ciencia médica y la razón de muerte por millón de tuberculosis para 1959-69.
 
@@ -1521,7 +1497,7 @@ Como el $p-value<\alpha$, rechazamos $H_{o}$. Confirmamos nuestros cálculos.
 
  
 
-## Pruebas de correlacion de rango 
+## Pruebas de correlación de rango 
 ## Problema 4
 
 El personal de un hospital mental desea saber que clase de tratamiento es mas efectivo para un tipo particular de desorden mental. Una bateria de pruebas administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes fueron considerados de diagnostico similar y tambien personalidad, inteligencia y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y
@@ -1835,7 +1811,7 @@ print(rechazamos_H0_kendall_p_value2_R1)
 Realizamos el test con la función de R para ver la diferencia con nuestro código.
 
 ```r
-cor.test(Xi_R1, Yi_R1,method="kendall",alternative="greater",exact = NULL)
+print(cor.test(Xi_R1, Yi_R1,method="kendall",alternative="greater",exact = NULL))
 ```
 
 ```
@@ -2242,7 +2218,7 @@ print(friedman.test(data.matrix(Data)))
 ## Friedman chi-squared = 21.667, df = 7, p-value = 0.002899
 ```
 
-No rechazamos la hipótesis nula
+No rechazamos la hipótesis nula.
 
 
 ## Pregunta 5
@@ -2310,7 +2286,7 @@ print(bartlett.test(Data))
 ```
 
 
-No hay evidencia para rechazar H0
+No hay evidencia para rechazar $H_{0}$
 
 
 ```r
@@ -2375,7 +2351,7 @@ print(bartlett.test(Data))
 ```
 
 
-Rechazamos H_0
+Rechazamos $H_{0}$.
 
 
 ```r
@@ -2439,7 +2415,7 @@ print(bartlett.test(Data))
 ## Bartlett's K-squared = 5.898, df = 3, p-value = 0.1167
 ```
 
-No rechazamos H_0 
+No rechazamos $H_{0}$.
 
 
 
