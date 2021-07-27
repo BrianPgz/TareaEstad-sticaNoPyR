@@ -187,14 +187,14 @@ library(dplyr)</code></pre>
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(ggplot2)</code></pre>
-<p>Ho: La muestra sigue una distribucion normal VS Ha: La muestra no sigue una distribucion normal.</p>
+<p>Ho: La muestra sigue una distribución normal VS Ha: La muestra no sigue una distribución normal.</p>
 <p>Metemos los datos en un vector y ordenamos los datos.</p>
 <pre class="r"><code>Dirty_data=c(0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
              1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548)
 Data=sort(Dirty_data)</code></pre>
 <pre><code>##  [1] 0.25130 0.25660 0.31280 0.34590 0.35005 0.63790 0.65480 1.27260 1.52990
 ## [10] 1.80300 2.05050 2.19060 2.32140 2.36740 2.43730</code></pre>
-<p>Como queremos probar normalidad pero no sabemos los parC!metros tenemos que estimarlos, primero queremos hacer una funciC3n para calcular la varianza muestral.</p>
+<p>Como queremos probar normalidad pero no sabemos los parámetros tenemos que estimarlos, primero queremos hacer una función para calcular la varianza muestral.</p>
 <pre class="r"><code>S2&lt;-function(x){
   mean_aux=mean(x)
   n_aux=length(x)
@@ -205,14 +205,14 @@ Data=sort(Dirty_data)</code></pre>
   s2=s2/(n_aux-1)
   return(s2)
 }</code></pre>
-<p>Calculamos los estimadores mC!ximos verosC-miles.</p>
+<p>Calculamos los estimadores máximos verosímiles.</p>
 <pre class="r"><code>mean_est=mean(Data)
 S2_est=S2(Data)
 n=length(Data)</code></pre>
 <pre><code>## [1] 1.252137</code></pre>
 <pre><code>## [1] 0.7810794</code></pre>
 <pre><code>## [1] 15</code></pre>
-<p>Calculamos la funciC3n de distribuciC3n empC-rica necesaria para la prueba de lillieforce, donde “ecdf” es la funciC3n para crear la distribuciC3n empC-rica, “f_n” son los percentiles de la distribuciC3n empC-rica y “f_r” son los percentiles de la distribuciC3n pero desplazados una unidad.</p>
+<p>Calculamos la función de distribución empírica necesaria para la prueba de lillieforce, donde “ecdf” es la funciC3n para crear la distribuciC3n empírica, “f_n” son los percentiles de la distribución empC-rica y “f_r” son los percentiles de la distribución pero desplazados una unidad.</p>
 <pre class="r"><code>f_emp=ecdf(Data)
 f_n=f_emp(Data)
 f_r=f_n-(1/n) </code></pre>
@@ -221,7 +221,7 @@ f_r=f_n-(1/n) </code></pre>
 <pre><code>##  [1] -1.13244110 -1.12644418 -1.06285419 -1.02540173 -1.02070603 -0.69500536
 ##  [7] -0.67588310  0.02315415  0.31428766  0.62329879  0.90334365  1.06186602
 ## [13]  1.20986549  1.26191423  1.34100569</code></pre>
-<p>Ahora usaremos la funciC3n de distribuciC3n de una normal estandar para los valores antes calculados.</p>
+<p>Ahora usaremos la función de distribución de una normal estándar para los valores antes calculados.</p>
 <pre class="r"><code>Probas=pnorm(Z)</code></pre>
 <pre><code>##  [1] 0.1287245 0.1299888 0.1439240 0.1525868 0.1536969 0.2435260 0.2495574
 ##  [8] 0.5092363 0.6233487 0.7334559 0.8168282 0.8558517 0.8868347 0.8965102
@@ -230,7 +230,7 @@ f_r=f_n-(1/n) </code></pre>
 <span class="math display">\[D_{i}^{-}=  \phi(Z_{i}) - \frac{i-1}{n}\]</span></p>
 <pre class="r"><code>Di_p=f_n  -Probas
 Di_n= Probas - f_r</code></pre>
-<p>Visualizamos todos los cC!lculos.</p>
+<p>Visualizamos todos los cálculos.</p>
 <pre class="r"><code>Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)</code></pre>
 <pre><code>##    Dirty_data    Data           Z    Probas         Di_p        Di_n
 ## 1     0.25130 0.25130 -1.13244110 0.1287245 -0.062057851  0.12872452
@@ -257,20 +257,20 @@ D_n=max(Di_n)</code></pre>
 <pre class="r"><code>Dn=max(D_p,D_n)</code></pre>
 <pre><code>## [1] 0.2171092</code></pre>
 <p>Declaramos nuestro nivel de significancia <span class="math display">\[\alpha = 0.10\]</span> entonces <span class="math display">\[1-\alpha = 0.90\]</span>.</p>
-<p>Comparamos con el nivel crC-tico <span class="math display">\[ W_{0.10}^{15}= 0.2016 \]</span>, para el tamaC1o de muestra 15 en tablas.</p>
+<p>Comparamos con el nivel crítico <span class="math display">\[ W_{0.10}^{15}= 0.2016 \]</span>, para el tamaño de muestra 15 en tablas.</p>
 <pre class="r"><code>Est=0.2016
 Rechazamos_H0=Dn&gt;Est</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>Como <span class="math display">\[D &gt; W_{0.10}^{15}\]</span>, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribuciC3n <span class="math display">\[ N(\mu,\sigma^2) \]</span></p>
-<p>Hacemos la prueba en unas lC-neas.</p>
+<p>Como <span class="math inline">\(D &gt; W_{0.10}^{15}\)</span>, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribución <span class="math inline">\(N(\mu,\sigma^2)\)</span>.</p>
+<p>Hacemos la prueba en unas líneas.</p>
 <pre class="r"><code>p_value=lillie.test(Data)[[2]]
 
 Rechazamos_p_value=p_value&lt;alpha</code></pre>
 <pre><code>## [1] 0.05540837</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>Confirmando la prueba anterior.</p>
-<p>El gerente del banco asume que la muestra se distribuye sigue una distribuciC3n lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposiciC3n del gerente con un nivel de significancia alpha = 0.01.</p>
-<p>Llamamos a la funciC3n de distribuciC3n de una lognormal.</p>
+<p>El gerente del banco asume que la muestra se distribuye sigue una distribuciC3n lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposición del gerente con un nivel de significancia <span class="math inline">\(\alpha = 0.01\)</span>.</p>
+<p>Llamamos a la funciC3n de distribución de una lognormal.</p>
 <pre class="r"><code>ProbasB=plnorm(Data) </code></pre>
 <pre><code>##  [1] 0.0836229 0.0868775 0.1225789 0.1442074 0.1469328 0.3265089 0.3359924
 ##  [8] 0.5952465 0.6646554 0.7222209 0.7636471 0.7835314 0.8001537 0.8055991
@@ -282,17 +282,17 @@ Di_nB=(ProbasB-f_r)</code></pre>
 <pre class="r"><code>D_pB=max(Di_pB)
 #Calculamos D-
 D_nB=max(Di_nB)</code></pre>
-<p>Entonces obtenemos <span class="math inline">\(D\)</span></p>
+<p>Entonces obtenemos <span class="math inline">\(D\)</span>.</p>
 <pre class="r"><code>DnB=max(D_pB,D_nB)</code></pre>
 <pre><code>## [1] 0.1864939</code></pre>
-<p>Declaramos nuestro nivel de significancia <span class="math display">\[\alpha = 0.01\]</span> entonces <span class="math display">\[1-\alpha = 0.99\]</span>.</p>
-<p>Tenemos que en tablas <span class="math display">\[W_{0.01}^{15}=0.40420\]</span></p>
+<p>Declaramos nuestro nivel de significancia <span class="math inline">\(\alpha = 0.01\)</span> entonces <span class="math inline">\(1-\alpha = 0.99\)</span>.</p>
+<p>Tenemos que en tablas <span class="math inline">\(W_{0.01}^{15}=0.40420\)</span>.</p>
 <pre class="r"><code>EstB=0.40420
 
 Rechazamos_H0B=DnB&gt;EstB</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>Se cumple que <span class="math display">\[W_{0.01}^{15} &gt; D\]</span> entonces no hay evidencia para rechazar Ho, entonces los datos siguen una distribuciC3n lognormal con media de 1 y varianza 0.</p>
-<p>Usamos la prueba especC-ficando la distribuciC3n lognormal con sus parC!metros.</p>
+<p>Se cumple que <span class="math inline">\(W_{0.01}^{15} &gt; D\)</span> entonces no hay evidencia para rechazar Ho, entonces los datos siguen una distribuciC3n lognormal con media de 1 y varianza 0.</p>
+<p>Usamos la prueba especificando la distribuciC3n lognormal con sus parámetros.</p>
 <pre class="r"><code>p_valueB=ks.test(Data,plnorm,0,1)[[2]]
 
 Rechazamos_p_valueB=p_valueB&lt;alphaB</code></pre>
@@ -305,7 +305,7 @@ Rechazamos_p_valueB=p_valueB&lt;alphaB</code></pre>
 </div>
 <div id="problema-4" class="section level2">
 <h2>Problema 4</h2>
-<p>Un cierto banco otorga crC)dito a las personas con una tasa preferencial, de tal manera que los acreditados pueden pagar en cualquier momento desde que piden el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa preferencial . Se seleccionaron aleatoriamente a 1,000 personas y observaron su comportamiento, generando de esta manera la siguiente tabla de frecuencia:</p>
+<p>Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal manera que los acreditados pueden pagar en cualquier momento desde que piden el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa preferencial. Se seleccionaron aleatoriamente a 1,000 personas y observaron su comportamiento, generando de esta manera la siguiente tabla de frecuencia:</p>
 <pre class="r"><code>intervalos &lt;- c( &quot;Menos de 1 semana&quot;,&quot;1&lt;= x &lt;2&quot; , &quot;2&lt;= x &lt;3&quot;,&quot;3&lt;= x &lt;4&quot;,&quot;4&lt;= x &lt;5&quot;,&quot;5&lt;= x &lt;6&quot;,&quot;6&lt;= x &lt;7&quot;,&quot;7&lt;= x &lt;8&quot;,&quot;MC!s de 8 semanas&quot;)
 oi &lt;- c(64,195,287,241,140,51,25,4,1)
 
@@ -326,9 +326,9 @@ tabla</code></pre>
 print(k)</code></pre>
 <pre><code>## [1] 1008</code></pre>
 <p>Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago.</p>
-<p>Enunciamos la prueba de hipC3tesis:</p>
-<p>Ho: Se sigue una distribuciC3n Bin(n=10,p=0.25) VS Ha: No se sigue una distribuciC3n Bin(n=10,p=0.25)</p>
-<p>Nuestros parC!metros son:</p>
+<p>Enunciamos la prueba de hipótesis:</p>
+<p><span class="math inline">\(Ho\)</span>: Se sigue una distribución <span class="math inline">\(Bin(n=10,p=0.25)\)</span> VS <span class="math inline">\(Ha\)</span>: No se sigue una distribución <span class="math inline">\(Bin(n=10,p=0.25)\)</span>.</p>
+<p>Nuestros parámetros son:</p>
 <pre class="r"><code>p=0.25
 n=10</code></pre>
 <p>Los datos se agruparon en nueve diferentes clasificaciones <span class="math inline">\(c_{i} \quad i\in \{0,1,...,8 \}\)</span>.</p>
@@ -336,19 +336,18 @@ n=10</code></pre>
 <pre><code>## [1] 9</code></pre>
 <p>Nuestras observaciones fueron:</p>
 <pre class="r"><code>oi=c(64,195,287,241,140,51,25,4,1)</code></pre>
-<p>Calculamos las probabilidades <span class="math inline">\(p_{i}\)</span> con la distribuciC3n que propusimos, se itera desde cero ya que tenemos la clasificaciC3n 0.</p>
+<p>Calculamos las probabilidades <span class="math inline">\(p_{i}\)</span> con la distribución que propusimos, se itera desde cero ya que tenemos la clasificación 0.</p>
 <pre><code>## [1] 0.056313515 0.187711716 0.281567574 0.250282288 0.145998001 0.058399200
 ## [7] 0.016222000 0.003089905 0.000415802</code></pre>
 <p>Verificamos que las probas suman 1. <span class="math display">\[\sum_{i=0}^{8} p_{i} = 1\]</span></p>
 <pre class="r"><code>sum(Probas_ejercicio4)</code></pre>
 <pre><code>## [1] 1</code></pre>
-<p>Ahora calculamos las frecuencias esperadas.</p>
-<p><span class="math display">\[n * p_{i}\]</span></p>
+<p>Ahora calculamos las frecuencias esperadas. <span class="math display">\[n * p_{i}\]</span></p>
 <pre class="r"><code>ei= Probas_ejercicio4 * k 
 print(ei)</code></pre>
 <pre><code>## [1]  56.7640228 189.2134094 283.8201141 252.2845459 147.1659851  58.8663940
 ## [7]  16.3517761   3.1146240   0.4191284</code></pre>
-<p>Podemos visualizar toda la informaciC3n.</p>
+<p>Podemos visualizar toda la información.</p>
 <pre class="r"><code>Tabla_ji = data.frame(&quot;ci&quot;=0:8, &quot;oi&quot;=oi,&quot;pi&quot;= Probas_ejercicio4,&quot;ei&quot;=ei)
 print(Tabla_ji)</code></pre>
 <pre><code>##   ci  oi          pi          ei
@@ -361,7 +360,7 @@ print(Tabla_ji)</code></pre>
 ## 7  6  25 0.016222000  16.3517761
 ## 8  7   4 0.003089905   3.1146240
 ## 9  8   1 0.000415802   0.4191284</code></pre>
-<p>Vamos a calcular nuestra estadC-stica de prueba. <span class="math display">\[T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}\]</span></p>
+<p>Vamos a calcular nuestra estadística de prueba. <span class="math display">\[T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}\]</span></p>
 <pre class="r"><code>EstJi=0 
 for (i in 1:9){
   EstJi=EstJi+(((oi[i]) - (ei[i]))^2)/(ei[i])
@@ -372,16 +371,16 @@ print(EstJi)</code></pre>
 <p>Para un nivel de confianza $= 0.01 $ tenemos que <span class="math inline">\(1-\alpha = 0.99\)</span>.</p>
 <pre class="r"><code>alpha_ejercicio4=0.01
 conf_ejercicio4= 1- alpha_ejercicio4</code></pre>
-<p>Necesitamos los grados de libertad, que es el nC:mero de clasificaciones menos uno, ya que no estimamos parC!metros.</p>
+<p>Necesitamos los grados de libertad, que es el número de clasificaciones menos uno, ya que no estimamos parámetros.</p>
 <pre><code>## [1] 8</code></pre>
 <p>Calculamos el cuantil <span class="math inline">\({\chi}^2_{8,\ 0.99}\)</span>.</p>
 <pre class="r"><code>valor_critico=qchisq(conf_ejercicio4,df=v,lower.tail = TRUE)</code></pre>
-<p>Comparamos la estadC-stica de prueba con el valor crC-tico.</p>
+<p>Comparamos la estadística de prueba con el valor crítico.</p>
 <pre class="r"><code>Rechazamos_H0_p4=EstJi&gt;valor_critico
 print(Rechazamos_H0_p4)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>No hay evidencia pra decir que los datos no siguien una distribuciC3n binomial con n=10 y p=0.25, entonces aceptamos Ho.</p>
-<p>Para comprobar los cC!lculos usemos la prueba que vienen en la libreria nortest.</p>
+<p>No hay evidencia pra decir que los datos no siguien una distribución binomial con <span class="math inline">\(n=10\)</span> y <span class="math inline">\(p=0.25\)</span>, entonces aceptamos Ho.</p>
+<p>Para comprobar los cálculos usemos la prueba que vienen en la libreria nortest.</p>
 <pre class="r"><code>p_value_p4=chisq.test(x=oi,p=Probas_ejercicio4)[[3]]</code></pre>
 <pre><code>## Warning in chisq.test(x = oi, p = Probas_ejercicio4): Chi-squared approximation
 ## may be incorrect</code></pre>
@@ -396,11 +395,11 @@ print(Rechazamos_p_value_p4)</code></pre>
 <div id="problema-5" class="section level2">
 <h2>Problema 5</h2>
 <p>En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1) y con ella realiza:</p>
-<p>Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones generadas.</p>
-<p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es similar a la distribucin teC3rica de los datos?.</p>
+<p>Calcula y grC!fica la funciC3n de distribuciC3n empírica de las observaciones generadas.</p>
+<p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.</p>
 <p>Vuelve a fijar la semilla 2019, y genera un millC3n de observaciones distribuidas como una N(0; 1) y con ello realiza:</p>
-<p>Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones generadas.</p>
-<p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es similar a la distribuciC3n teC3rica de los datos?.</p>
+<p>Calcula y gráfica la función de distribución empírica de las observaciones generadas.</p>
+<p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las gráficas anteriores B?La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.</p>
 <p>Realiza la diferencia entre el valor de la funciC3n empC-rica y la funciC3n real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribuciC3n conocida y sC3lo mostrar los primeros 5 y los C:ltimos 5 resultados)</p>
 <p>B?Al ser una muestra mucho mayor que al anterior a que teorema te recuerda el resultado obtenido?.</p>
 <p>Para la primera parte del ejercicio fijemos la semilla inicial.</p>

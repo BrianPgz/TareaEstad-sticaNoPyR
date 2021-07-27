@@ -30,7 +30,7 @@ library(ggplot2)
 ```
 
 
-Ho: La muestra sigue una distribucion normal VS Ha: La muestra no sigue una distribucion normal.
+Ho: La muestra sigue una distribución normal VS Ha: La muestra no sigue una distribución normal.
 
 Metemos los datos en un vector y ordenamos los datos.
 
@@ -45,7 +45,7 @@ Data
 ```
 
 
-Como queremos probar normalidad pero no sabemos los parC!metros tenemos que estimarlos, primero queremos hacer una funciC3n para calcular la varianza muestral.
+Como queremos probar normalidad pero no sabemos los parámetros tenemos que estimarlos, primero queremos hacer una función para calcular la varianza muestral.
 
 
 ```{r echo=TRUE}
@@ -62,7 +62,7 @@ S2<-function(x){
 
 ```
 
-Calculamos los estimadores mC!ximos verosC-miles. 
+Calculamos los estimadores máximos verosímiles. 
 
 ```{r echo=TRUE}
 mean_est=mean(Data)
@@ -77,7 +77,7 @@ S2_est
 n
 ```
 
-Calculamos la funciC3n de distribuciC3n empC-rica necesaria para la prueba de lillieforce, donde "ecdf" es la funciC3n para crear la distribuciC3n empC-rica, "f_n" son los percentiles de la distribuciC3n empC-rica y "f_r" son los percentiles de la distribuciC3n pero desplazados una unidad. 
+Calculamos la función de distribución empírica necesaria para la prueba de lillieforce, donde "ecdf" es la funciC3n para crear la distribuciC3n empírica, "f_n" son los percentiles de la distribución empC-rica y "f_r" son los percentiles de la distribución pero desplazados una unidad. 
 
 
 ```{r echo=TRUE}
@@ -96,7 +96,7 @@ Z=(Data-mean_est)/sqrt(S2_est)
 Z
 ```
 
-Ahora usaremos la funciC3n de distribuciC3n de una normal estandar para los valores antes calculados. 
+Ahora usaremos la función de distribución de una normal estándar para los valores antes calculados. 
 
 ```{r echo=TRUE}
 Probas=pnorm(Z)
@@ -115,7 +115,7 @@ Di_p=f_n  -Probas
 Di_n= Probas - f_r
 ```
 
-Visualizamos todos los cC!lculos. 
+Visualizamos todos los cálculos. 
 
 ```{r echo=TRUE}
 Visual=data.frame(Dirty_data,Data,Z,Probas,Di_p,Di_n)
@@ -156,7 +156,7 @@ conf=0.90
 alpha=1-conf
 ```
 
-Comparamos con el nivel crC-tico $$ W_{0.10}^{15}= 0.2016 $$, para el tamaC1o de muestra 15 en tablas.
+Comparamos con el nivel crítico $$ W_{0.10}^{15}= 0.2016 $$, para el tamaño de muestra 15 en tablas.
 
 ```{r echo=TRUE}
 Est=0.2016
@@ -168,9 +168,9 @@ Rechazamos_H0=Dn>Est
 Rechazamos_H0
 ```
 
-Como $$D > W_{0.10}^{15}$$, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribuciC3n $$ N(\mu,\sigma^2) $$
+Como $D > W_{0.10}^{15}$, rechazamos Ho y por lo tanto no hay evidencia para que los datos sigan una distribución $N(\mu,\sigma^2)$.
 
-Hacemos la prueba en unas lC-neas. 
+Hacemos la prueba en unas líneas. 
 
 ```{r echo=TRUE}
 p_value=lillie.test(Data)[[2]]
@@ -186,9 +186,9 @@ Rechazamos_p_value
 Confirmando la prueba anterior. 
 
 
-El gerente del banco asume que la muestra se distribuye sigue una distribuciC3n lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposiciC3n del gerente con un nivel de significancia alpha = 0.01. 
+El gerente del banco asume que la muestra se distribuye sigue una distribuciC3n lognormal con media 0 y varianza 1. Realice la prueba correspondiente para verificar la suposición del gerente con un nivel de significancia $\alpha = 0.01$.
 
-Llamamos a la funciC3n de distribuciC3n de una lognormal.
+Llamamos a la funciC3n de distribución de una lognormal.
 
 ```{r echo=TRUE}
 ProbasB=plnorm(Data) 
@@ -215,7 +215,7 @@ D_pB=max(Di_pB)
 D_nB=max(Di_nB)
 ```
 
-Entonces obtenemos $D$
+Entonces obtenemos $D$.
 ```{r echo=TRUE}
 DnB=max(D_pB,D_nB)
 ```
@@ -224,14 +224,14 @@ DnB=max(D_pB,D_nB)
 DnB
 ```
 
-Declaramos nuestro nivel de significancia $$\alpha = 0.01$$ entonces $$1-\alpha = 0.99$$. 
+Declaramos nuestro nivel de significancia $\alpha = 0.01$ entonces $1-\alpha = 0.99$. 
 
 ```{r echo=FALSE}
 alphaB=0.01
 confB=1-alpha
 ```
 
-Tenemos que en tablas $$W_{0.01}^{15}=0.40420$$
+Tenemos que en tablas $W_{0.01}^{15}=0.40420$.
 
 
 ```{r echo=TRUE}
@@ -245,10 +245,10 @@ Rechazamos_H0B=DnB>EstB
 Rechazamos_H0B
 ```
 
-Se cumple que $$W_{0.01}^{15} > D$$ entonces no hay evidencia para rechazar Ho, entonces 
+Se cumple que $W_{0.01}^{15} > D$ entonces no hay evidencia para rechazar Ho, entonces 
 los datos siguen una distribuciC3n lognormal con media de 1 y varianza 0.
 
-Usamos la prueba especC-ficando la distribuciC3n lognormal con sus parC!metros.
+Usamos la prueba especificando la distribuciC3n lognormal con sus parámetros.
 
 ```{r echo=TRUE}
 p_valueB=ks.test(Data,plnorm,0,1)[[2]]
@@ -268,10 +268,10 @@ Confirmamos la prueba anterior.
 ## Problema 4
 
 
-Un cierto banco otorga crC)dito a las personas con una tasa preferencial, de tal
+Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal
 manera que los acreditados pueden pagar en cualquier momento desde que piden
 el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa
-preferencial . Se seleccionaron aleatoriamente a 1,000 personas y observaron su
+preferencial. Se seleccionaron aleatoriamente a 1,000 personas y observaron su
 comportamiento, generando de esta manera la siguiente tabla de frecuencia:
 
 ```{r echo=TRUE}
@@ -291,11 +291,11 @@ print(k)
 
 Sea X v.a. que modela semanas completas que se tarda el cliente en hacer el pago. 
 
-Enunciamos la prueba de hipC3tesis: 
+Enunciamos la prueba de hipótesis: 
 
-Ho: Se sigue una distribuciC3n Bin(n=10,p=0.25)  VS   Ha: No se sigue una distribuciC3n Bin(n=10,p=0.25)
+$Ho$: Se sigue una distribución $Bin(n=10,p=0.25)$  VS   $Ha$: No se sigue una distribución $Bin(n=10,p=0.25)$.
 
-Nuestros parC!metros son: 
+Nuestros parámetros son: 
 
 ```{r echo=TRUE}
 p=0.25
@@ -316,7 +316,7 @@ Nuestras observaciones fueron:
 oi=c(64,195,287,241,140,51,25,4,1)
 ```
 
-Calculamos las probabilidades $p_{i}$ con la distribuciC3n que propusimos, se itera desde cero ya que tenemos la clasificaciC3n 0. 
+Calculamos las probabilidades $p_{i}$ con la distribución que propusimos, se itera desde cero ya que tenemos la clasificación 0. 
 
 ```{r echo=FALSE}
 Probas_ejercicio4=list()
@@ -331,6 +331,7 @@ Probas_ejercicio4=unlist(Probas_ejercicio4)
 print(Probas_ejercicio4)
 
 ```
+
 Verificamos que las probas suman 1. 
 $$\sum_{i=0}^{8} p_{i} = 1$$
 
@@ -338,21 +339,20 @@ $$\sum_{i=0}^{8} p_{i} = 1$$
 sum(Probas_ejercicio4)
 ```
 Ahora calculamos las frecuencias esperadas. 
-
 $$n * p_{i}$$
 ```{r echo=TRUE}
 ei= Probas_ejercicio4 * k 
 print(ei)
 ```
 
-Podemos visualizar toda la informaciC3n. 
+Podemos visualizar toda la información. 
 
 ```{r echo=TRUE}
 Tabla_ji = data.frame("ci"=0:8, "oi"=oi,"pi"= Probas_ejercicio4,"ei"=ei)
 print(Tabla_ji)
 ```
 
-Vamos a calcular nuestra estadC-stica de prueba. 
+Vamos a calcular nuestra estadística de prueba. 
 $$T= \sum _{i=0}^{8} \frac{(o_{i}-e_{i})^{2}}{e_{i}}$$
 
 ```{r echo=TRUE}
@@ -371,7 +371,7 @@ alpha_ejercicio4=0.01
 conf_ejercicio4= 1- alpha_ejercicio4
 ```
 
-Necesitamos los grados de libertad, que es el nC:mero de clasificaciones menos uno, ya que no estimamos parC!metros. 
+Necesitamos los grados de libertad, que es el número de clasificaciones menos uno, ya que no estimamos parámetros. 
 
 ```{r echo=FALSE}
 v= length(Probas_ejercicio4) -1
@@ -381,15 +381,15 @@ Calculamos el cuantil ${\chi}^2_{8,\ 0.99}$.
 ```{r echo=TRUE}
 valor_critico=qchisq(conf_ejercicio4,df=v,lower.tail = TRUE)
 ```
-Comparamos la estadC-stica de prueba con el valor crC-tico. 
+Comparamos la estadística de prueba con el valor crítico. 
 ```{r echo=TRUE}
 Rechazamos_H0_p4=EstJi>valor_critico
 print(Rechazamos_H0_p4)
 ```
 
-No hay evidencia pra decir que los datos no siguien una distribuciC3n binomial con n=10 y p=0.25, entonces aceptamos Ho. 
+No hay evidencia pra decir que los datos no siguien una distribución binomial con $n=10$ y $p=0.25$, entonces aceptamos Ho. 
 
-Para comprobar los cC!lculos usemos la prueba que vienen en la libreria nortest. 
+Para comprobar los cálculos usemos la prueba que vienen en la libreria nortest. 
 
 ```{r echo=TRUE}
 p_value_p4=chisq.test(x=oi,p=Probas_ejercicio4)[[3]]
@@ -405,19 +405,17 @@ No rechazamos Ho.
 En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1)
 y con ella realiza:
 
-Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones
-generadas.
+Calcula y grC!fica la funciC3n de distribuciC3n empírica de las observaciones generadas.
 
 Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
-A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es
-similar a la distribucin teC3rica de los datos?.
+A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
 Vuelve a fijar la semilla 2019, y genera un millC3n de observaciones distribuidas como una N(0; 1) y con ello realiza:
 
-Calcula y grC!fica la funciC3n de distribuciC3n empC-rica de las observaciones generadas.
+Calcula y gráfica la función de distribución empírica de las observaciones generadas.
 
 Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
-A partir de las grC!ficas anteriores B?La funciC3n de distribuciC3n empC-rica es similar a la distribuciC3n teC3rica de los datos?.
+A partir de las gráficas anteriores B?La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
 
 Realiza la diferencia entre el valor de la funciC3n empC-rica y la funciC3n real,
 (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribuciC3n conocida y sC3lo mostrar los primeros 5 y los C:ltimos 5 resultados)
