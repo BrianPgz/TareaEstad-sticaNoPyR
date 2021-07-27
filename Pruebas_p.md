@@ -1733,11 +1733,12 @@ p_value_R1=test_R1$p.value
 
 Rechazamos_H0se_p_value_R1=p_value_R1<alpha_R1
 
-print(p_value_R1)
+print(Rechazamos_H0se_R1)
 ```
 
 ```
-## [1] 0
+## Estadistica 
+##        TRUE
 ```
 
 ```r
@@ -1803,7 +1804,7 @@ tau2_R1=(N_c_R1-N_d_R1)/(N_c_R1+N_d_R1)
 ```
 
 
-Al final vimos que esta aproximación era solo para valores grandes de n
+Al final vimos que esta aproximación era solo para valores grandes de n.
 
 ```r
 w_p_R1=qnorm(1-alpha_R1)*(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1))))
@@ -1814,6 +1815,14 @@ rechazamos_H0_kendall_p_value_R1=p_value_kendall_tau_R1<alpha_R1
 p_value_kendall_tau2_R1=pnorm(tau2_R1,sd=(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1)))),
                            lower.tail = FALSE)
 rechazamos_H0_kendall_p_value2_R1=p_value_kendall_tau2_R1<alpha_R1
+print(Rechazamos_Kendall_tau_R1)
+```
+
+```
+## [1] TRUE
+```
+
+```r
 print(rechazamos_H0_kendall_p_value2_R1)
 ```
 
@@ -1915,6 +1924,27 @@ rechazamos_H0_kendall_p_value_R2=p_value_kendall_tau_R2<alpha_R2
 p_value_kendall_tau2_R2=pnorm(tau2_R2,sd=(sqrt((2*(2*n_R2+5)))/(3*sqrt(n_R2*(n_R2-1)))),
                            lower.tail = FALSE)
 rechazamos_H0_kendall_p_value2_R2=p_value_kendall_tau2_R2<alpha_R2
+print(Rechazamos_Kendall_tau_R2)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+print(rechazamos_H0_kendall_p_value_R2)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+print(rechazamos_H0_kendall_p_value2_R2)
+```
+
+```
+## [1] TRUE
 ```
 
 
@@ -1922,7 +1952,7 @@ rechazamos_H0_kendall_p_value2_R2=p_value_kendall_tau2_R2<alpha_R2
 Realizamos el test con la función_R2 de R para ver la diferencia con nuestro código.
 
 ```r
-cor.test(ordenados_Xi_R2, ordenados_Yi_R2,method="kendall",alternative="greater",exact = NULL)
+print(cor.test(ordenados_Xi_R2, ordenados_Yi_R2,method="kendall",alternative="greater",exact = NULL))
 ```
 
 ```
@@ -2125,7 +2155,28 @@ wilcox.test(X_R3, Y_R3, paired=FALSE)
 ## alternative hypothesis: true location shift is not equal to 0
 ```
 
-Existe evidencia estadisticamente significativa para rechazar la hipotesis nula, por lo que no podemos decir que provienen de distribuciones distintas
+```r
+print(Rechazamos_H0_R3)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+print(wilcox.test(X_R3, Y_R3, paired=FALSE))
+```
+
+```
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  X_R3 and Y_R3
+## W = 0, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+```
+
+Existe evidencia estadisticamente significativa para rechazar la hipótesis nula, por lo que no podemos decir que provienen de distribuciones distintas
 
 ## Pregunta 4
 
@@ -2153,6 +2204,34 @@ p_value=pchisq(Est,df=k-1,lower.tail = FALSE)
 Rechazamos_H0=Est>valor_critico
 Rechazamos_H0_p_value=p_value<alpha
 friedman.test(data.matrix(Data))
+```
+
+```
+## 
+## 	Friedman rank sum test
+## 
+## data:  data.matrix(Data)
+## Friedman chi-squared = 21.667, df = 7, p-value = 0.002899
+```
+
+```r
+print(Rechazamos_H0)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+print(Rechazamos_H0_p_value)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+print(friedman.test(data.matrix(Data)))
 ```
 
 ```
@@ -2202,6 +2281,34 @@ bartlett.test(Data)
 ## Bartlett's K-squared = 1.7569, df = 2, p-value = 0.4154
 ```
 
+```r
+print(Rechazamos_H0)
+```
+
+```
+## [1] FALSE
+```
+
+```r
+print(Rechazamos_H0_p_value)
+```
+
+```
+## [1] FALSE
+```
+
+```r
+print(bartlett.test(Data))
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  Data
+## Bartlett's K-squared = 1.7569, df = 2, p-value = 0.4154
+```
+
 
 No hay evidencia para rechazar H0
 
@@ -2239,6 +2346,34 @@ bartlett.test(Data)
 ## Bartlett's K-squared = 8.4136, df = 3, p-value = 0.03819
 ```
 
+```r
+print(Rechazamos_H0_2)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+print(Rechazamos_H0_p_value_2)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+print(bartlett.test(Data))
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  Data
+## Bartlett's K-squared = 8.4136, df = 3, p-value = 0.03819
+```
+
 
 Rechazamos H_0
 
@@ -2266,6 +2401,34 @@ p_value_3=pchisq(Est_3,df=r-1,lower.tail = FALSE)
 Rechazamos_H0_3=Est_3>valor_critico_3
 Rechazamos_H0_p_value_3=p_value_3<alpha
 bartlett.test(Data)
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  Data
+## Bartlett's K-squared = 5.898, df = 3, p-value = 0.1167
+```
+
+```r
+print(Rechazamos_H0_3)
+```
+
+```
+## [1] FALSE
+```
+
+```r
+print(Rechazamos_H0_p_value_3)
+```
+
+```
+## [1] FALSE
+```
+
+```r
+print(bartlett.test(Data))
 ```
 
 ```
