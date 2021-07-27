@@ -148,14 +148,14 @@ Dn
 ```
 
 
-Declaramos nuestro nivel de significancia $$\alpha = 0.10$$ entonces $$1-\alpha = 0.90$$.
+Declaramos nuestro nivel de significancia $\alpha = 0.10$ entonces $1-\alpha = 0.90$.
 
 ```{r echo=F}
 conf=0.90
 alpha=1-conf
 ```
 
-Comparamos con el nivel crítico $$ W_{0.10}^{15}= 0.2016 $$, para el tamaño de muestra 15 en tablas.
+Comparamos con el nivel crítico $ W_{0.10}^{15}= 0.2016 $, para el tamaño de muestra 15 en tablas.
 
 ```{r echo=TRUE}
 Est=0.2016
@@ -397,12 +397,11 @@ No rechazamos Ho.
 ## Problema 5
 
 
-En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1)
-y con ella realiza:
+En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0: 1) y con ella realiza:
 
 Calcula y grC!fica la función de distribuciC3n empírica de las observaciones generadas.
 
-Agrega sobre esa misma grC!fica, la curva de la distribución verdadera (N(0; 1)).
+Agrega sobre esa misma gráfica, la curva de la distribución verdadera (N(0; 1)).
 A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
 Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0: 1) y con ello realiza:
@@ -410,7 +409,7 @@ Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuida
 Calcula y gráfica la función de distribución empírica de las observaciones generadas.
 
 Agrega sobre esa misma gráficaa, la curva de la distribución verdadera (N(0: 1)).
-A partir de las gráficas anteriores ¿La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
+A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
 Realiza la diferencia entre el valor de la función empírica y la función real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y mostrar los primeros 5 y los últimos 5 resultados).
 
@@ -423,12 +422,12 @@ Para la primera parte del ejercicio fijemos la semilla inicial.
 set.seed(2019)
 ```
 
-Obtengamos 25 datos de una distribuciC3n normal estándar.
+Obtengamos 25 datos de una distribución normal estándar.
 ```{r echo=TRUE}
 x_data=rnorm(25,mean=0,sd=1)
 print(x_data)
 ```
-Calculemos la función de distribuciC3n empírica y obtengamos su gráfica.
+Calculemos la función de distribución empírica y obtengamos su gráfica.
 
 ```{r echo=TRUE}
 f_empi=ecdf(x_data)
@@ -522,14 +521,14 @@ print(head(valores_25))
 print(tail(valores_25))
 ```
 
-Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
+Vamos a hacer lo mismo para los datos de la simulación $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
 
 ```{r echo=TRUE}
 x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)
 ```
 
-Calculamos la funcición desfasada ($\frac{1}{10^6}$).
+Calculamos la función desfasada ($\frac{1}{10^6}$).
 
 ```{r echo=TRUE}
 f_empi_M_des = f_empi_M - (1/(10^3))
@@ -580,10 +579,7 @@ print(tail(valores_M))
 ## Tablas de Contingencia
 ## Problema 1
 
-1.- Se recopilaron datos macroecnomicos de diversos paises durante el 2017 del
-Fondo Monetario Internacional entre los cuales destacan el tamano del territorio
-del pais en km2 y la tasa de fertilidad. Se clasifico la informacion de la siguiente
-manera:
+1.- Se recopilaron datos macroecnomicos de diversos paises durante el 2017 del Fondo Monetario Internacional entre los cuales destacan el tamano del territorio del pais en km2 y la tasa de fertilidad. Se clasifico la informacion de la siguiente manera:
 
 ->Microestado cuando su territorio se menor o igual a 23,180 km2
 
@@ -619,8 +615,7 @@ print(Tabla_pais)
 
 a) Establecer $H_0$ vs. $H_a$
 
-Establecemos las hipotesis nulas y alternativas como propone la prueba para tablas 
-contingencia.
+Establecemos las hipotesis nulas y alternativas como propone la prueba para tablas contingencia.
 
 $H_0$ = La probabilidad de que un pais tenga tasa de fertilidad <= 2.7 o > 2.7
 es independiente de su clasificacion como microestado, pais pequeno, pais mediano
@@ -628,10 +623,7 @@ o pais grande. Es decir la fertilidad y el tamano de una poblacion son independi
 
 $H_a$ = La fertilidad y el tamano de una poblacion no son independientes.
 
-b) De la tabla de contigencia realice el procedimiento obtenido la estadistica 
-necesaria para rechazar o aceptar con un nivel de significancia alpha = 0.05 la 
-hipotesis de que la tasa de fecundidad y el tamano del territorio se comportan 
-de manera independiente entre s con los parametros dados.
+b) De la tabla de contigencia realice el procedimiento obtenido la estadistica necesaria para rechazar o aceptar con un nivel de significancia alpha = 0.05 lahipotesis de que la tasa de fecundidad y el tamano del territorio se comportan de manera independiente entre s con los parametros dados.
 
 ```{r echo=TRUE}
 alpha_pais=0.05
@@ -672,23 +664,15 @@ print(Rechazamos_H0_pais1)
 
 ```
 
-Es decir, no hay suficiente evidencia como para decir que la fertilidad y el
-tamano el territorio NO son independientes. Aceptamos entonces la hipotesis nula 
-y decimos que la fertilidad y tamano del territorio son independientes, a un nivel 
-de confianza alpha = 0.05.
+Es decir, no hay suficiente evidencia como para decir que la fertilidad y el tamaño el territorio NO son independientes. Aceptamos entonces la hipótesis nula  y decimos que la fertilidad y tamano del territorio son independientes, a un nivel de confianza alpha = 0.05.
 
-c) Calcula el coeficiente de contigencia, ??como lo interpretarias?
+c) Calcula el coeficiente de contigencia, ¿cómo lo interpretarías?
 
 ```{r echo=TRUE}
 Contingencia=sqrt(Est_pais/(Est_pais+n_pais))
 ```
 
-Como valores crecientes de C implican un crecimiento en el grado de asociacion 
-y tenemos que C es pequena, puesto que C esta en el intervalo abierto (0,1)
-y obtuvimos C= 0.1864 aproximadamente, podemos decir que, con un poco mas de 
-confianza basandonos en esta estadistica y la prueba realizada, parecen
-ser independientes, o por lo menos, tener muy poca correlacion o asociacion entre 
-ellas.
+Como valores crecientes de C implican un crecimiento en el grado de asociación  y tenemos que C es pequena, puesto que C esta en el intervalo abierto (0,1) y obtuvimos C= 0.1864 aproximadamente, podemos decir que, con un poco mas de confianza basandonos en esta estadística y la prueba realizada, parecen ser independientes, o por lo menos, tener muy poca correlación o asociacion entre ellas.
 
 d) Calcular el p value de la prueba anterior.
 
