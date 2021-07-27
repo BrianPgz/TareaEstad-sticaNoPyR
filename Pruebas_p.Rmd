@@ -448,7 +448,7 @@ set.seed(2019)
 Generamos un millón de datos de una distribución $N(0,1)$.
 
 ```{r echo=TRUE}
-x_dataM = rnorm(10^3)
+x_dataM = rnorm(10^6)
 ```
 Calculamos la función de distribución empírica $F_{n}$
 
@@ -531,7 +531,7 @@ f_empi_M= f_empiM(x_dataM_ord)
 Calculamos la función desfasada ($\frac{1}{10^6}$).
 
 ```{r echo=TRUE}
-f_empi_M_des = f_empi_M - (1/(10^3))
+f_empi_M_des = f_empi_M - (1/(10^6))
 ```
 
 Calculamos las probas bajo una distribuciones $N(0,1)$.
