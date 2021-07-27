@@ -16,8 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Pruebas de bondad de ajuste
 ## Problema 3
-La siguiente muestra aleatoria hace referencia a los rendimientos positivos de
-cierta acción a lo largo del tiempo.
+La siguiente muestra aleatoria hace referencia a los rendimientos positivos de cierta acción a lo largo del tiempo.
 
 0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
 1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548
@@ -26,7 +25,7 @@ Llamamos a la libreria nortest para hacer la prueba lilliforce hasta el final.
 ```{r echo=TRUE}
 library(nortest)
 library(dplyr)
-library(ggplot2)
+library(ggplot2) #favor de abrir el rchivo en codificacion UTF-8
 ```
 
 
@@ -268,11 +267,7 @@ Confirmamos la prueba anterior.
 ## Problema 4
 
 
-Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal
-manera que los acreditados pueden pagar en cualquier momento desde que piden
-el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa
-preferencial. Se seleccionaron aleatoriamente a 1,000 personas y observaron su
-comportamiento, generando de esta manera la siguiente tabla de frecuencia:
+Un cierto banco otorga crédito a las personas con una tasa preferencial, de tal manera que los acreditados pueden pagar en cualquier momento desde que piden el prestamo hasta 8 semanas posteriores para que les sea respetada la tasa preferencial. Se seleccionaron aleatoriamente a 1,000 personas y observaron su comportamiento, generando de esta manera la siguiente tabla de frecuencia:
 
 ```{r echo=TRUE}
 intervalos <- c( "Menos de 1 semana","1<= x <2" , "2<= x <3","3<= x <4","4<= x <5","5<= x <6","6<= x <7","7<= x <8","MC!s de 8 semanas")
@@ -405,16 +400,16 @@ No rechazamos Ho.
 En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1)
 y con ella realiza:
 
-Calcula y grC!fica la funciC3n de distribuciC3n empírica de las observaciones generadas.
+Calcula y grC!fica la función de distribuciC3n empírica de las observaciones generadas.
 
-Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
+Agrega sobre esa misma grC!fica, la curva de la distribución verdadera (N(0; 1)).
 A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
 Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0: 1) y con ello realiza:
 
 Calcula y gráfica la función de distribución empírica de las observaciones generadas.
 
-Agrega sobre esa misma gráficaa, la curva de la distribuciC3n verdadera (N(0; 1)).
+Agrega sobre esa misma gráficaa, la curva de la distribución verdadera (N(0: 1)).
 A partir de las gráficas anteriores ¿La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
 
 Realiza la diferencia entre el valor de la función empírica y la función real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y mostrar los primeros 5 y los últimos 5 resultados).
@@ -465,7 +460,7 @@ f_empiM = ecdf(x_dataM)
 Veamos las gráficas: 
 
 ```{r echo=TRUE}
-plot(f_empiM, xlab="Observados", ylab="FunciC3n de probabilidad", 
+plot(f_empiM, xlab="Observados", ylab="Función de probabilidad", 
      main="Muestra con 10^6 valores", col="darkcyan")
 curve(pnorm(x), add=TRUE, col="red")
 ```
@@ -734,10 +729,7 @@ print(p_value_pais2)
 print(Rechazamos_H0_p_value_chi_pais)
 
 ```
-Como vemos, tampoco hay evidencia suficiente para rechazar $H_0$ mediante la 
-prueba de la ji-cuadrada, por lo que con un nivel de confianza alpha=0.05
-podemos decir que esas son las probabilidades de caer en cada casilla, al igual
-que cuando realizamos la de tablas de contingencia.
+Como vemos, tampoco hay evidencia suficiente para rechazar $H_0$ mediante la  prueba de la ji-cuadrada, por lo que con un nivel de confianza alpha=0.05 podemos decir que esas son las probabilidades de caer en cada casilla, al igual que cuando realizamos la de tablas de contingencia.
 
 f) Economicamente tiene sentido la proposicion de que el PIB y la poblacion 
 se comportan de manera independiente.
@@ -754,10 +746,10 @@ la poblacion.
 
 
 
-## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
+## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlación
 ## Problema 1
 
-1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minoría más grande en los Estados Unidos para el año 2030. Use dos pruebas diferentes para ver si hay una relación directa entre el número de Hispanos y el procentaje de la poblaciC3n del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
+1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minoría más grande en los Estados Unidos para el año 2030. Use dos pruebas diferentes para ver si hay una relación directa entre el número de Hispanos y el procentaje de la población del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
 
 Necesitamos los datos de dos muestras y queremos ver si vienen de la misma población. En este caso los datos vienen por estado en ese orden. 
 
@@ -836,11 +828,11 @@ Entonces concluimos que los datos tienen una corrlaciÓn positiva, ya que $p>0$ 
 
 
 
-## Pruebas de correlaciC3n de rango   
+## Pruebas de correlación de rango   
 ## Problema 2 
 
 
-Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento académico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niños similares cuyos padres no se divorciaron.
+Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento académico de los niños. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niños similares cuyos padres no se divorciaron.
 
 La prueba de Mann-Whitney-Wilcoxon es una prueba no paramétrica que es usada cuando se tienen dos muestras aleatorias independientes y se desea probar que estas provienen de una misma poblacion, es decir, se observara si existe evidencia con un nivel signicancia $\alpha$, que dos muestras aleatorias independientes son iguales entre si.
 
@@ -971,7 +963,7 @@ Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la mis
 
 
 
-## Pruebas de correlacion de rango 
+## Pruebas de correlación de rango 
 ## Problema 3
 La tabla que se proporciona a continuacion da el número de premios de postgraduados en ciencia médica y la razón de muerte por millón de tuberculosis para 1959-69.
 
@@ -1044,7 +1036,7 @@ Como el $p-value<\alpha$, rechazamos $H_{o}$. Confirmamos nuestros cálculos.
 
  
 
-## Pruebas de correlacion de rango 
+## Pruebas de correlación de rango 
 ## Problema 4
 
 El personal de un hospital mental desea saber que clase de tratamiento es mas efectivo para un tipo particular de desorden mental. Una bateria de pruebas administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes fueron considerados de diagnostico similar y tambien personalidad, inteligencia y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y
@@ -1250,7 +1242,7 @@ print(rechazamos_H0_kendall_p_value2_R1)
 
 Realizamos el test con la función de R para ver la diferencia con nuestro código.
 ```{r echo=TRUE}
-cor.test(Xi_R1, Yi_R1,method="kendall",alternative="greater",exact = NULL)
+print(cor.test(Xi_R1, Yi_R1,method="kendall",alternative="greater",exact = NULL))
 
 ```
 
@@ -1421,7 +1413,7 @@ print(Rechazamos_H0_p_value)
 print(friedman.test(data.matrix(Data)))
 ```
 
-No rechazamos la hipótesis nula
+No rechazamos la hipótesis nula.
 
 
 ## Pregunta 5
@@ -1455,7 +1447,7 @@ print(bartlett.test(Data))
 ```
 
 
-No hay evidencia para rechazar H0
+No hay evidencia para rechazar $H_{0}$
 
 ```{r echo=TRUE}
 Data_In<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta5.csv')
@@ -1486,7 +1478,7 @@ print(bartlett.test(Data))
 ```
 
 
-Rechazamos H_0
+Rechazamos $H_{0}$.
 
 ```{r echo=TRUE}
 Data_In<-read.csv('C:/Users/Brian Pérez/Documents/Estadística 2/GitEstadística/TareaEstad-sticaNoPyR/Datos/pregunta5.csv')
@@ -1516,7 +1508,7 @@ print(Rechazamos_H0_p_value_3)
 print(bartlett.test(Data))
 ```
 
-No rechazamos H_0 
+No rechazamos $H_{0}$.
 
 
 
