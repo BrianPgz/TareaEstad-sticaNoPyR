@@ -14,7 +14,7 @@ output:
 ## Pruebas de bondad de ajuste
 ## Problema 3
 La siguiente muestra aleatoria hace referencia a los rendimientos positivos de
-cierta acciC3n a lo largo del tiempo.
+cierta acción a lo largo del tiempo.
 
 0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,
 1.5299, 0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548
