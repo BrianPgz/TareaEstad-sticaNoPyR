@@ -397,14 +397,14 @@ print(Rechazamos_p_value_p4)</code></pre>
 <p>En R fije la semilla 2019, y genera 25 observaciones distribuidas como una N(0; 1) y con ella realiza:</p>
 <p>Calcula y grC!fica la funciC3n de distribuciC3n empírica de las observaciones generadas.</p>
 <p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.</p>
-<p>Vuelve a fijar la semilla 2019, y genera un millC3n de observaciones distribuidas como una N(0; 1) y con ello realiza:</p>
+<p>Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0: 1) y con ello realiza:</p>
 <p>Calcula y gráfica la función de distribución empírica de las observaciones generadas.</p>
-<p>Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las gráficas anteriores B?La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.</p>
-<p>Realiza la diferencia entre el valor de la funciC3n empC-rica y la funciC3n real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribuciC3n conocida y sC3lo mostrar los primeros 5 y los C:ltimos 5 resultados)</p>
-<p>B?Al ser una muestra mucho mayor que al anterior a que teorema te recuerda el resultado obtenido?.</p>
+<p>Agrega sobre esa misma gráficaa, la curva de la distribuciC3n verdadera (N(0; 1)). A partir de las gráficas anteriores ¿La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.</p>
+<p>Realiza la diferencia entre el valor de la función empírica y la función real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y mostrar los primeros 5 y los últimos 5 resultados).</p>
+<p>¿Al ser una muestra mucho mayor que al anterior a que teorema te recuerda el resultado obtenido?.</p>
 <p>Para la primera parte del ejercicio fijemos la semilla inicial.</p>
 <pre class="r"><code>set.seed(2019)</code></pre>
-<p>Obtengamos 25 datos de una distribuciC3n normal estC!ndar.</p>
+<p>Obtengamos 25 datos de una distribuciC3n normal estándar.</p>
 <pre class="r"><code>x_data=rnorm(25,mean=0,sd=1)
 print(x_data)</code></pre>
 <pre><code>##  [1]  0.7385227 -0.5147605 -1.6401813  0.9160368 -1.2674820  0.7382478
@@ -412,31 +412,31 @@ print(x_data)</code></pre>
 ## [13] -1.1176011  0.2340028  0.3161516  0.3707686  0.8775886 -1.7683235
 ## [19] -0.3271264 -2.2632252  0.2855605  0.9684286  0.8673066  1.3781350
 ## [25] -0.8082596</code></pre>
-<p>Calculemos la funciC3n de distribuciC3n empC-rica y obtengamos su grC!fica.</p>
+<p>Calculemos la función de distribuciC3n empírica y obtengamos su gráfica.</p>
 <pre class="r"><code>f_empi=ecdf(x_data)
 plot(f_empi, xlab=&quot;Observados&quot;, ylab=&quot;FunciC3n de probabilidad&quot;, 
      main=&quot;Muestra con 25 valores&quot;, col=&quot;darkcyan&quot;)
 curve(pnorm(x), add=TRUE, col=&quot;red&quot;)</code></pre>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idC)nticas, del lado de los negativos se aprecia mC!s despegada en cambio para valores mayores a cero se ajustan mejor a la funciC3n de distribuciC3n de una <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idénticas, del lado de los negativos se aprecia mC!s despegada en cambio para valores mayores a cero se ajustan mejor a la función de distribución de una <span class="math inline">\(N(0,1)\)</span>.</p>
 <p>Vamos con la segunda parte del ejercicio, primero volvemos a fijar la semilla.</p>
 <pre class="r"><code>set.seed(2019)</code></pre>
-<p>Generamos un millC3n de datos de una distribuciC3n <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>Generamos un millón de datos de una distribución <span class="math inline">\(N(0,1)\)</span>.</p>
 <pre class="r"><code>x_dataM = rnorm(10^3)</code></pre>
-<p>Calculamos la funciC3n de distribuciC3n empC-rica <span class="math inline">\(F_{n}\)</span></p>
+<p>Calculamos la función de distribución empírica <span class="math inline">\(F_{n}\)</span></p>
 <pre class="r"><code>f_empiM = ecdf(x_dataM)</code></pre>
-<p>Veamos las grC!ficas:</p>
+<p>Veamos las gráficas:</p>
 <pre class="r"><code>plot(f_empiM, xlab=&quot;Observados&quot;, ylab=&quot;FunciC3n de probabilidad&quot;, 
      main=&quot;Muestra con 10^6 valores&quot;, col=&quot;darkcyan&quot;)
 curve(pnorm(x), add=TRUE, col=&quot;red&quot;)</code></pre>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>En este caso para una muestra de tamaC1o <span class="math inline">\(10^6\)</span>, ambas funciones se parecen mucho, apenas se alcanzan a ver los puntos en los que difieren.</p>
-<p>Trabajemos con la muestra tamaC1o 25, ahora vamos a ver como se comportan los datos en relaciC3n con la funciC3n empC-rica y real, primero debemos ordenar los datos.</p>
+<p>Trabajemos con la muestra tamaC1o 25, ahora vamos a ver como se comportan los datos en relación con la función empírica y real, primero debemos ordenar los datos.</p>
 <pre class="r"><code>x_data_ord=sort(x_data)
 f_empi_norm=f_empi(x_data_ord)</code></pre>
-<p>Calculemos la funciC3n empC-rica con un lugar desfasado (salto de <span class="math inline">\(\frac{1}{25}\)</span>).</p>
+<p>Calculemos la función empírica con un lugar desfasado (salto de <span class="math inline">\(\frac{1}{25}\)</span>).</p>
 <pre class="r"><code>f_empi_des=f_empi_norm - (1/25)</code></pre>
-<p>Calculemos las probabilidades de la muestra suponiendo una distribuciC3n <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>Calculemos las probabilidades de la muestra suponiendo una distribución <span class="math inline">\(N(0,1)\)</span>.</p>
 <pre class="r"><code>probras_data = pnorm(x_data_ord)</code></pre>
 <p>Primero vamos con <span class="math inline">\(D^{+}\)</span>.</p>
 <pre class="r"><code>D_data_norm = f_empi_norm - probras_data
@@ -448,12 +448,12 @@ print(D_data_max)</code></pre>
 D_data_des_max = max(D_data_des)
 print(D_data_des_max)</code></pre>
 <pre><code>## [1] 0.1125086</code></pre>
-<p>Ahora calculamos <span class="math inline">\(D = max \{D^{+},D^{-} \}= \sup |F_{n}(x) - F(x) |\)</span>, que es la diferencia entre la funciC3n de distribuciC3n empC-rica y teC3rica, al final vamos a comparar con la de la simulaciC3n <span class="math inline">\(10^{6}\)</span>.</p>
+<p>Ahora calculamos <span class="math inline">\(D = max \{D^{+},D^{-} \}= \sup |F_{n}(x) - F(x) |\)</span>, que es la diferencia entre la función de distribución empírica y teC3rica, al final vamos a comparar con la de la simulación <span class="math inline">\(10^{6}\)</span>.</p>
 <pre class="r"><code>D_max= max(D_data_max,D_data_des_max)
 print(D_max)</code></pre>
 <pre><code>## [1] 0.1125086</code></pre>
-<p>Veamos la informaciCiC3n:</p>
-<p>Mostremos los 5 primeros datos y C:ltimos 5:</p>
+<p>Veamos la información:</p>
+<p>Mostremos los 5 primeros datos y últimos 5:</p>
 <pre class="r"><code>print(head(valores_25))</code></pre>
 <pre><code>##       x_data x_data_ord probras_data D_data_norm   D_data_des
 ## 1  0.7385227  -2.263225   0.01181090  0.02818910  0.011810905
@@ -470,10 +470,10 @@ print(D_max)</code></pre>
 ## 23  0.8673066  0.9684286    0.8335848  0.086415187 -0.046415187
 ## 24  1.3781350  1.3781350    0.9159192  0.044080808 -0.004080808
 ## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213</code></pre>
-<p>Vamos a hacer lo mismo para los datos de la simulaciC3n <span class="math inline">\(10^{6}\)</span>, y despuC)s vamos comparar las <span class="math inline">\(D\)</span>. Ordenamos la muestra.</p>
+<p>Vamos a hacer lo mismo para los datos de la simulaciC3n <span class="math inline">\(10^{6}\)</span>, y después vamos comparar las <span class="math inline">\(D\)</span>. Ordenamos la muestra.</p>
 <pre class="r"><code>x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)</code></pre>
-<p>Calculamos la funciciC3n desfasada (<span class="math inline">\(\frac{1}{10^6}\)</span>).</p>
+<p>Calculamos la funcición desfasada (<span class="math inline">\(\frac{1}{10^6}\)</span>).</p>
 <pre class="r"><code>f_empi_M_des = f_empi_M - (1/(10^3))</code></pre>
 <p>Calculamos las probas bajo una distribuciones <span class="math inline">\(N(0,1)\)</span>.</p>
 <pre class="r"><code>probas_dataM = pnorm(x_dataM_ord)</code></pre>
@@ -491,7 +491,7 @@ print(D_data_des_max)</code></pre>
 <pre class="r"><code>D_maxM = max(D_dataM_norm_max, D_data_des_max)
 print(D_data_des_max)</code></pre>
 <pre><code>## [1] 0.1125086</code></pre>
-<p>Mostremos los 5 primeros datos y ultimos 5:</p>
+<p>Mostremos los 5 primeros datos y últimos 5:</p>
 <pre class="r"><code>print(head(valores_M))</code></pre>
 <pre><code>##      x_dataM x_dataM_ord probas_dataM D_dataM_norm   D_dataM_des
 ## 1  0.7385227   -3.236082 0.0006059136 0.0003940864  0.0006059136
@@ -626,10 +626,9 @@ print(p_value_pais2)</code></pre>
 </div>
 <div id="problema-1-1" class="section level2">
 <h2>Problema 1</h2>
-<p>1.- La oficina de Censo reportC3 que se espera que los hispanos sobrepasen a los afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o 2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el numero de Hispanos y el procentaje de la poblaciC3n del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New MC)xico, Colorado.</p>
-<p>Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma poblaciC3n.En este caso los datos vienen por estado en ese orden.</p>
-<pre class="r"><code>library(dplyr)
-porcentaje=c(23,24,12,12,7,18,8,35,11)
+<p>1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minoría más grande en los Estados Unidos para el año 2030. Use dos pruebas diferentes para ver si hay una relación directa entre el número de Hispanos y el procentaje de la poblaciC3n del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.</p>
+<p>Necesitamos los datos de dos muestras y queremos ver si vienen de la misma población. En este caso los datos vienen por estado en ese orden.</p>
+<pre class="r"><code>porcentaje=c(23,24,12,12,7,18,8,35,11)
 hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)</code></pre>
 <p>Vamos a meter los vectores en un data frame.</p>
 <pre class="r"><code>paises&lt;-data.frame(hispanos,porcentaje)
@@ -659,8 +658,7 @@ print(paises)</code></pre>
 ## 8      0.5         35 2.0 9.0
 ## 9      0.4         11 1.0 3.0</code></pre>
 <p>Planteamos la prueba de hipotesis (prueba de una cola tipo c).</p>
-<p><span class="math inline">\(H_{0}\)</span>:<span class="math inline">\(\rho ??? 0\)</span>, existe una tendencia para que los valores mas grandes de X esten emparejados con los valores mas chicos de <span class="math inline">\(Y\)</span>, y que los valores mas chicos de <span class="math inline">\(X\)</span> esten emparejados con los valores mas grandes de <span class="math inline">\(Y\)</span>.</p>
-<p><span class="math inline">\(H_{a}\)</span>:<span class="math inline">\(p&lt;0\)</span></p>
+<p><span class="math inline">\(H_{0}\)</span>: Son independientes VS <span class="math inline">\(H_{a}\)</span>:<span class="math inline">\(p&gt;0\)</span></p>
 <p>Obtenemos las diferencias entre los rangos en error cuadratico, que nos sirve para calcular <span class="math inline">\(T\)</span>, estadC-stica de prueba. <span class="math display">\[T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) \]</span></p>
 <pre class="r"><code>paises$diff_c = (paises$R_x - paises$R_y)^2 
 estadistica= sum(paises$diff_c)
@@ -673,11 +671,11 @@ print(rho_Spearman)</code></pre>
 <p>Definimos el nivel de significancia <span class="math inline">\(\alpha\)</span>.</p>
 <pre class="r"><code>alpha_spear= 0.05
 conf_spear = 1- alpha_spear </code></pre>
-<p>Ahora veamos que se rechaza Ho si <span class="math inline">\(\rho &lt; \omega_{\alpha}= 0.6\)</span>,se busco el cuantil en tablas.</p>
+<p>Ahora veamos que se rechaza Ho si <span class="math inline">\(\rho &gt; \omega_{\alpha}= 0.6\)</span>,se busco el cuantil en tablas.</p>
 <pre class="r"><code>Rechazamos_H0_spear=rho_Spearman&gt;0.6
 print(Rechazamos_H0_spear)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>Por lo anterior, debemos aceptar <span class="math inline">\(H_{0}\)</span>, entonces la poblaci??n tiene una correlaci??n <span class="math inline">\(\rho ??? 0\)</span>.</p>
+<p>Por lo anterior, debemos aceptar <span class="math inline">\(H_{0}\)</span>, entonces la población tiene una correlación <span class="math inline">\(\rho&gt;0\)</span>.</p>
 <p>Hacemos el test para comprobar la respuesta.</p>
 <pre class="r"><code>test_spear=cor.test(porcentaje, hispanos,method=&quot;spearman&quot;,alternative=&quot;greater&quot;)</code></pre>
 <pre><code>## Warning in cor.test.default(porcentaje, hispanos, method = &quot;spearman&quot;,
@@ -686,30 +684,29 @@ print(Rechazamos_H0_spear)</code></pre>
 print(p_value)</code></pre>
 <pre><code>## [1] 0.2637307</code></pre>
 <p>Entonces aceptamos <span class="math inline">\(H_{0}\)</span> ya que <span class="math inline">\(p-value&gt;\alpha= 0.05\)</span>.</p>
-<p>Vamos a hacer la prueba por Kendall, para comprobar nuestros datos. Tenemos que hacer la prueba con el test de la paqueterC-a nortest.</p>
+<p>Vamos a hacer la prueba por Kendall, para comprobar nuestros datos. Tenemos que hacer la prueba con el test de la paqueterÍa nortest.</p>
 <pre class="r"><code>test_ken=cor.test(hispanos, porcentaje,method=&quot;kendall&quot;,alternative=&quot;greater&quot;,exact = NULL)</code></pre>
 <pre><code>## Warning in cor.test.default(hispanos, porcentaje, method = &quot;kendall&quot;,
 ## alternative = &quot;greater&quot;, : Cannot compute exact p-value with ties</code></pre>
 <pre class="r"><code>print(test_ken$p.value)</code></pre>
 <pre><code>## [1] 0.2635765</code></pre>
-<p>Como el <span class="math inline">\(p-value&gt;alpha\)</span> entonces aceptamos <span class="math inline">\(H_{0}\)</span>, como en la prueba de Spearman.</p>
-<p>Entonces concluimos que los datos tienen una corrlacipon positiva (mejor dicho no negativa), ya que <span class="math inline">\(p???0\)</span> con un nivel de confianza <span class="math inline">\(\alpha=0.05\)</span>.</p>
+<p>Como el <span class="math inline">\(p-value&gt;\alpha\)</span> entonces aceptamos <span class="math inline">\(H_{0}\)</span>, como en la prueba de Spearman.</p>
+<p>Entonces concluimos que los datos tienen una corrlaciÓn positiva, ya que <span class="math inline">\(p&gt;0\)</span> con un nivel de confianza <span class="math inline">\(\alpha=0.05\)</span>.</p>
 </div>
 <div id="pruebas-de-correlacic3n-de-rango" class="section level2">
 <h2>Pruebas de correlaciC3n de rango</h2>
 </div>
 <div id="problema-2" class="section level2">
 <h2>Problema 2</h2>
-<p>Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.</p>
-<p>La prueba de Mann-Whitney-Wilcoxon es una prueba no parametrica que es usada cuando se tienen dos muestras aleatorias independientes y se desea probar que estas provienen de una misma poblacion, es decir, se observara si existe evidencia con un nivel signicancia <span class="math inline">\(\alpha\)</span>, que dos muestras aleatorias independientes son iguales entre si.</p>
+<p>Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento académico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niños similares cuyos padres no se divorciaron.</p>
+<p>La prueba de Mann-Whitney-Wilcoxon es una prueba no paramétrica que es usada cuando se tienen dos muestras aleatorias independientes y se desea probar que estas provienen de una misma poblacion, es decir, se observara si existe evidencia con un nivel signicancia <span class="math inline">\(\alpha\)</span>, que dos muestras aleatorias independientes son iguales entre si.</p>
 <p>Creamos los vectores con los datos.</p>
-<pre class="r"><code>library(ggplot2)
-nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
+<pre class="r"><code>nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
 divorciados= c(60, 70, 88, 75, 42, 30, 50)</code></pre>
-<p>Planteamos la prueba de hipC3tesis como:</p>
-<p><span class="math inline">\(H_{0}\)</span>: Las muestras vienen de la misma poblaciC3n, es decir, <span class="math inline">\(E[X]=E[Y]\)</span>.</p>
-<p><span class="math inline">\(H_{a}\)</span>: Las muestras no vienen de la misma poblaciC3n.</p>
-<p>Obtenemos el tamaC1o de la muestra, para este caso ambas muestras tienen el mismo tamaC1o, entonces <span class="math inline">\(n_{1}=n_{2}\)</span>.</p>
+<p>Planteamos la prueba de hipótesis como:</p>
+<p><span class="math inline">\(H_{0}\)</span>: Las muestras vienen de la misma población, es decir, <span class="math inline">\(E[X]=E[Y]\)</span>.</p>
+<p><span class="math inline">\(H_{a}\)</span>: Las muestras no vienen de la misma población.</p>
+<p>Obtenemos el tamaño de la muestra, para este caso ambas muestras tienen el mismo tamaño, entonces <span class="math inline">\(n_{1}=n_{2}\)</span>.</p>
 <pre class="r"><code>n_tamanio_muestra=length(nodivorciados)</code></pre>
 <p>Hacemos las muestras una sola, las juntamos para darles un rango dentro de un data frame.</p>
 <pre class="r"><code>datos_div = data.frame(Estado =rep(c(&quot;no divorciados&quot;, &quot;divorciados&quot;), 
@@ -760,7 +757,7 @@ print(suma_rango)</code></pre>
 ##   &lt;chr&gt;               &lt;dbl&gt;
 ## 1 divorciados          40.5
 ## 2 no divorciados       64.5</code></pre>
-<p>Podemos ver la distribucion de los rangos:</p>
+<p>Podemos ver la distribución de los rangos:</p>
 <pre class="r"><code>ggplot(data = datos_div , aes(x = rango , y=0)) + 
   geom_point(aes(colour = Estado), size = 8) + 
   ggtitle(&quot;Comportamiento de los rangos&quot;)+ ylab(&quot;&quot;) + 
@@ -777,11 +774,11 @@ print(U_div)</code></pre>
 <pre><code>## [1] 12.5</code></pre>
 <p>Recordamos que <span class="math inline">\(U=\min(U_{1},U_{2} )\)</span>.</p>
 <pre class="r"><code>U_est= min(U_div,U_nd)</code></pre>
-<p>Como suponemos que los datos vienen de la distribucion normal, obtengamos la esperanza y varianza de <span class="math inline">\(U\)</span>, que ser??n los par??metros para la distribucion normal, como se sugiere en las notas.</p>
+<p>Como suponemos que los datos vienen de la distribución normal, obtengamos la esperanza y varianza de <span class="math inline">\(U\)</span>, que serán los parámetros para la distribución normal, como se sugiere en las notas.</p>
 <p><span class="math display">\[E[U]= \frac{n_{1}n_{2} }{2}\]</span> <span class="math display">\[Var[U] = \frac{n_{1}n_{2}}{12}(n_{1}+n_{2}+1) \]</span></p>
 <pre class="r"><code>mu_div = (n_tamanio_muestra^2)/2
 sigma_div = (n_tamanio_muestra^2 / 12 )*(n_tamanio_muestra+n_tamanio_muestra+1)</code></pre>
-<p>Por ser una prueba de dos colas para $= 0.05 $ tenemos que ver que pasa con los cuantiles <span class="math inline">\(\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}\)</span>, recordamos que la distribuci??n normal es simetrica.</p>
+<p>Por ser una prueba de dos colas para $= 0.05 $ tenemos que ver qué pasa con los cuantiles <span class="math inline">\(\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}\)</span>, recordamos que la distribución normal es simétrica.</p>
 <pre class="r"><code>alpha_div = 0.05
 z_izq=qnorm(alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
 z_der=qnorm(1-alpha_div/2,mean=mu_div,sd=sqrt(sigma_div))
@@ -793,21 +790,21 @@ print(z_izq)</code></pre>
 <pre class="r"><code>Rechazamos_H0_div=(U_est &lt; z_izq || U_est &gt; z_der)
 print(Rechazamos_H0_div)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>Por lo anterior aceptamos <span class="math inline">\(H_{0}\)</span>, entonces los datos vienen de la misma poblaci??n. No hay una diferencia en el aprovechamiento de los ni??os, con un <span class="math inline">\(\alpha=0.05\)</span> de confianza.</p>
+<p>Por lo anterior aceptamos <span class="math inline">\(H_{0}\)</span>, entonces los datos vienen de la misma población. No hay una diferencia en el aprovechamiento de los niños, con un <span class="math inline">\(\alpha=0.05\)</span> de confianza.</p>
 <p>Para comprobar lo anterior tenemos que ver la prueba de paqueteria nortest.</p>
 <pre class="r"><code>prueba_wilcox = wilcox.test(divorciados, nodivorciados, paired=FALSE)</code></pre>
 <pre><code>## Warning in wilcox.test.default(divorciados, nodivorciados, paired = FALSE):
 ## cannot compute exact p-value with ties</code></pre>
 <pre class="r"><code>print(prueba_wilcox$p.value)</code></pre>
 <pre><code>## [1] 0.1412821</code></pre>
-<p>Como el <span class="math inline">\(p-value&gt;0.05\)</span> aceptamos <span class="math inline">\(H_{0}\)</span>, entonces las muestras vienen de la misma poblacion.</p>
+<p>Como el <span class="math inline">\(p-value&gt;0.05\)</span> aceptamos <span class="math inline">\(H_{0}\)</span>, entonces las muestras vienen de la misma población.</p>
 </div>
 <div id="pruebas-de-correlacion-de-rango" class="section level2">
 <h2>Pruebas de correlacion de rango</h2>
 </div>
 <div id="problema-3-1" class="section level2">
 <h2>Problema 3</h2>
-<p>La tabla que se proporciona a continuacion da el nC:mero de premios de postgraduados en ciencia medica y la razon de muerte por millon de tuberculosis para 1959-69.</p>
+<p>La tabla que se proporciona a continuacion da el número de premios de postgraduados en ciencia médica y la razón de muerte por millón de tuberculosis para 1959-69.</p>
 <p>Demuestre que estos datos muestran una fuerte evidencia de correlacion negativa entre el numero de premios y la tasa de muerte por tuberculosis. Explique este resultado. Use <span class="math inline">\(\alpha=0.05\)</span>.</p>
 <p>Primero veamos los datos en un data frame.</p>
 <pre class="r"><code>tasa_muerte&lt;-c(83,74,71,65,62,52,47,48,42,43,38)
@@ -827,8 +824,8 @@ print(Datos_tuber)</code></pre>
 ## 9  1967     849          42
 ## 10 1968     932          43
 ## 11 1969     976          38</code></pre>
-<p>Queremos ver si se tiene una correlacion negativa (es una prueba tipo C), entonces proponemos la prueba de hipotesis:</p>
-<p><span class="math inline">\(H_{0}\)</span>: Las muestras son mutuamente independientes VS <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\rho&gt;0\)</span></p>
+<p>Queremos ver si se tiene una correlacion negativa (es una prueba tipo C), entonces proponemos la prueba de hipótesis:</p>
+<p><span class="math inline">\(H_{0}\)</span>: Las muestras son mutuamente independientes VS <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\rho&lt;0\)</span></p>
 <p>Tenemos que hacer los rangos y obtener las diferencias al cuadrado para calular <span class="math inline">\(T\)</span>.</p>
 <p><span class="math display">\[T=\sum_{i=1}^{n} (R(X_{i})-R(Y_{i})) ^{2} \]</span></p>
 <pre class="r"><code>Datos_tuber$R_x=rank(Datos_tuber$premios)
@@ -850,7 +847,7 @@ print(Datos_tuber)</code></pre>
 ## 9  1967     849          42   9   2           49
 ## 10 1968     932          43  10   3           49
 ## 11 1969     976          38  11   1          100</code></pre>
-<p>Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.</p>
+<p>Como no hay muchos empates, solo uno en <span class="math inline">\(X\)</span> y uno en <span class="math inline">\(Y\)</span>, procederemos usando la estadística simplificada como en el ejemplo, pero despues procederemos con la estadística normal.</p>
 <p>Con un <span class="math inline">\(\alpha = 0.05\)</span> y un tamaño de muestra <span class="math inline">\(11\)</span>, tenemos que buscar en la tabla el valor critico, que es <span class="math inline">\(0.536\)</span>.</p>
 <pre class="r"><code>rho_tuber=(1-(6*Est_tuber)/(n_tuber*(n_tuber^2 -1)))
 Rechazamos_H0_tuber=rho_tuber&lt;0.536
@@ -869,14 +866,14 @@ print(p_value_tuber)</code></pre>
 p_value_ken_tuber = kendall_tuber$p.value
 print(p_value_ken_tuber)</code></pre>
 <pre><code>## [1] 2.755732e-07</code></pre>
-<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, rechazamos <span class="math inline">\(H_{o}\)</span>. Confirmmos nuestros calculos.</p>
+<p>Como el <span class="math inline">\(p-value&lt;\alpha\)</span>, rechazamos <span class="math inline">\(H_{o}\)</span>. Confirmamos nuestros cálculos.</p>
 </div>
 <div id="pruebas-de-correlacion-de-rango-1" class="section level2">
 <h2>Pruebas de correlacion de rango</h2>
 </div>
 <div id="problema-4-1" class="section level2">
 <h2>Problema 4</h2>
-<p>El personal de un hospital mental desea saber que clase de tratamiento es mas efectivo para un tipo particular de desorden mental. Una bateria de pruebas administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes fueron considerados de diagnostico similar y tambien personalidad, inteligencia y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y (4) ningun tipo de tratamiento. Al final de este periodo la bateria de pruebas fue repetida en cada paciente. El unico tipo de medida posible para estas pruebas es un ordenamiento (ranking) de los 40 pacientes de acuerdo a su grado relativo de mejora al final del periodo de tratamiento; rango 1 indica el nivel mas alto de mejora, rango 2 el segundo mejor, y asi sucesivamente.</p>
+<p>El personal de un hospital mental desea saber que clase de tratamiento es mas efectivo para un tipo particular de desorden mental. Una bateria de pruebas administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes fueron considerados de diagnostico similar y tambien personalidad, inteligencia y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y (4) ningun tipo de tratamiento. Al final de este periodo la bateria de pruebas fue repetida en cada paciente. El unico tipo de medida posible para estas pruebas es un ordenamiento (ranking) de los 40 pacientes de acuerdo a su grado relativo de mejora al final del periodo de tratamiento; rango 1 indica el nivel mas alto de mejora, rango 2 el segundo mejor, y así sucesivamente.</p>
 <p>De acuerdo con estos datos, existe diferencia en efectividad de los tipos de tratamiento? Use <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <p>Primero hagamos un data frame para visualizar los datos:</p>
 <pre class="r"><code>Electro&lt;-c(19,22,25,24,29,26,37,23,27,28)
@@ -884,11 +881,11 @@ Psico&lt;-c(14,21,2,6,10,16,17,11,18,7)
 Ambos&lt;-c(12,1,5,8,4,13,9,15,3,20)
 Ninguno&lt;-c(38,39,40,30,31,32,33,36,34,35)</code></pre>
 <p>Los datos representan el rango que ocupan en una escala relativa de mejoria respecto al estado inicial, donde 1 es la ‘mejor mejoria’ y 40 la ‘peor mejoria’ .</p>
-<p>Tenemos 4 grupos donde cada grupo tiene 10 pacientes, entonces en total tenemos 40 pacientes</p>
+<p>Tenemos 4 grupos donde cada grupo tiene 10 pacientes, entonces en total tenemos 40 pacientes.</p>
 <pre class="r"><code>m_categorias=4
 k_total=40
 n_pacientes = 10</code></pre>
-<p>Tenemos que plantear la prueba de hipotesis:</p>
+<p>Tenemos que plantear la prueba de hipótesis:</p>
 <p><span class="math inline">\(H_{0} : \ E[X_{1}=E[X_{2}]=E[X_{3}]=E[X_{4}]\)</span>. <span class="math inline">\(H_{a}:\)</span> Los datos no tienen el mismo valor esperado.</p>
 <p>Vamos a visualizar los datos y a ponerlos en un mismo data frame de forma vertical para facilitar los cálculos.</p>
 <pre class="r"><code>DataVisual_pacientes&lt;-data.frame(Electro,Psico,Ambos,Ninguno)
@@ -947,7 +944,7 @@ print(DataVisual_pacientes)</code></pre>
 ## 38     Ninguno    36
 ## 39     Ninguno    34
 ## 40     Ninguno    35</code></pre>
-<p>Podemos ver las clasificaciones y sus calificaciones en una grafica.</p>
+<p>Podemos ver las clasificaciones y sus calificaciones en una gráfica.</p>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAMAAABNUi8GAAABUFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrYAv8QzMzM6AAA6ADo6AGY6OgA6OmY6OpA6ZmY6ZpA6ZrY6kJA6kLY6kNtNTU1NTW5NTY5NbqtNjshmAABmADpmAGZmOgBmOjpmOmZmOpBmZmZmkJBmkLZmkNtmtpBmtttmtv9uTU1uTW5uTY5ubo5ubqtuq+R8rgCOTU2OTW6OTY6Obk2OyP+QOgCQOjqQOmaQZgCQZjqQZmaQkDqQkGaQkLaQtpCQttuQ27aQ29uQ2/+rbk2rbm6ryKur5OSr5P+2ZgC2Zjq2kDq2kGa2tma2tpC2ttu225C229u22/+2/9u2///HfP/Ijk3I///bkDrbkGbbtmbbtpDb25Db27bb29vb2//b/7bb///kq27k///r6+v4dm3/tmb/yI7/25D/27b/29v/5Kv//7b//8j//9v//+T///+Qk8x4AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAVc0lEQVR4nO2d7X/b1mGFKcUqbcZ9STa669R4a7rN6l7ibouyduucTN0arVuXenLLpV03pTJD1wqD///b7r0ASIAiKJA6R4Dn5/wSCQTw4IDiY7yJEAcZIT3OoOsVIGRTEJT0OghKeh0EJb0OgpJeB0FJr4OgpNdBUNLrXCvo/N++Ohi88Wi3pc/++Kx5wccH59tB8+Nh64WQ/ye5TtDZaJDy9k5Ln+zvIGgjhKCvYa4R9PJw8Pb/ZNmvHw6Odln6JkG3hxD0Ncw1gk4G4/R9NooivHg4GNx5Gh+NPx3t/Wk2HQ3eOg8Sj8PAnZM4XzlHcGky2Itb38B/Gg4SwtwrWO5WBL6WgIOffTXONT/OoXJJRT4NDT9PgpZEynIhad75D0PTo8W0sA77Txf1i4p8cXt/sljcVZb0JZsFnR+XW7PfhP+naXe/dxJM+0YY3HsSHw+DoPFRHL+cY378RjDqYXJtkh8kHK1gya3ZEijmKgRdLClPWsadh8NsSRQrGBYyXVnIUTktrMPB+aJ+UZGVqzTMmljSl2wW9PKwslMNL+Gj+NoenAdJHmWfRo/iljUcBgzP5z9NzpVzhKG46Y176yB52ugOszoW3Zofx23Wr0YJHZ4HdFhC5ZKK9dj7MHtxnCpKolin1LVYr7fPU1O5vuOsUr+sqC5uPUv6ki0ELV69072TNHR5eJDvp9NAGL9/tpyj2PQWh5O/+dnfjwbDrI7F/8NOP8tny4HUF6HlkorqcVZKXhJpQr6Q5Xq98d2fL9Z3sfkv6pcV08FycetZ0pdsJWja/03jizkup51GQdNMkzi+nKM4eUkeFRcCCrkWWJxlmu9qByWQToNyQcslpepp2vXGqUsiTcgFXcx7Gie9VRygFuuwqF9WTBIdh5pY0pe0PQb9r7ee7ihoOAL4xj/+x/8e3oag2a/iYW9l65pV6q8RtMaSvqTlWfzlYXUHvipo/sLXd/ELQXMHFrvnmqCFH1mWXRF0zS7+8nBhVFbBVub97x8UZzr5Ipf1y4p1u/g6S/qS1tdBx7UTirqgg9+/epKUC5pO+cOpyYuHV7DiJOnDLJyuxGPQpaD5OfXKSdKjdJKTLYk0oX6SNA0rks1/Wtm6ZpX6ZcW6k6Q6S/qStr9JilZVLjPVBX1jVOwcKxdtckHDKXt5dWedoOUee1zbgq65zDRdXGZaEClrLzMVVpeLLOvrFQ2Xmbju37Nc+7v4Fz8cLX4XP1teqK8fg8ZL70+rcxSCXj4cDM/TpfAP00n+FUETEJdesSdBiyUVCQeId/4zXVkviZTlQpYX298+r07LFvWVinSh/s8Oh1kTS/oSwbuZaqf6r1AuD8ddrwK5Nq+loLPRV8Lx5iknRK9AXktBOd58dfJaCsrx5qsT3lFPeh0EJb0OgpJeB0FJr4OgpNdBUNLrNAt6j5DV3KKZRTZvQasrdHGTmhvBVPelGkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6GkENNNU6un+CXhCyTP8ErQz38B801bdcjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmodjaAGmmod3StB78VcELJMrwSNYQtKdTUIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tFrBZ0fD/IM6+NfPF2/kNmbJ1fGNc2LoFRvQzduQddIt87DLfAyCEp1e7p/gl4Qssw1gs7u/8Ng/2w2Crv7cfw6zvLhMPnJqBh3lOaNhwX7Z8X4o3zeOG54ZclsQaluT18n6CgIdnl4lGWT4GkYtRgeHZxnk0H8kibMj8OMk4PzfHw+bxyXxteDoFS3p68VNPj4u/P8cRy1GI4T8i9pwjRsPaO9lVFZGpe+1IKgVLenrxM0P5Scht363kn+oDJcfgn/TfLT/nFlVDYNG9M1B6MISnV7uo2gl4d7J6V01eGaoFHGrDYKQam+Od1G0CTadG8p3fTqFjSMWmKloHEcu3iqb0K3EjRuNEd7J/EEqRxeFXR+HMytiBvn5SSJ6hvTrY5BT8NR50fBuNPBsBxeFTRdUsr3/vn4OC+Xmai+Kc3v4g001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001ToaQQ001Tr6GkGfh9yod00QlOr29EZBnxe5UfOVICjV7elNgj5/bjEUQaluT+8m6OW3V240Oj1qvyoISnV7eoOgz583Gjp9d1wfgaBU90jQ+Qcffec8fP3RYDCexj8hkp2+G//CSHZ5OEj3wqc/MtIUBKW6Pb2ToLOvn5/m98TFvzwyu3+WnR6cp2/jeNvn5Ttn2eTqvUhlEJTq9vROgk6Ch8OwBT1J/8cD0riLPz2KZoZHV45Q60FQqtvTu5wkpT8fun9WFfRfT6KgcSMax8xGg71mRxGU6vb0LoKGPXzUcWULOj8ut6Bxnmnxl0bWBEGpbk/vcqF+Ek/Zp8OaoMWhaDoGjXIiKNUSeodfdc7/Lp6hX377n6qCvpt26sVZ/Cln8VSLaN4sYqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tEIaqCp1tHXCPo45Ea9a7KLoNX3BDwLWTuhabhGVIdrMzVVbA20qq49iepPuWmptVei+qBpePuZ7oasG26c0Apoamima9ko6OMim+bZPtsLWn1X1bMiVyY0DdeI6nBtpqaKrYFW1bUnUf0pNy219kpUHzQNbz/T3SKrw40TWgFNDc30SjYJ+vhx7dmosrWg1felPntWed2qE5qGa0R1uDZTU8XWQKvq2pOo/pSbllp7JaoPmoa3n+nu3aUm1eHGCa2ApoZmepMPq2kSNH0id/y8zvv199StPm4IgiKoRNDHj2vPZplSxFsS9HklzyqpTWhK9qwhtZmaKrYGWlXXnkT1p9y01Nor8bhFtp/pbkOypgmtgKaGxqVu9mElrQQt3qIcvu19FAY/+drD/bNiHIIiaPeCno7jHcbz46NsevDr+2fp4+LzGz92EPRezMVqml622oSmXLTxrbFia6BVde1JbCtoDWjK9jM1GXOxraA1oKmhcalXXvyLnQRNx6DpTvh4u8flO2e5suFr2qgub53bUtAkaWWYLehVQWtAU7afqcmYPm9BK0+gPr6yBQ1783S6FO/zLAUtbz5WCcpJUv2VqD5oGt5+pqokNWGaJrQCmhrMZ/EVQd85W44xbUERFEEbst7P1WPQcLwZj0Fn9z/JBd39GHR1hbhQX85UeyWqD5qGt5+pKklNmKYJrYCmBsmF+qzhV535MejgqDiLL+433juZH+9/cv9scfNxU/hV5+qTqP6Um5ZaeyWqD5qGt5+p6kjNl6YJrYCmBsWvOj3hzSJUt6cR1EBTraMR1EBTraMR1EBTraMR1EBTraMR1EBTraMR1EBTraMR1EBTraMR1EBTraMR1EBTraMR1EBTraOvEbT5d6S7B0Gpbk9vFHTTu0x2D4JS3Z7eJOjG9+ntHgSluj29i6DpxqPy7cnbB0Gpbk9vEPTu3QZDZ6P4ds/d7MwQlOpt6J0Evf/vw3ILOvv6D8rPOb7zRyfFLUmVkWveuYygVLendxP07PSoFHSU398Rb/PYWwhaGXn13g8Epbo9vaOgl985LwTNlYw3ys0/WAi6HLnm7jkEpbo9vdNJUvBvMq4JGu87viJow/3HCEp1e3pXQecfPGELSrW/epcL9en8PZ7KV/5SQ34MGnWc7NdGcgxK9U3oXX7VmV9gmtQEDSfsXwl788lg8HvvVEdyFk/1jWjhm0XaXhhFUKrb0yJB58eD9Acc2gRBqW5P83Y7A021jkZQA021jkZQA021jkZQA021jkZQA021jkZQA021jkZQA021jkZQA021jkZQA021jr5G0NpfqhYFQaluT28UtPa3/mVBUKrb05sErX1aii4ISnV7ehdB80/5GC8ebnl7J4JS3Z7eIOizZw2GJiM3fVTX5iAo1e3pnQVNnx87iG9IXn5c0jUfkFQEQaluT+8s6OzNk3jP0WQYH+afdnx+zUfMFUFQqtvTOwmajkGPyr384m/gXPchnUUQlOr29E4nSeVZUTA17NiLu47Luz0RlGohfSNBQ6YH52xBqfZV73KhvhQ0Hm/mguafdnwmOQa9IGSZXX7VudiCnnIWT7W5mjeLGGiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdTSCGmiqdXSvBL0Xc0HIMr0SNIYtKNXVIKiBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpHI6iBplpH90/QC0KW6Z+gleEe/oOm+parEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jEdRAU62jeyXoPUJWc4tmFtm8Ba2mg5Wj+vWrXg2CUt2r6tUgKNW9ql5Ne0EJ6SAISnodBCW9DoKSXgdBSa/TUtAvvv/gW7/1rklDXv7FL7upf/m9Bw/e76b68wcP/qCjZ51lX/64o2e9Pu0EjSv92R+aV2VtPo8vVRf1X/z1x9nLP/+4i+r4bzJ0dvRD/yz8s+zu9b6SdoJ+8Te/zDdlt51ffPNfQm0X9Z/H1+cX73f1zENnN9Uv//Jv3+/u9b6adoK+/Kvfpk1KB4k/p67qQ2dX1WH71Un1l//8k7D17PD1Xk07QT//VqeCdlT/5Y/f66j65fe++XE31Z+9F3fvHb7eq2EL2pgvvv9ed8+8o4136PzyVdyCdnhM8rKjY9CwFQtnsx0efXdy+PvZg5j3Xrlj0Liz6+isLv6cuqjP/eykutjBdvRDj1vQDl/v1XAdtCH5tuT9Tp556A7HoFwHjeE3SaTXQVDS6yAo6XUQlPQ6CEp6HQQlvQ6C1jM/HqSMu14RkgdB65kfJzVno6Ou14SkIGg9haDZ6bDjFSF5ELSeqqCzUdrXz958EgbCFvXycLD35P5ZOgzA31sKgtZTCDoNQl4eBikn+2ez0cF5/H55OA7j9s/mx8Ms/k9uIwhaT3mSFNz83Xl4PHvzJB2Phu/T/bMkbPqevhB/ELSetAWdjfL9/DSYuncS3EyCTsKGNJvdP5um73Ek8QdB68l38dP8kHPvJG1BEbTDIGg9xTHoadiDJxGnyy1ouWsPo9jF31oQtJ7FddBhdDN8XwrKSVIXQdB6ystMk8E4Ow1HoB8dHpWCpstMP9rnMtOtBkG3S9rvk9sLgrZO3OWza7/tIGj7TAbs2m89CEp6HQQlvQ6Ckl4HQUmvg6Ck10FQ0usgKOl1/g92vOqJbQtLQgAAAABJRU5ErkJggg==" /><!-- --></p>
 <p>Observamos que les ha ido mejor a los de ningun tratamiento. Ahora debemos obtener las suma de los rangos.</p>
 <pre class="r"><code>Suma_rangos= Data_pacientes %&gt;%
@@ -973,7 +970,7 @@ Rechazamos_H0_pacientes=Est&gt;valor_critico_pacientes
 print(Rechazamos_H0_pacientes)</code></pre>
 <pre><code>## Estadistica_t 
 ##          TRUE</code></pre>
-<p>Entonces rechazamos <span class="math inline">\(H_{0}\)</span>, es decir, las muestras no tienen el mismo valor esperado, por ello eisten diferencias en la efectividad de los tratamientos.</p>
+<p>Entonces rechazamos <span class="math inline">\(H_{0}\)</span>, es decir, las muestras no tienen el mismo valor esperado, por ello existen diferencias en la efectividad de los tratamientos.</p>
 </div>
 <div id="en-r-realiza" class="section level2">
 <h2>En R realiza</h2>
@@ -993,17 +990,24 @@ Datos_R1$R_y_R1&lt;-rank(Datos_R1$Yi)
 Datos_R1$Dif_cuadrada_R1&lt;-(Datos_R1$R_x_R1-Datos_R1$R_y_R1)^2
 Est_R1&lt;-Datos_R1 %&gt;% summarize(Estadistica=sum(Dif_cuadrada_R1))
 Est_R1&lt;-unlist(Est_R1)
-n_R1=length(Yi_R1)</code></pre>
+n_R1=length(Yi_R1)
+print(pearson_R1)</code></pre>
+<pre><code>## [1] 0.7016726</code></pre>
 <p>#Test de Spearman</p>
 <p>Haremos la prueba de una cola donde <span class="math inline">\(H_0\)</span> es que son independientes, y <span class="math inline">\(H_a\)</span>: Existe una tendencia para que los valores más grandes de <span class="math inline">\(X\)</span> estén “emparejados” con los valores más grandes de <span class="math inline">\(Y\)</span> y los valores más chicos de <span class="math inline">\(X\)</span> estén “emparejados” con los valores más chicos de <span class="math inline">\(Y\)</span> (<span class="math inline">\(/rho\)</span> &gt; 0)</p>
-<p>Como no hay muchos empates, solo uno en <span class="math inline">\(X\)</span> y uno en <span class="math inline">\(Y\)</span>, procederemos usando la estadística simplificada como en el ejemplo, pero después procederemos con la estadística normal</p>
+<p>Como no hay muchos empates, solo uno en <span class="math inline">\(X\)</span> y uno en <span class="math inline">\(Y\)</span>, procederemos usando la estadística simplificada como en el ejemplo, pero después procederemos con la estadística normal.</p>
 <pre class="r"><code>rho_se_R1&lt;-1-(6*Est_R1)/(n_R1*(n_R1^2-1))
 Rechazamos_H0se_R1&lt;-rho_se_R1&gt;0.6
 
 test_R1&lt;-cor.test(Yi_R1, Xi_R1,method=&quot;spearman&quot;,alternative=&quot;greater&quot;)
 p_value_R1=test_R1$p.value
 
-Rechazamos_H0se_p_value_R1=p_value_R1&lt;alpha_R1</code></pre>
+Rechazamos_H0se_p_value_R1=p_value_R1&lt;alpha_R1
+
+print(p_value_R1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>print(Rechazamos_H0se_p_value_R1)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>Usando spearman al 5<span class="math inline">\(\%\)</span>, nos dice que existe una relación, por lo que rechazamos la hipótesis nula de que son independientes.</p>
 <p>#Test de Kendall</p>
 <pre class="r"><code>DatosK_R1&lt;-(data.frame(Xi_R1,Yi_R1))
@@ -1054,7 +1058,9 @@ p_value_kendall_tau_R1=pnorm(tau_R1,sd=(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-
 rechazamos_H0_kendall_p_value_R1=p_value_kendall_tau_R1&lt;alpha_R1
 p_value_kendall_tau2_R1=pnorm(tau2_R1,sd=(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1)))),
                            lower.tail = FALSE)
-rechazamos_H0_kendall_p_value2_R1=p_value_kendall_tau2_R1&lt;alpha_R1</code></pre>
+rechazamos_H0_kendall_p_value2_R1=p_value_kendall_tau2_R1&lt;alpha_R1
+print(rechazamos_H0_kendall_p_value2_R1)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>Realizamos el test con la función de R para ver la diferencia con nuestro código.</p>
 <pre class="r"><code>cor.test(Xi_R1, Yi_R1,method=&quot;kendall&quot;,alternative=&quot;greater&quot;,exact = NULL)</code></pre>
 <pre><code>## 

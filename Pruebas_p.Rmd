@@ -1175,7 +1175,7 @@ p_value_R1=test_R1$p.value
 
 Rechazamos_H0se_p_value_R1=p_value_R1<alpha_R1
 
-print(p_value_R1)
+print(Rechazamos_H0se_R1)
 print(Rechazamos_H0se_p_value_R1)
 ```
 
@@ -1232,7 +1232,7 @@ tau2_R1=(N_c_R1-N_d_R1)/(N_c_R1+N_d_R1)
 ```
 
 
-Al final vimos que esta aproximación era solo para valores grandes de n
+Al final vimos que esta aproximación era solo para valores grandes de n.
 ```{r echo=TRUE}
 w_p_R1=qnorm(1-alpha_R1)*(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1))))
 Rechazamos_Kendall_tau_R1=tau_R1>w_p_R1
@@ -1242,6 +1242,7 @@ rechazamos_H0_kendall_p_value_R1=p_value_kendall_tau_R1<alpha_R1
 p_value_kendall_tau2_R1=pnorm(tau2_R1,sd=(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1)))),
                            lower.tail = FALSE)
 rechazamos_H0_kendall_p_value2_R1=p_value_kendall_tau2_R1<alpha_R1
+print(Rechazamos_Kendall_tau_R1)
 print(rechazamos_H0_kendall_p_value2_R1)
 ```
 
@@ -1324,13 +1325,17 @@ rechazamos_H0_kendall_p_value_R2=p_value_kendall_tau_R2<alpha_R2
 p_value_kendall_tau2_R2=pnorm(tau2_R2,sd=(sqrt((2*(2*n_R2+5)))/(3*sqrt(n_R2*(n_R2-1)))),
                            lower.tail = FALSE)
 rechazamos_H0_kendall_p_value2_R2=p_value_kendall_tau2_R2<alpha_R2
+print(Rechazamos_Kendall_tau_R2)
+print(rechazamos_H0_kendall_p_value_R2)
+print(rechazamos_H0_kendall_p_value2_R2)
+
 ```
 
 
 
 Realizamos el test con la función_R2 de R para ver la diferencia con nuestro código.
 ```{r echo=TRUE}
-cor.test(ordenados_Xi_R2, ordenados_Yi_R2,method="kendall",alternative="greater",exact = NULL)
+print(cor.test(ordenados_Xi_R2, ordenados_Yi_R2,method="kendall",alternative="greater",exact = NULL))
 ```
 
 
@@ -1380,9 +1385,11 @@ p_value_R3=2*min(pnorm(U,mean=mu_R3,sd=sqrt(var_R3)),pnorm(U,mean=mu_R3,sd=sqrt(
                                                   lower.tail = FALSE))
 Rechazamos_H0_R3=(U<z_izq|| U>z_der)
 wilcox.test(X_R3, Y_R3, paired=FALSE)
+print(Rechazamos_H0_R3)
+print(wilcox.test(X_R3, Y_R3, paired=FALSE))
 ```
 
-Existe evidencia estadisticamente significativa para rechazar la hipotesis nula, por lo que no podemos decir que provienen de distribuciones distintas
+Existe evidencia estadisticamente significativa para rechazar la hipótesis nula, por lo que no podemos decir que provienen de distribuciones distintas
 
 ## Pregunta 4
 ```{r echo=TRUE}
@@ -1409,6 +1416,9 @@ p_value=pchisq(Est,df=k-1,lower.tail = FALSE)
 Rechazamos_H0=Est>valor_critico
 Rechazamos_H0_p_value=p_value<alpha
 friedman.test(data.matrix(Data))
+print(Rechazamos_H0)
+print(Rechazamos_H0_p_value)
+print(friedman.test(data.matrix(Data)))
 ```
 
 No rechazamos la hipótesis nula
@@ -1439,6 +1449,9 @@ p_value=pchisq(Est,df=r-1,lower.tail = FALSE)
 Rechazamos_H0=Est>valor_critico
 Rechazamos_H0_p_value=p_value<alpha
 bartlett.test(Data)
+print(Rechazamos_H0)
+print(Rechazamos_H0_p_value)
+print(bartlett.test(Data))
 ```
 
 
@@ -1467,6 +1480,9 @@ p_value_2=pchisq(Est_2,df=r-1,lower.tail = FALSE)
 Rechazamos_H0_2=Est_2>valor_critico_2
 Rechazamos_H0_p_value_2=p_value_2<alpha
 bartlett.test(Data)
+print(Rechazamos_H0_2)
+print(Rechazamos_H0_p_value_2)
+print(bartlett.test(Data))
 ```
 
 
@@ -1495,6 +1511,9 @@ p_value_3=pchisq(Est_3,df=r-1,lower.tail = FALSE)
 Rechazamos_H0_3=Est_3>valor_critico_3
 Rechazamos_H0_p_value_3=p_value_3<alpha
 bartlett.test(Data)
+print(Rechazamos_H0_3)
+print(Rechazamos_H0_p_value_3)
+print(bartlett.test(Data))
 ```
 
 No rechazamos H_0 

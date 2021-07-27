@@ -551,17 +551,16 @@ Calcula y grC!fica la funciC3n de distribuciC3n empírica de las observaciones g
 Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
 A partir de las gráficas anteriores ¿La función de distribución empírica es similar a la distribución teórica de los datos?.
 
-Vuelve a fijar la semilla 2019, y genera un millC3n de observaciones distribuidas como una N(0; 1) y con ello realiza:
+Vuelve a fijar la semilla 2019, y genera un millón de observaciones distribuidas como una N(0: 1) y con ello realiza:
 
 Calcula y gráfica la función de distribución empírica de las observaciones generadas.
 
-Agrega sobre esa misma grC!fica, la curva de la distribuciC3n verdadera (N(0; 1)).
-A partir de las gráficas anteriores B?La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
+Agrega sobre esa misma gráficaa, la curva de la distribuciC3n verdadera (N(0; 1)).
+A partir de las gráficas anteriores ¿La funciC3n de distribución empírica es similar a la distribución teórica de los datos?.
 
-Realiza la diferencia entre el valor de la funciC3n empC-rica y la funciC3n real,
-(Hint: no olvides que debes ordenar de menor a mayor los valores de la distribuciC3n conocida y sC3lo mostrar los primeros 5 y los C:ltimos 5 resultados)
+Realiza la diferencia entre el valor de la función empírica y la función real, (Hint: no olvides que debes ordenar de menor a mayor los valores de la distribución conocida y mostrar los primeros 5 y los últimos 5 resultados).
 
-B?Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
+¿Al ser una muestra mucho mayor que al anterior a que teorema te recuerda
 el resultado obtenido?.
 
 
@@ -571,7 +570,7 @@ Para la primera parte del ejercicio fijemos la semilla inicial.
 set.seed(2019)
 ```
 
-Obtengamos 25 datos de una distribuciC3n normal estC!ndar.
+Obtengamos 25 datos de una distribuciC3n normal estándar.
 
 ```r
 x_data=rnorm(25,mean=0,sd=1)
@@ -585,7 +584,7 @@ print(x_data)
 ## [19] -0.3271264 -2.2632252  0.2855605  0.9684286  0.8673066  1.3781350
 ## [25] -0.8082596
 ```
-Calculemos la funciC3n de distribuciC3n empC-rica y obtengamos su grC!fica.
+Calculemos la función de distribuciC3n empírica y obtengamos su gráfica.
 
 
 ```r
@@ -598,7 +597,7 @@ curve(pnorm(x), add=TRUE, col="red")
 ![](Pruebas_p_files/figure-html/unnamed-chunk-52-1.png)<!-- -->
 
 
-Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idC)nticas, del lado de los negativos se aprecia mC!s despegada en cambio para valores mayores a cero se ajustan mejor a la funciC3n de distribuciC3n de una $N(0,1)$. 
+Las funciones se parecen aunque pareciera que el error el algo grande ya que no son idénticas, del lado de los negativos se aprecia mC!s despegada en cambio para valores mayores a cero se ajustan mejor a la función de distribución de una $N(0,1)$. 
 
 Vamos con la segunda parte del ejercicio, primero volvemos a fijar la semilla. 
 
@@ -607,20 +606,20 @@ Vamos con la segunda parte del ejercicio, primero volvemos a fijar la semilla.
 set.seed(2019)
 ```
 
-Generamos un millC3n de datos de una distribuciC3n $N(0,1)$.
+Generamos un millón de datos de una distribución $N(0,1)$.
 
 
 ```r
 x_dataM = rnorm(10^3)
 ```
-Calculamos la funciC3n de distribuciC3n empC-rica $F_{n}$
+Calculamos la función de distribución empírica $F_{n}$
 
 
 ```r
 f_empiM = ecdf(x_dataM)
 ```
 
-Veamos las grC!ficas: 
+Veamos las gráficas: 
 
 
 ```r
@@ -633,7 +632,7 @@ curve(pnorm(x), add=TRUE, col="red")
 
 En este caso para una muestra de tamaC1o $10^6$, ambas funciones se parecen mucho, apenas se alcanzan a ver los puntos en los que difieren. 
 
-Trabajemos con la muestra tamaC1o 25, ahora vamos a ver como se comportan los datos en relaciC3n con la funciC3n empC-rica y real, primero debemos ordenar los datos.
+Trabajemos con la muestra tamaC1o 25, ahora vamos a ver como se comportan los datos en relación con la función empírica y real, primero debemos ordenar los datos.
 
 
 ```r
@@ -641,14 +640,14 @@ x_data_ord=sort(x_data)
 f_empi_norm=f_empi(x_data_ord)
 ```
 
-Calculemos la funciC3n empC-rica con un lugar desfasado (salto de $\frac{1}{25}$).
+Calculemos la función empírica con un lugar desfasado (salto de $\frac{1}{25}$).
 
 
 ```r
 f_empi_des=f_empi_norm - (1/25)
 ```
 
-Calculemos las probabilidades de la muestra suponiendo una distribuciC3n $N(0,1)$. 
+Calculemos las probabilidades de la muestra suponiendo una distribución $N(0,1)$. 
 
 
 ```r
@@ -681,7 +680,7 @@ print(D_data_des_max)
 ```
 ## [1] 0.1125086
 ```
-Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la diferencia entre la funciC3n de distribuciC3n empC-rica y teC3rica, al final vamos a comparar con la de la simulaciC3n $10^{6}$. 
+Ahora calculamos $D = max \{D^{+},D^{-}  \}= \sup |F_{n}(x) - F(x) |$, que es la diferencia entre la función de distribución empírica y teC3rica, al final vamos a comparar con la de la simulación $10^{6}$. 
 
 
 ```r
@@ -692,11 +691,11 @@ print(D_max)
 ```
 ## [1] 0.1125086
 ```
-Veamos la informaciCiC3n:
+Veamos la información:
 
 
 
-Mostremos los 5 primeros datos y C:ltimos 5: 
+Mostremos los 5 primeros datos y últimos 5: 
 
 
 ```r
@@ -727,7 +726,7 @@ print(tail(valores_25))
 ## 25 -0.8082596  1.6186229    0.9472358  0.052764213 -0.012764213
 ```
 
-Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y despuC)s vamos comparar las $D$. Ordenamos la muestra. 
+Vamos a hacer lo mismo para los datos de la simulaciC3n $10^{6}$, y después vamos comparar las $D$. Ordenamos la muestra. 
 
 
 ```r
@@ -735,7 +734,7 @@ x_dataM_ord = sort(x_dataM)
 f_empi_M= f_empiM(x_dataM_ord)
 ```
 
-Calculamos la funciciC3n desfasada ($\frac{1}{10^6}$).
+Calculamos la funcición desfasada ($\frac{1}{10^6}$).
 
 
 ```r
@@ -788,7 +787,7 @@ print(D_data_des_max)
 
 
 
-Mostremos los 5 primeros datos y ultimos 5: 
+Mostremos los 5 primeros datos y últimos 5: 
 
 
 ```r
@@ -1035,17 +1034,12 @@ la poblacion.
 ## Pruebas de Wilcoxon / Kruskal Wallis / Medidas de correlacion
 ## Problema 1
 
-1.- La oficina de Censo reportC3 que se espera que los hispanos sobrepasen a los
-afroamericanos como la minorC-a mC!s grande en los Estados Unidos para el aC1o
-2030. Use dos pruebas diferentes para ver si hay una relaciC3n directa entre el
-numero de Hispanos y el procentaje de la poblaciC3n del estado para los nueve
-estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New MC)xico, Colorado.
+1.- La oficina de Censo reportó que se espera que los hispanos sobrepasen a los afroamericanos como la minoría más grande en los Estados Unidos para el año 2030. Use dos pruebas diferentes para ver si hay una relación directa entre el número de Hispanos y el procentaje de la poblaciC3n del estado para los nueve estados. California, Texas, New York, Florida, Illinois, Arizona, New Jersey, New México, Colorado.
 
-Necesitamos los datos de dos muestras independientes y queremos ver si vienen de la misma poblaciC3n.En este caso los datos vienen por estado en ese orden. 
+Necesitamos los datos de dos muestras y queremos ver si vienen de la misma población. En este caso los datos vienen por estado en ese orden. 
 
 
 ```r
-library(dplyr)
 porcentaje=c(23,24,12,12,7,18,8,35,11)
 hispanos=c(6.6,4.1,2.1,1.5,0.8,0.6,0.6,0.5,0.4)
 ```
@@ -1094,9 +1088,7 @@ print(paises)
 ```
 Planteamos la prueba de hipotesis (prueba de una cola tipo c).
 
-$H_{0}$:$\rho ??? 0$, existe una tendencia para que los valores mas grandes de X esten emparejados con los valores mas chicos de $Y$, y que los valores mas chicos de $X$ esten emparejados con los valores mas grandes de $Y$.
-
-$H_{a}$:$p<0$ 
+$H_{0}$: Son independientes VS $H_{a}$:$p>0$ 
 
 Obtenemos las diferencias entre los rangos en error cuadratico, que nos sirve para calcular $T$, estadC-stica de prueba. $$T= \sum_{i=1}^{n} (R(X_{i}) - R(Y_{i})    ) $$
 
@@ -1127,7 +1119,7 @@ Definimos el nivel de significancia $\alpha$.
 alpha_spear= 0.05
 conf_spear = 1- alpha_spear 
 ```
-Ahora veamos que se rechaza Ho si $\rho < \omega_{\alpha}= 0.6$,se busco el cuantil en tablas.
+Ahora veamos que se rechaza Ho si $\rho > \omega_{\alpha}= 0.6$,se busco el cuantil en tablas.
 
 
 ```r
@@ -1138,7 +1130,7 @@ print(Rechazamos_H0_spear)
 ```
 ## [1] FALSE
 ```
-Por lo anterior, debemos aceptar $H_{0}$, entonces la poblaci??n tiene una correlaci??n $\rho ??? 0$.
+Por lo anterior, debemos aceptar $H_{0}$, entonces la población tiene una correlación $\rho>0$.
 
 
 Hacemos el test para comprobar la respuesta. 
@@ -1163,7 +1155,7 @@ print(p_value)
 ```
 Entonces aceptamos $H_{0}$ ya que $p-value>\alpha= 0.05$.
 
-Vamos a hacer la prueba por Kendall, para comprobar nuestros datos. Tenemos que hacer la prueba con el test de la paqueterC-a nortest. 
+Vamos a hacer la prueba por Kendall, para comprobar nuestros datos. Tenemos que hacer la prueba con el test de la paqueterÍa nortest. 
 
 ```r
 test_ken=cor.test(hispanos, porcentaje,method="kendall",alternative="greater",exact = NULL)
@@ -1181,9 +1173,9 @@ print(test_ken$p.value)
 ```
 ## [1] 0.2635765
 ```
-Como el $p-value>alpha$ entonces aceptamos $H_{0}$, como en la prueba de Spearman. 
+Como el $p-value>\alpha$ entonces aceptamos $H_{0}$, como en la prueba de Spearman. 
 
-Entonces concluimos que los datos tienen una corrlacipon positiva (mejor dicho no negativa), ya que $p???0$ con un nivel de confianza $\alpha=0.05$.
+Entonces concluimos que los datos tienen una corrlaciÓn positiva, ya que $p>0$ con un nivel de confianza $\alpha=0.05$.
 
 
 
@@ -1191,29 +1183,25 @@ Entonces concluimos que los datos tienen una corrlacipon positiva (mejor dicho n
 ## Problema 2 
 
 
-Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento acadC)mico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niC1os similares cuyos padres no se divorciaron.
+Un psicologo esta investigando el impacto que el divorcio de los padres tiene sobre el aprovechamiento académico de los niC1os. El psicologo cuenta con las calicaciones de un grupo de niC1os de escuela primaria cuyos padres tuvieron un divorcio durante el aC1o anterior, y las calicaciones para un grupo de niños similares cuyos padres no se divorciaron.
 
-La prueba de Mann-Whitney-Wilcoxon es una prueba no parametrica que es usada
-cuando se tienen dos muestras aleatorias independientes y se desea probar que estas
-provienen de una misma poblacion, es decir, se observara si existe evidencia con un
-nivel signicancia $\alpha$, que dos muestras aleatorias independientes son iguales entre si.
+La prueba de Mann-Whitney-Wilcoxon es una prueba no paramétrica que es usada cuando se tienen dos muestras aleatorias independientes y se desea probar que estas provienen de una misma poblacion, es decir, se observara si existe evidencia con un nivel signicancia $\alpha$, que dos muestras aleatorias independientes son iguales entre si.
 
 Creamos los vectores con los datos.
 
 
 ```r
-library(ggplot2)
 nodivorciados=c(80, 72, 99 ,82 ,62 ,50 ,85)
 divorciados= c(60, 70, 88, 75, 42, 30, 50)
 ```
 
-Planteamos la prueba de hipC3tesis como: 
+Planteamos la prueba de hipótesis como: 
 
-$H_{0}$: Las muestras vienen de la misma poblaciC3n, es decir, $E[X]=E[Y]$. 
+$H_{0}$: Las muestras vienen de la misma población, es decir, $E[X]=E[Y]$. 
 
-$H_{a}$: Las muestras no vienen de la misma poblaciC3n.
+$H_{a}$: Las muestras no vienen de la misma población.
 
-Obtenemos el tamaC1o de la muestra, para este caso ambas muestras tienen el mismo tamaC1o, entonces $n_{1}=n_{2}$.
+Obtenemos el tamaño de la muestra, para este caso ambas muestras tienen el mismo tamaño, entonces $n_{1}=n_{2}$.
 
 
 ```r
@@ -1295,7 +1283,7 @@ print(suma_rango)
 ## 2 no divorciados       64.5
 ```
 
-Podemos ver la distribucion de los rangos: 
+Podemos ver la distribución de los rangos: 
 
 
 ```r
@@ -1343,7 +1331,7 @@ Recordamos que $U=\min(U_{1},U_{2} )$.
 U_est= min(U_div,U_nd)
 ```
 
-Como suponemos que los datos vienen de la distribucion normal, obtengamos la esperanza y varianza de $U$, que ser??n los par??metros para la distribucion normal, como se sugiere en las notas.
+Como suponemos que los datos vienen de la distribución normal, obtengamos la esperanza y varianza de $U$, que serán los parámetros para la distribución normal, como se sugiere en las notas.
 
 $$E[U]= \frac{n_{1}n_{2} }{2}$$
 $$Var[U] = \frac{n_{1}n_{2}}{12}(n_{1}+n_{2}+1) $$
@@ -1353,7 +1341,7 @@ mu_div = (n_tamanio_muestra^2)/2
 sigma_div = (n_tamanio_muestra^2 / 12 )*(n_tamanio_muestra+n_tamanio_muestra+1)
 ```
 
-Por ser una prueba de dos colas para $\alpha= 0.05 $ tenemos que ver que pasa con los cuantiles $\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}$, recordamos que la distribuci??n normal es simetrica.
+Por ser una prueba de dos colas para $\alpha= 0.05 $ tenemos que ver qué pasa con los cuantiles $\frac{\alpha}{2}, \ 1-\frac{\alpha}{2}$, recordamos que la distribución normal es simétrica.
 
 
 ```r
@@ -1386,7 +1374,7 @@ print(Rechazamos_H0_div)
 ```
 ## [1] FALSE
 ```
-Por lo anterior aceptamos $H_{0}$, entonces los datos vienen de la misma poblaci??n. No hay una diferencia en el aprovechamiento de los ni??os, con un $\alpha=0.05$ de confianza. 
+Por lo anterior aceptamos $H_{0}$, entonces los datos vienen de la misma población. No hay una diferencia en el aprovechamiento de los niños, con un $\alpha=0.05$ de confianza. 
 
 
 
@@ -1409,7 +1397,7 @@ print(prueba_wilcox$p.value)
 ```
 ## [1] 0.1412821
 ```
-Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la misma poblacion. 
+Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la misma población. 
 
 
 
@@ -1418,10 +1406,9 @@ Como el $p-value>0.05$ aceptamos $H_{0}$, entonces las muestras vienen de la mis
 
 ## Pruebas de correlacion de rango 
 ## Problema 3
-La tabla que se proporciona a continuacion da el nC:mero de premios de postgraduados en ciencia medica y la razon de muerte por millon de tuberculosis para 1959-69.
+La tabla que se proporciona a continuacion da el número de premios de postgraduados en ciencia médica y la razón de muerte por millón de tuberculosis para 1959-69.
 
-Demuestre que estos datos muestran una fuerte evidencia de correlacion negativa
-entre el numero de premios y la tasa de muerte por tuberculosis. Explique este resultado. Use $\alpha=0.05$.
+Demuestre que estos datos muestran una fuerte evidencia de correlacion negativa entre el numero de premios y la tasa de muerte por tuberculosis. Explique este resultado. Use $\alpha=0.05$.
 
 Primero veamos los datos en un data frame.
 
@@ -1449,9 +1436,9 @@ print(Datos_tuber)
 ## 11 1969     976          38
 ```
 
-Queremos ver si se tiene una correlacion negativa (es una prueba tipo C), entonces proponemos la prueba de hipotesis:
+Queremos ver si se tiene una correlacion negativa (es una prueba tipo C), entonces proponemos la prueba de hipótesis:
 
-$H_{0}$: Las muestras son mutuamente independientes VS $H_{a}$: $\rho>0$
+$H_{0}$: Las muestras son mutuamente independientes VS $H_{a}$: $\rho<0$
 
 Tenemos que hacer los rangos y obtener las diferencias al cuadrado para calular $T$.
 
@@ -1483,7 +1470,7 @@ print(Datos_tuber)
 ## 11 1969     976          38  11   1          100
 ```
 
-Como no hay muchos empates, solo uno en X y uno en Y, procederemos usando la estadistica simplificada como en el ejemplo, pero despues procederemos con la estadística normal.
+Como no hay muchos empates, solo uno en $X$ y uno en $Y$, procederemos usando la estadística simplificada como en el ejemplo, pero despues procederemos con la estadística normal.
 
 Con un $\alpha = 0.05$ y un tamaño de muestra $11$, tenemos que buscar en la tabla el valor critico, que es $0.536$.
 
@@ -1530,25 +1517,15 @@ print(p_value_ken_tuber)
 ```
 ## [1] 2.755732e-07
 ```
-Como el $p-value<\alpha$, rechazamos $H_{o}$. Confirmmos nuestros calculos.
+Como el $p-value<\alpha$, rechazamos $H_{o}$. Confirmamos nuestros cálculos.
 
  
 
 ## Pruebas de correlacion de rango 
 ## Problema 4
 
-El personal de un hospital mental desea saber que clase de tratamiento es mas
-efectivo para un tipo particular de desorden mental. Una bateria de pruebas
-administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes
-fueron considerados de diagnostico similar y tambien personalidad, inteligencia
-y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes
-grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos
-recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y
-(4) ningun tipo de tratamiento. Al final de este periodo la bateria de pruebas fue
-repetida en cada paciente. El unico tipo de medida posible para estas pruebas
-es un ordenamiento (ranking) de los 40 pacientes de acuerdo a su grado relativo
-de mejora al final del periodo de tratamiento; rango 1 indica el nivel mas alto
-de mejora, rango 2 el segundo mejor, y asi sucesivamente.
+El personal de un hospital mental desea saber que clase de tratamiento es mas efectivo para un tipo particular de desorden mental. Una bateria de pruebas administrada a todos los pacientes delineo a un grupo de 40 pacientes quienes fueron considerados de diagnostico similar y tambien personalidad, inteligencia y factores psiologicos y proyectivos. Esta gente fue dividida en cuatro diferentes grupos de 10 cada uno para tratamiento. Durante seis meses los grupos respectivos recibieron (1) electroshock, (2) psicoterapia, (3) electroshock mas psicoterapia, y
+(4) ningun tipo de tratamiento. Al final de este periodo la bateria de pruebas fue repetida en cada paciente. El unico tipo de medida posible para estas pruebas es un ordenamiento (ranking) de los 40 pacientes de acuerdo a su grado relativo de mejora al final del periodo de tratamiento; rango 1 indica el nivel mas alto de mejora, rango 2 el segundo mejor, y así sucesivamente.
 
 De acuerdo con estos datos, existe diferencia en efectividad de los tipos de tratamiento? Use $\alpha = 0.05$.
 
@@ -1562,11 +1539,10 @@ Ambos<-c(12,1,5,8,4,13,9,15,3,20)
 Ninguno<-c(38,39,40,30,31,32,33,36,34,35)
 ```
 
-Los datos representan el rango que ocupan en una escala relativa de mejoria
-respecto al estado inicial, donde 1 es la 'mejor mejoria' y 40 la 'peor mejoria'
+Los datos representan el rango que ocupan en una escala relativa de mejoria respecto al estado inicial, donde 1 es la 'mejor mejoria' y 40 la 'peor mejoria'
 . 
 
-Tenemos 4 grupos donde cada grupo tiene 10 pacientes, entonces en total tenemos 40 pacientes
+Tenemos 4 grupos donde cada grupo tiene 10 pacientes, entonces en total tenemos 40 pacientes.
 
 ```r
 m_categorias=4
@@ -1574,7 +1550,7 @@ k_total=40
 n_pacientes = 10
 ```
 
-Tenemos que plantear la prueba de hipotesis:
+Tenemos que plantear la prueba de hipótesis:
 
 $H_{0} : \ E[X_{1}=E[X_{2}]=E[X_{3}]=E[X_{4}]$. 
 $H_{a}:$ Los datos no tienen el mismo valor esperado.
@@ -1651,7 +1627,7 @@ print(Data_pacientes)
 ## 40     Ninguno    35
 ```
 
-Podemos ver las clasificaciones y sus calificaciones en una grafica. 
+Podemos ver las clasificaciones y sus calificaciones en una gráfica. 
 
 ![](Pruebas_p_files/figure-html/unnamed-chunk-109-1.png)<!-- -->
 
@@ -1707,7 +1683,7 @@ print(Rechazamos_H0_pacientes)
 ##          TRUE
 ```
 
-Entonces rechazamos $H_{0}$, es decir, las muestras no tienen el mismo valor esperado, por ello eisten diferencias en la efectividad de los tratamientos. 
+Entonces rechazamos $H_{0}$, es decir, las muestras no tienen el mismo valor esperado, por ello existen diferencias en la efectividad de los tratamientos. 
 
 
 
@@ -1732,6 +1708,11 @@ Datos_R1$Dif_cuadrada_R1<-(Datos_R1$R_x_R1-Datos_R1$R_y_R1)^2
 Est_R1<-Datos_R1 %>% summarize(Estadistica=sum(Dif_cuadrada_R1))
 Est_R1<-unlist(Est_R1)
 n_R1=length(Yi_R1)
+print(pearson_R1)
+```
+
+```
+## [1] 0.7016726
 ```
 
 
@@ -1741,7 +1722,7 @@ Haremos la prueba de una cola donde $H_0$ es que son independientes, y
 $H_a$: Existe una tendencia para que los valores más grandes de $X$ estén 
 “emparejados” con los valores más grandes de $Y$ y los valores más chicos de $X$ estén “emparejados” con los valores más chicos de $Y$ ($/rho$ > 0)
 
-Como no hay muchos empates, solo uno en $X$ y uno en $Y$, procederemos usando la estadística simplificada como en el ejemplo, pero después procederemos con la estadística normal
+Como no hay muchos empates, solo uno en $X$ y uno en $Y$, procederemos usando la estadística simplificada como en el ejemplo, pero después procederemos con la estadística normal.
 
 ```r
 rho_se_R1<-1-(6*Est_R1)/(n_R1*(n_R1^2-1))
@@ -1751,6 +1732,20 @@ test_R1<-cor.test(Yi_R1, Xi_R1,method="spearman",alternative="greater")
 p_value_R1=test_R1$p.value
 
 Rechazamos_H0se_p_value_R1=p_value_R1<alpha_R1
+
+print(p_value_R1)
+```
+
+```
+## [1] 0
+```
+
+```r
+print(Rechazamos_H0se_p_value_R1)
+```
+
+```
+## [1] TRUE
 ```
 
 
@@ -1819,6 +1814,11 @@ rechazamos_H0_kendall_p_value_R1=p_value_kendall_tau_R1<alpha_R1
 p_value_kendall_tau2_R1=pnorm(tau2_R1,sd=(sqrt((2*(2*n_R1+5)))/(3*sqrt(n_R1*(n_R1-1)))),
                            lower.tail = FALSE)
 rechazamos_H0_kendall_p_value2_R1=p_value_kendall_tau2_R1<alpha_R1
+print(rechazamos_H0_kendall_p_value2_R1)
+```
+
+```
+## [1] TRUE
 ```
 
 
